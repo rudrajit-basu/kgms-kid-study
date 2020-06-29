@@ -1,0 +1,627 @@
+* {
+  box-sizing: border-box;
+}
+
+.mApp{
+	background-color: #ffeb3b;
+	min-height: 100vh;
+	overflow: hidden;
+	/*font-family: Arial, Helvetica, sans-serif;*/
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+
+.Column{
+	float: left;
+	/*border-style: solid;*/
+}
+
+.Row:after{
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.Row{
+	/*border-style: solid;*/
+}
+
+.mTopLeft{
+	width: 55%;
+}
+
+.mTopRight{
+	width: 45%;
+}
+
+.noSelect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.mLogOutModal{
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 15vh; 
+  left: 0;
+  top: 0;
+  width: 100vw; /* Full width */
+  height: 100vh; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+}
+
+.mLogOutLeft{
+	width: 50%;
+}
+
+.mLogOutRight{
+	width: 50%;	
+}
+
+.mLogOutModalContent{
+	position: relative;
+  	background-color: #fefefe;
+  	margin: auto;
+	padding: 16px;
+	/*border: 1px solid #888;*/
+	width: 80%;
+	-webkit-animation-name: animatetop;
+	-webkit-animation-duration: 0.6s;
+	animation-name: animatetop;
+	animation-duration: 0.6s;
+	font-weight: bold;
+	color: black;
+	font-size: 1.1em;
+}
+
+.mLogOutModalActionBtn{
+	/*font-size: 1.1em;*/
+}
+
+.mLogOutModalActionBtn:active{
+	color: rgba(0,0,0,0.4);
+}
+
+.mLogOutModalBtnContainer{
+	padding-top: 6px;	
+}
+
+.mLog-out:active{
+  /*background: rgba(0,0,0,0.2);*/
+  /*box-shadow: 0 0px #666;*/
+    transform: translateY(4px);
+}
+
+.mHDiv{
+	margin-top: 2vh;
+	margin-left: 6vw;
+}
+
+.mBodyContent1{
+	margin-left: 4%;
+	margin-right: 4%;
+	padding-top: 10%;
+	padding-bottom: 4.5%;
+}
+
+.mBodyContent2{
+	padding-left: 4.8%;
+	padding-right: 4.8%;
+	padding-top: 2%;
+	padding-bottom: 4.5%;
+}
+
+.mLightBlack{
+	background: rgba(0,0,0,0.4);;
+}
+
+.mSeaBlue{
+	background-color: #aa87de;
+	/*background-color: #b89be4;*/
+	/*background-color: rgb(170,135,222);*/
+}
+
+.mOrange{
+  background-color: #ff7f2a;
+}
+
+.mBord{
+  /*border-radius: 10px;*/
+  border-radius: 0.6em;
+}
+
+@media only screen and (max-width: 320px) and (orientation: portrait) {
+
+	.mLogOutModalContent{
+		position: relative;
+	  	background-color: #fefefe;
+	  	margin: auto;
+		padding: 15px;
+		/*border: 1px solid #888;*/
+		width: 80%;
+		-webkit-animation-name: animatetop;
+		-webkit-animation-duration: 0.6s;
+		animation-name: animatetop;
+		animation-duration: 0.6s;
+		font-weight: bold;
+		color: black;
+		font-size: 1em;
+	}
+
+}
+
+@media only screen and (max-width: 600px) and (orientation: portrait) {
+	.mSun{
+		width: 64%;
+		margin-top: 7%;
+		margin-right: 10%;
+	}
+
+	.mLog-out{
+		background: transparent;
+		margin-top: 15%;
+		width: 20.5vw;
+		border: none;
+		outline: none;
+		margin-left: 12%;
+	}
+
+	.mHH{
+		width: 65vw;
+	}
+
+	.mTextGap3{
+		margin-top: 6%;
+	}
+
+	.mFooter{
+		width: 215%;
+		margin-left: 5%;
+		overflow: hidden;
+		margin-bottom: 0.1%;
+	}
+}
+
+@media only screen and (max-width: 600px) and (orientation: landscape) {
+	.mSun{
+		width: 42.5%;
+		margin-top: 7%;
+		margin-right: 10%;
+	}
+
+
+	.mLog-out{
+	  background: transparent;
+	  width: 12.5vw;
+	  margin-top: 10%;
+	  border: none;
+	  outline: none;
+	  margin-left: 10%;
+	}
+
+	.mHH{
+		width: 43.5vw;
+	}
+
+	.mTextGap3{
+		margin-top: 4%;
+	}
+
+	.mFooter{
+		width: 145%;
+		margin-left: 5%;
+		overflow: hidden;
+		margin-bottom: 0%;
+	}
+
+	.mLogOutModal{
+	  display: none; /* Hidden by default */
+	  position: fixed; /* Stay in place */
+	  z-index: 1; /* Sit on top */
+	  padding-top: 15vh; 
+	  left: 0;
+	  top: 0;
+	  width: 100vw; /* Full width */
+	  height: 100vh; /* Full height */
+	  overflow: auto; /* Enable scroll if needed */
+	  background-color: rgb(0,0,0); /* Fallback color */
+	  background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+	}
+
+
+	.mLogOutModalContent{
+		position: relative;
+	  	background-color: #fefefe;
+	  	margin: auto;
+		padding: 16px;
+		/*border: 1px solid #888;*/
+		width: 55%;
+		-webkit-animation-name: animatetop;
+		-webkit-animation-duration: 0.6s;
+		animation-name: animatetop;
+		animation-duration: 0.6s;
+		font-weight: bold;
+		color: black;
+		font-size: 1.1em;
+	}
+
+	.mLogOutModalBtnContainer{
+		padding-top: 7px;	
+	}
+
+}
+
+@media only screen and (min-width: 600px) and (orientation: portrait) {
+	.mSun{
+		width: 44%;
+		margin-top: 7%;
+		margin-right: 10%;
+	}
+}
+
+@media only screen and (min-width: 600px) and (orientation: landscape) {
+	.mSun{
+		width: 42%;
+		margin-top: 7%;
+		margin-right: 10%;
+	}
+
+	.mLog-out{
+	  background: transparent;
+	  width: 12.5vw;
+	  margin-top: 10%;
+	  border: none;
+	  outline: none;
+	  margin-left: 10%;
+	}
+
+	.mHH{
+		width: 43vw;
+	}
+
+	.mTextGap3{
+		margin-top: 4.5%;
+	}
+
+	.mFooter{
+		width: 140%;
+		margin-left: 5%;
+		overflow: hidden;
+		margin-bottom: 0%;
+	}
+
+	.mLogOutModal{
+	  display: none; /* Hidden by default */
+	  position: fixed; /* Stay in place */
+	  z-index: 1; /* Sit on top */
+	  padding-top: 15vh; 
+	  left: 0;
+	  top: 0;
+	  width: 100vw; /* Full width */
+	  height: 100vh; /* Full height */
+	  overflow: auto; /* Enable scroll if needed */
+	  background-color: rgb(0,0,0); /* Fallback color */
+	  background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+	}
+
+
+	.mLogOutModalContent{
+		position: relative;
+	  	background-color: #fefefe;
+	  	margin: auto;
+		padding: 16px;
+		/*border: 1px solid #888;*/
+		width: 55%;
+		-webkit-animation-name: animatetop;
+		-webkit-animation-duration: 0.6s;
+		animation-name: animatetop;
+		animation-duration: 0.6s;
+		font-weight: bold;
+		color: black;
+		font-size: 1.16em;
+	}
+
+	.mLogOutModalBtnContainer{
+		padding-top: 7px;	
+	}
+}
+
+@media only screen and (min-width: 768px) and (orientation: portrait) {
+	.mSun{
+		width: 56%;
+		margin-top: 7%;
+		margin-right: 10%;
+	}
+
+	/*.mLog-out{
+	  background: transparent;
+	  border: 0.34vw solid black;
+	  padding: 2.4vw;
+	  width: 11.3vw;
+	  margin-top: 6vh;
+	  border-radius: 10px;
+	  box-shadow: 0 1.1px #999;
+	  outline: none;
+	  margin-left: 8vw;
+	}*/
+
+	.mLog-out{
+		background: transparent;
+		margin-top: 14%;
+		width: 17vw;
+		border: none;
+		outline: none;
+		margin-left: 12%;
+	}
+
+	.mHH{
+		width: 57vw;
+	}
+
+	.mTextGap3{
+		margin-top: 5%;
+	}
+
+	.mFooter{
+		width: 180%;
+		margin-left: 5%;
+		overflow: hidden;
+		margin-bottom: 0.1%;
+	}
+
+	.mLogOutModal{
+	  display: none; /* Hidden by default */
+	  position: fixed; /* Stay in place */
+	  z-index: 1; /* Sit on top */
+	  padding-top: 18vh; 
+	  left: 0;
+	  top: 0;
+	  width: 100vw; /* Full width */
+	  height: 100vh; /* Full height */
+	  overflow: auto; /* Enable scroll if needed */
+	  background-color: rgb(0,0,0); /* Fallback color */
+	  background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+	}
+
+	.mLogOutModalContent{
+		position: relative;
+	  	background-color: #fefefe;
+	  	margin: auto;
+		padding: 20px;
+		/*border: 1px solid #888;*/
+		width: 70%;
+		-webkit-animation-name: animatetop;
+		-webkit-animation-duration: 0.6s;
+		animation-name: animatetop;
+		animation-duration: 0.6s;
+		font-weight: bold;
+		color: black;
+		font-size: 1.9em;
+	}
+
+	.mLogOutModalBtnContainer{
+		padding-top: 12px;	
+	}
+}
+
+@media only screen and (min-width: 768px) and (orientation: landscape) {
+	.mSun{
+		width: 40%;
+		margin-top: 7%;
+		margin-right: 10%;
+	}
+
+	.mLog-out{
+		background: transparent;
+		margin-top: 10%;
+		width: 11.5vw;
+		border: none;
+		outline: none;
+		margin-left: 11%;
+	}
+
+	.mHH{
+		width: 41vw;
+	}
+
+	.mTextGap3{
+		margin-top: 4.5%;
+	}
+
+	.mFooter{
+		width: 131%;
+		margin-left: 5%;
+		overflow: hidden;
+		margin-bottom: 0.1%;
+	}
+
+	.mLogOutModal{
+	  display: none; /* Hidden by default */
+	  position: fixed; /* Stay in place */
+	  z-index: 1; /* Sit on top */
+	  padding-top: 18vh; 
+	  left: 0;
+	  top: 0;
+	  width: 100vw; /* Full width */
+	  height: 100vh; /* Full height */
+	  overflow: auto; /* Enable scroll if needed */
+	  background-color: rgb(0,0,0); /* Fallback color */
+	  background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+	}
+
+	.mLogOutModalContent{
+		position: relative;
+	  	background-color: #fefefe;
+	  	margin: auto;
+		padding: 20px;
+		/*border: 1px solid #888;*/
+		width: 55%;
+		-webkit-animation-name: animatetop;
+		-webkit-animation-duration: 0.6s;
+		animation-name: animatetop;
+		animation-duration: 0.6s;
+		font-weight: bold;
+		color: black;
+		font-size: 1.8em;
+	}
+
+	.mLogOutModalBtnContainer{
+		padding-top: 12px;	
+	}
+}
+
+@media only screen and (min-width: 1024px) and (orientation: portrait) {
+	.mSun{
+		width: 52.5%;
+		margin-top: 7%;
+		margin-right: 10%;
+	}
+
+	.mHH{
+		width: 53.5vw;
+	}
+
+	.mTextGap3{
+		margin-top: 5%;
+	}
+
+	.mFooter{
+		width: 170.5%;
+		margin-left: 5%;
+		overflow: hidden;
+		margin-bottom: 0.1%;
+	}
+
+	.mLogOutModal{
+	  display: none; /* Hidden by default */
+	  position: fixed; /* Stay in place */
+	  z-index: 1; /* Sit on top */
+	  padding-top: 18vh; 
+	  left: 0;
+	  top: 0;
+	  width: 100vw; /* Full width */
+	  height: 100vh; /* Full height */
+	  overflow: auto; /* Enable scroll if needed */
+	  background-color: rgb(0,0,0); /* Fallback color */
+	  background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+	}
+
+	.mLogOutModalContent{
+		position: relative;
+	  	background-color: #fefefe;
+	  	margin: auto;
+		padding: 25px;
+		/*border: 1px solid #888;*/
+		width: 70%;
+		-webkit-animation-name: animatetop;
+		-webkit-animation-duration: 0.6s;
+		animation-name: animatetop;
+		animation-duration: 0.6s;
+		font-weight: bold;
+		color: black;
+		font-size: 2.4em;
+	}
+
+	.mLogOutModalBtnContainer{
+		padding-top: 12px;	
+	}
+}
+
+@media only screen and (min-width: 1366px) and (orientation: landscape) {
+	.mSun{
+		width: 42%;
+		margin-top: 7%;
+		margin-right: 10%;
+	}
+
+	.mHH{
+		width: 43vw;
+	}
+
+	.mTextGap3{
+		margin-top: 4.5%;
+	}
+
+	.mFooter{
+		width: 138%;
+		margin-left: 5%;
+		overflow: hidden;
+		margin-bottom: 0.1%;
+	}
+
+	.mLogOutModal{
+	  display: none; /* Hidden by default */
+	  position: fixed; /* Stay in place */
+	  z-index: 1; /* Sit on top */
+	  padding-top: 18vh; 
+	  left: 0;
+	  top: 0;
+	  width: 100vw; /* Full width */
+	  height: 100vh; /* Full height */
+	  overflow: auto; /* Enable scroll if needed */
+	  background-color: rgb(0,0,0); /* Fallback color */
+	  background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+	}
+
+	.mLogOutModalContent{
+		position: relative;
+	  	background-color: #fefefe;
+	  	margin: auto;
+		padding: 27px;
+		/*border: 1px solid #888;*/
+		width: 55%;
+		-webkit-animation-name: animatetop;
+		-webkit-animation-duration: 0.6s;
+		animation-name: animatetop;
+		animation-duration: 0.6s;
+		font-weight: bold;
+		color: black;
+		font-size: 2.3em;
+	}
+
+	.mLogOutModalBtnContainer{
+		padding-top: 12px;	
+	}
+}
+
+@media only screen and (orientation: landscape) {
+	.mBodyContent1{
+		margin-left: 4%;
+		margin-right: 4%;
+		padding-top: 7%;
+		padding-bottom: 4.5%;
+	}	
+}
+
+/*----------------------------------------------------------*/
+
+@-webkit-keyframes rotateUnfoldTop {
+  from { opacity: 0; -webkit-transform: translateY(-100%) rotateX(90deg); }
+}
+@keyframes rotateUnfoldTop {
+  from { opacity: 0; -webkit-transform: translateY(-100%) rotateX(90deg); transform: translateY(-100%) rotateX(90deg); }
+}
+
+.pt-page-rotateUnfoldTop {
+  -webkit-transform-origin: 50% 100%;
+  transform-origin: 50% 100%;
+  -webkit-animation: rotateUnfoldTop .7s both ease;
+  animation: rotateUnfoldTop .7s both ease;
+}
+
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}

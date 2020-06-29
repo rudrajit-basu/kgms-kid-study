@@ -1,26 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {BrowserView,MobileView} from 'react-device-detect';
+import KSDesk from './kgmsComponent/KSDesk';
+import KSDevice from './kgmsComponent/KSDevice';
+import * as firebase from "firebase/app";
+import firebaseConfig from './kgmsComponent/firebaseConfig'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.PureComponent {
+
+  render(){
+    !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app();
+    return(
+      <div style={{scrollBehavior:'smooth'}}>
+        <BrowserView>
+          <KSDesk firebase={firebase}/>
+        </BrowserView>
+        <MobileView>
+          <KSDevice firebase={firebase}/>
+        </MobileView>
+      </div>
+    );
+  }
 }
 
 export default App;
