@@ -74,17 +74,23 @@ class KSDesk extends React.PureComponent {
 			db.collection("kgms-classes").where("classPassword", "==", password.toLowerCase()).limit(1)
 			.get()
 			.then((querySnapshot)=>{
-				querySnapshot.forEach((doc) => {
-		            // doc.data() is never undefined for query doc snapshots
-		            // console.log(doc.id, " => ", doc.data());
-		            if(doc.data().classId.toLowerCase() === userId.toLowerCase()){
-		            	this.setState({KClassName: doc.data().className, KImgAlbumId: doc.data().imgAlbumId});
-		            	this.fetchKgmsStudy(db,doc.id);
-		            	resolve("Success!");
-		            }else{
-		            	reject("Not Success!");
-		            }
-		        });
+				if(querySnapshot.empty){
+					// console.log('doc empty');
+					reject("Not Success!");
+				} else {
+						querySnapshot.forEach((doc) => {
+				            // doc.data() is never undefined for query doc snapshots
+				            // console.log(doc.id, " => ", doc.data());
+				            if(doc.data().classId === userId.toLowerCase()){
+				            	this.setState({KClassName: doc.data().className, KImgAlbumId: doc.data().imgAlbumId});
+				            	this.fetchKgmsStudy(db,doc.id);
+				            	resolve("Success!");
+				            }else{
+				            	reject("Not Success!");
+				            }
+			        	});
+					}
+				
 			})
 			.catch((error)=>{
 				// console.log("Error getting document:", error);
