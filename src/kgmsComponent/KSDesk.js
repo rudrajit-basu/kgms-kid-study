@@ -81,7 +81,7 @@ class KSDesk extends React.PureComponent {
 						querySnapshot.forEach((doc) => {
 				            // doc.data() is never undefined for query doc snapshots
 				            // console.log(doc.id, " => ", doc.data());
-				            if(doc.data().classId === userId.toLowerCase()){
+				            if(doc.data().classId.toLowerCase() === userId.trim().toLowerCase()){
 				            	this.setState({KClassName: doc.data().className, KImgAlbumId: doc.data().imgAlbumId});
 				            	this.fetchKgmsStudy(db,doc.id);
 				            	resolve("Success!");

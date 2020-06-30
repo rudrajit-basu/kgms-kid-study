@@ -63,7 +63,7 @@ class KSDevice extends React.PureComponent {
 					querySnapshot.forEach((doc) => {
 			            // doc.data() is never undefined for query doc snapshots
 			            // console.log(doc.id, " => ", doc.data());
-			            if(doc.data().classId.toLowerCase() === userId.toLowerCase()){
+			            if(doc.data().classId.toLowerCase() === userId.trim().toLowerCase()){
 			            	this.setState({KMClassName: doc.data().className, KMImgAlbumId: doc.data().imgAlbumId});
 			            	this.fetchMKgmsStudy(db,doc.id);
 			            	resolve("Success!");
