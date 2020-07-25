@@ -376,6 +376,12 @@
     color: rgb(139,0,0);
   }
 
+  .mTaskVideoContainer{
+    width: 90%;
+    height: 240px;
+    position: relative;
+    margin: 50px 0px;
+  }
 
 @media only screen and (max-width: 320px) and (orientation: portrait) {
 
@@ -496,6 +502,13 @@
     font-weight: bold;
     transition: 0.3s;
   }
+
+  .mTaskVideoContainer{
+    width: 90%;
+    height: 200px;
+    position: relative;
+    margin: 50px 0px;
+  }
   
 }
 @media only screen and (max-width: 600px) and (orientation: portrait) {
@@ -557,51 +570,58 @@
     cursor: pointer;
   }
 
-  .mImgModal{
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 18vh; 
-  left: 0;
-  top: 0;
-  width: 100vw; /* Full width */
-  height: 100vh; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
-}
+    .mImgModal{
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 18vh; 
+    left: 0;
+    top: 0;
+    width: 100vw; /* Full width */
+    height: 100vh; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+  }
 
-/* The Close Button */
-.mImgModalClose {
-  position: absolute;
-  top: 1.2vh;
-  /*right: 20vw;*/
-  left: 2.4vw;
-  color: #f1f1f1;
-  font-size: 2.3em;
-  font-weight: bold;
-  transition: 0.3s;
-}
+  /* The Close Button */
+  .mImgModalClose {
+    position: absolute;
+    top: 1.2vh;
+    /*right: 20vw;*/
+    left: 2.4vw;
+    color: #f1f1f1;
+    font-size: 2.3em;
+    font-weight: bold;
+    transition: 0.3s;
+  }
 
-/*.ImgModalClose:hover,*/
-.mImgModalClose:focus {
-  color: #bbb;
-  text-decoration: none;
-  cursor: pointer;
-}
+  /*.ImgModalClose:hover,*/
+  .mImgModalClose:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+  }
 
-.mImgModalImage{
-    margin: auto;
-  display: block;
-  width: auto;
-  height: auto;
-  max-width: 90vw;
-  /*max-height: 96vh;*/
-  animation-name: zoom;
-  animation-duration: 0.6s;
-  overflow-y: auto;
-  margin-bottom: 2.5em;
-}
+  .mImgModalImage{
+      margin: auto;
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 90vw;
+    /*max-height: 96vh;*/
+    animation-name: zoom;
+    animation-duration: 0.6s;
+    overflow-y: auto;
+    margin-bottom: 2.5em;
+  }
+
+  .mTaskVideoContainer{
+    width: 88%;
+    height: 230px;
+    position: relative;
+    margin: 50px 0px;
+  }
 
 }
 
@@ -801,6 +821,13 @@
   overflow-y: auto;
   margin-bottom: 3em;
 }
+
+.mTaskVideoContainer{
+    width: 88%;
+    height: 250px;
+    position: relative;
+    margin: 50px 0px;
+  }
 
 }
 
@@ -1009,6 +1036,13 @@
     margin-bottom: 4em;
   }
 
+  .mTaskVideoContainer{
+    width: 84%;
+    height: 310px;
+    position: relative;
+    margin: 55px 0px;
+  }
+
 }
 
 @media only screen and (min-width: 768px) and (orientation: landscape) {
@@ -1212,6 +1246,13 @@
       animation-duration: 0.6s;
       overflow-y: auto;
       margin-bottom: 3em;
+    }
+
+    .mTaskVideoContainer{
+      width: 82%;
+      height: 370px;
+      position: relative;
+      margin: 60px 0px;
     }
 }
 
@@ -1418,6 +1459,13 @@
     margin-bottom: 4em;
   }
 
+  .mTaskVideoContainer{
+    width: 82%;
+    height: 350px;
+    position: relative;
+    margin: 60px 0px;
+  }
+
 }
 
 @media only screen and (min-width: 1366px) and (orientation: landscape) {
@@ -1622,6 +1670,13 @@
       overflow-y: auto;
       margin-bottom: 3em;
     }
+
+    .mTaskVideoContainer{
+      width: 82%;
+      height: 460px;
+      position: relative;
+      margin: 64px 0px;
+    }
 }
 
 /*----------------------Spinner----------------------*/
@@ -1779,7 +1834,7 @@
   .dKc-img{
     display: inline;
     position: relative;
-    width: 17.5%;
+    width: 20%;
     animation: clMove 5s infinite;
   }
 
@@ -1907,6 +1962,7 @@
 .dTaskImg{
   width: 35%;
   height: auto;
+  max-height: 500px;
   margin: 18px 25px;
   border: none;
   border-radius: 10px;
@@ -1961,4 +2017,21 @@
 .dSpanStyl{
   display: block;
   margin-top: 10px;
+}
+
+.dTaskVideo{
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  border: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.dTaskVideoContainer{
+  width: 630px;
+  height: 350px;
+  position: relative;
+  margin: 55px 0px;
 }

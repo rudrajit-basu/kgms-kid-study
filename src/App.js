@@ -3,7 +3,8 @@ import {BrowserView,MobileView} from 'react-device-detect';
 import KSDesk from './kgmsComponent/KSDesk';
 import KSDevice from './kgmsComponent/KSDevice';
 import * as firebase from "firebase/app";
-import firebaseConfig from './kgmsComponent/firebaseConfig'
+import firebaseConfig from './kgmsComponent/firebaseConfig';
+
 
 class App extends React.PureComponent {
 

@@ -2,7 +2,6 @@ import React from 'react';
 import './MStyle.css';
 import HHM from './images/HHM.png';
 import H4 from './images/H4.png';
-// import L1 from './images/L1.png';
 import LO from './images/LO.png';
 import F1 from './images/F1.png';
 import KSLogin from './KSLogin';
@@ -13,7 +12,7 @@ class KSDevice extends React.PureComponent {
 
 	constructor(props){
 		super(props);
-		this.state = {isMLogin: false, isModalLogOut: false, KMClassName: "", KMImgAlbumId: "",
+		this.state = {isMLogin: false, isModalLogOut: false, KMClassName: "", KMediaId: "",
 						KMStudies:[{id:0,header:"Please wait... Fetching Events >>",desc:""}]}
 		this.getmBodyContent = this.getmBodyContent.bind(this);
 		this.handleMKSLogin = this.handleMKSLogin.bind(this);
@@ -64,7 +63,7 @@ class KSDevice extends React.PureComponent {
 			            // doc.data() is never undefined for query doc snapshots
 			            // console.log(doc.id, " => ", doc.data());
 			            if(doc.data().classId.toLowerCase() === userId.trim().toLowerCase()){
-			            	this.setState({KMClassName: doc.data().className, KMImgAlbumId: doc.data().imgAlbumId});
+			            	this.setState({KMClassName: doc.data().className, KMediaId: doc.data().classId});
 			            	this.fetchMKgmsStudy(db,doc.id);
 			            	resolve("Success!");
 			            }else{
@@ -109,7 +108,7 @@ class KSDevice extends React.PureComponent {
 	}
 
 	handleMKSLogOut(){
-		this.setState({isModalLogOut: false,isMLogin: false, KMClassName: "", KMImgAlbumId: "",
+		this.setState({isModalLogOut: false,isMLogin: false, KMClassName: "", KMediaId: "",
 					KMStudies:[{id:0,header:"Please wait... Fetching Events >>",desc:""}]});
 	}
 
@@ -136,7 +135,7 @@ class KSDevice extends React.PureComponent {
 				<div key={'mKStudy'} className="mOrange mBord pt-page-rotateUnfoldRight">
 					<div className="mBodyContent2">
 						<KStudy kgmsClassName={this.state.KMClassName} kgmsStudies={this.state.KMStudies}
-								kgmsAlbumId={this.state.KMImgAlbumId}/>
+								kgmsMediaId={this.state.KMediaId} firebase={this.props.firebase}/>
 					</div>
 				</div>
 			);

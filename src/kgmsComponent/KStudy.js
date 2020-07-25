@@ -1,16 +1,21 @@
 import React from 'react';
-import imgur from 'imgur';
 import './K1.css';
 import {isMobile} from 'react-device-detect';
-// const albumOGroupId = '7BQyCQx';
-const apiKey = '3787cfa5b5000f4';
-imgur.setClientId(apiKey);
+import "firebase/storage";
+
+// document.cookie = "test1=Hello";
+document.cookie = "name1=kgmsstudy; SameSite=Lax";
+document.cookie = "name1-legacy=kgmsStudy; ";
+// document.cookie = "name1=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+const apiJsUrl = "https://apis.google.com/js/api.js";
+const apiKeyY = 'AIzaSyCMyBe3gjfvs38Yh_eiTwBEd5xlPVwnqK8';
+const yJsUrl = 'https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest';
 
 class KStudy extends React.PureComponent {
 
 	constructor(props){
 		super(props);
-		this.state = {isImgModal: false, kImgList: [], ImgModalSrc: ''};
+		this.state = {isImgModal: false, kImgList: [], ImgModalSrc: '', kVideoList: []};
 		this.getTasksFrom = this.getTasksFrom.bind(this);
 		this.handleImgAlbumRequest = this.handleImgAlbumRequest.bind(this);
 		this.getTasksImgFrom = this.getTasksImgFrom.bind(this);
@@ -18,6 +23,9 @@ class KStudy extends React.PureComponent {
 		this.handleCloseImgModal = this.handleCloseImgModal.bind(this);
 		this.getmTasksFrom = this.getmTasksFrom.bind(this);
 		this.getmTasksImgFrom = this.getmTasksImgFrom.bind(this);
+		this.loadGapiClient = this.loadGapiClient.bind(this);
+		this.getTaskVideoFrom = this.getTaskVideoFrom.bind(this);
+		this.handleImgUrlRequest = this.handleImgUrlRequest.bind(this);
 	}
 
 
@@ -25,7 +33,88 @@ class KStudy extends React.PureComponent {
 		if(!isMobile){
 			this.timerID = setTimeout(() => this.props.handleDeco(),900);
 		}
+
+		// console.log('cookie = ',document.cookie);
 		this.handleImgAlbumRequest();
+		if(!window.gapi){
+			const script = document.createElement('script');
+			script.type = 'text/javascript';
+			script.src = apiJsUrl;
+			script.id = 'googleApi';
+			script.async = true;
+			window.document.body.appendChild(script);
+
+			script.onload = () => {
+				// console.log('gapi script loaded');
+				window.gapi.load('client', () => {
+					this.loadGapiClient();
+				});
+			};
+		} else {
+			// console.log('gapi without script loaded');
+			window.gapi.load('client', () => {
+					this.loadGapiClient();
+				});
+		}
+		
+	}
+
+	 async loadGapiClient(){
+	 	// Initializes the client with the API key and the Youtube API.
+        window.gapi.client.init({
+          'apiKey': apiKeyY,
+          'discoveryDocs': [yJsUrl],
+        }).then(() => {
+          // Executes an API request, and returns a Promise.
+          // console.log("GAPI client loaded for Youtube API Playlist list !");
+          return window.gapi.client.youtube.playlists.list({
+		      "part": [
+		        "snippet"
+		      ],
+		      "channelId": "UCuS-pL1W9DnAgw0ju4rDOKA"
+		    });
+        },(err)=>{
+        	console.error("Error loading GAPI client for Youtube API Playlist list !", err);
+        }).then((response) => {
+        	// console.log("Youtube Response Playlist ->", response);
+        	if(response !== null || response !== undefined) {
+        		let playListId = null;
+	        	for(let i in response.result.items) {
+	        		if(response.result.items[i].snippet.title === this.props.kgmsMediaId){
+	        			playListId = response.result.items[i].id;
+	        		}
+	        	}
+	        	if(playListId != null) {
+	        		// console.log("Youtube playListId", playListId);
+	        		return window.gapi.client.youtube.playlistItems.list({
+				      "part": [
+				        "contentDetails"
+				      ],
+				      "playlistId": playListId
+				    });
+	        	}
+        	}
+
+        }, (err) => {
+        	console.error("Youtube Execute error", err);
+        }).then((response)=>{
+        	// console.log("GAPI client loaded for Youtube API PlaylistItems list !");
+        	// console.log("Youtube PlaylistItems Response ->", response);
+        	if(response !== null || response !== undefined) {
+        		let videoIdList = [];
+	        	for(let i in response.result.items){
+	        		videoIdList.push({id: response.result.items[i].id, videoId: response.result.items[i].contentDetails.videoId});
+	        	}
+	        	if(videoIdList.length > 0){
+	        		this.setState({kVideoList: videoIdList});
+	        		if(!isMobile){
+						this.timerID = setTimeout(() => this.props.handleDeco(),900);
+					}
+	        	}
+        	}
+        },(err)=>{
+        	console.error("Error loading GAPI client for Youtube API PlaylistItems list !", err);
+        });
 	}
 
 	componentWillUnmount(){
@@ -43,28 +132,58 @@ class KStudy extends React.PureComponent {
 	}
 
 	async handleImgAlbumRequest(){
+		let kStorage = this.props.firebase.storage();
+		let kStorageRef = kStorage.ref();
+		let imgRef = kStorageRef.child('kgms-images').child(this.props.kgmsMediaId);
+		imgRef.listAll()
+		.then((res) => {
+			// console.log('firebase storage data = ',res);
+			if(res !== null && res !== undefined) {
+				let imageNameList = [];
+				res.items.forEach((itemRef)=>{
+					// console.log('item ref = ',itemRef.name);
+					imageNameList.push(itemRef.name);
+				});
+				if(imageNameList.length > 0) {
+					// console.log('imageNameList = ',imageNameList.toString());
+					this.handleImgUrlRequest(imgRef, imageNameList);
+				}
+			}
+		})
+		.catch((error) => {
+			console.log('firebase storage error = ',error.toString());
+		});
+	}
 
-		imgur.getAlbumInfo(this.props.kgmsAlbumId)
-		    .then((json) => {
-		        // console.log(json);
-		        let k = [];
-		        for(let i in json.data.images){
-		        	// console.log('img: '+json.data.images[i].link);
-		        	k.push({id: json.data.images[i].id, link: json.data.images[i].link});
-		        }
-		        if(k.length > 0){
-		        	this.setState({kImgList: k});
-		        }
-		        if(!isMobile){
-		        	this.timerID = setTimeout(() => this.props.handleDeco(),1000);
-		        }
-		    })
-		    .catch((err) => {
-		        // console.error(err.message);
-		        if(!isMobile){
-		        	this.timerID = setTimeout(() => this.props.handleDeco(),1000);
-		        }
-		    });
+	async handleImgUrlRequest(imgRef, imgArr){
+		let imgList = [];
+		for(let i = 0; i < imgArr.length; i++) {
+			// console.log('imageName = ',imgArr[i]);
+			let url = await imgRef.child(imgArr[i]).getDownloadURL();
+			imgList.push({id: (i+500).toString(), link: url});
+		}
+
+		if(imgList.length > 0) {
+			this.setState({kImgList: imgList});
+			if(!isMobile) {
+				this.timerID = setTimeout(() => this.props.handleDeco(),5000);
+			}
+		}
+	}
+
+	getTaskVideoFrom(){
+		let num = 1;
+		let taskVideoListItems = this.state.kVideoList.map((vidL) => {
+			let embedUrl = `https://www.youtube.com/embed/${vidL.videoId}`;
+			return(
+				<div className={isMobile ? 'mTaskVideoContainer' : 'dTaskVideoContainer'} key={vidL.id}>
+				<iframe className="dTaskVideo" src={embedUrl} samesite="None; secure"
+					title={`kgms-video-${num++}`} type="text/html" allowFullScreen="allowfullscreen" frameBorder="0"/>
+				</div>	
+			);
+		});
+
+		return taskVideoListItems;
 	}
 
 	getTasksImgFrom(){
@@ -156,6 +275,15 @@ class KStudy extends React.PureComponent {
 				</div>
 				<div align="center">
 					{isMobile ? this.getmTasksImgFrom() : this.getTasksImgFrom()}
+				</div>
+				<div align="center">
+					<h4 className={isMobile ? 'mTaskImgHeader' : 'dTaskImgHeader'}
+						style={{display: this.state.kVideoList.length > 0 ? 'block':'none'}}>
+						<span className={isMobile ? 'mTextMain' : 'dTaskImgHeader-span'}>{'Video Section'}</span>
+					</h4>
+				</div>
+				<div align="center">
+					{this.getTaskVideoFrom()}
 				</div>
 				<div style={{display: this.state.isImgModal ? 'block' : 'none'}} 
 					className={isMobile ? 'mImgModal' : 'dImgModal'} /*modal starts*/>

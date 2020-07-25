@@ -28,7 +28,7 @@ class KSDesk extends React.PureComponent {
 	constructor(props){
 		super(props);
 		this.state = {isLogin: false, isModalLogOut: false, kBodyHeight: 0, kBodyNum: [], KClassName: "",
-						KStudies:[{id:0,header:"Please wait... Fetching Events >>",desc:""}], KImgAlbumId: ""}
+						KStudies:[{id:0,header:"Please wait... Fetching Events >>",desc:""}], KMediaId: ""}
 		this.getBodyContent = this.getBodyContent.bind(this);
 		this.handleLogOutModalStart = this.handleLogOutModalStart.bind(this);
 		this.handleLogOutModalClose = this.handleLogOutModalClose.bind(this);
@@ -42,6 +42,7 @@ class KSDesk extends React.PureComponent {
 		this.fetchKgmsStudy = this.fetchKgmsStudy.bind(this);
 		this.bodyRef = React.createRef();
 	}
+
 
 	async fetchKgmsStudy(db,kStudyDoc){
 
@@ -82,7 +83,7 @@ class KSDesk extends React.PureComponent {
 				            // doc.data() is never undefined for query doc snapshots
 				            // console.log(doc.id, " => ", doc.data());
 				            if(doc.data().classId.toLowerCase() === userId.trim().toLowerCase()){
-				            	this.setState({KClassName: doc.data().className, KImgAlbumId: doc.data().imgAlbumId});
+				            	this.setState({KClassName: doc.data().className, KMediaId: doc.data().classId});
 				            	this.fetchKgmsStudy(db,doc.id);
 				            	resolve("Success!");
 				            }else{
@@ -119,7 +120,7 @@ class KSDesk extends React.PureComponent {
 
 	handleKSLogOut(){
 		this.setState({isModalLogOut: false, isLogin: false, kBodyHeight: 0, kBodyNum: [], KClassName: "",
-				KStudies:[{id:0,header:"Please wait... Fetching Events >>",desc:""}], KImgAlbumId: ""});
+				KStudies:[{id:0,header:"Please wait... Fetching Events >>",desc:""}], KMediaId: ""});
 	}
 
 	handleLogOutModalStart(){
@@ -144,7 +145,8 @@ class KSDesk extends React.PureComponent {
 				<div className="pt-page-rotateUnfoldRight" key={'KStudy'} style={{width:'100%'}}>
 					<div className="Orange BorderRound dKStudyContent BoxShadow">
 						<KStudy handleDeco={()=>this.handleCurrentDecoList()} kgmsClassName={this.state.KClassName}
-								kgmsStudies={this.state.KStudies} kgmsAlbumId={this.state.KImgAlbumId}/>
+								kgmsStudies={this.state.KStudies} kgmsMediaId={this.state.KMediaId} 
+								firebase={this.props.firebase}/>
 					</div>
 				</div>
 			);
@@ -155,9 +157,9 @@ class KSDesk extends React.PureComponent {
 		if(this.bodyRef.current !== null){
 			let bHeight = this.bodyRef.current.clientHeight;
 			if( bHeight !== undefined && bHeight > 0){
-				let i = bHeight / 600;
+				let i = bHeight / 500;
 				let j = Math.floor(i);
-				// console.log(`j = ${j}`);
+				// console.log(`j = ${j} & height = ${bHeight}`);
 				let k = [];
 				while(j > 0){
 					k.push(j);
@@ -255,9 +257,6 @@ class KSDesk extends React.PureComponent {
 
 
 	render(){
-		// const log_out_btn = <input type="image" src={L1} alt="log_out" className="Log-out noSelect pt-page-rotateUnfoldTop"
-		// 						style={{visibility: this.state.isLogin ? 'visible' : 'hidden'}} 
-		// 						key={this.state.isLogin.toString()} onClick={this.handleKSLogOut}/>;
 		const log_out_btn = <input type="image" src={LO} alt="log_out" className="dLog-out noSelect pt-page-rotateUnfoldTop"
 								style={{visibility: this.state.isLogin ? 'visible' : 'hidden'}} 
 								key={this.state.isLogin.toString()} onClick={() => this.handleLogOutModalStart()}/>;
