@@ -15,7 +15,8 @@ class KStudy extends React.PureComponent {
 
 	constructor(props){
 		super(props);
-		this.state = {isImgModal: false, kImgList: [], ImgModalSrc: '', kVideoList: []};
+		this.state = {isImgModal: false, kImgList: [], ImgModalSrc: '', kVideoList: [], showImageSection: false,
+						imageBanner: 'Loading Images...'};
 		this.getTasksFrom = this.getTasksFrom.bind(this);
 		this.handleImgAlbumRequest = this.handleImgAlbumRequest.bind(this);
 		this.getTasksImgFrom = this.getTasksImgFrom.bind(this);
@@ -88,7 +89,7 @@ class KStudy extends React.PureComponent {
 	        		// console.log("Youtube playListId", playListId);
 	        		return window.gapi.client.youtube.playlistItems.list({
 				      "part": [
-				        "contentDetails"
+				      	"snippet"
 				      ],
 				      "playlistId": playListId
 				    });
@@ -103,7 +104,8 @@ class KStudy extends React.PureComponent {
         	if(response !== null || response !== undefined) {
         		let videoIdList = [];
 	        	for(let i in response.result.items){
-	        		videoIdList.push({id: response.result.items[i].id, videoId: response.result.items[i].contentDetails.videoId});
+	        		videoIdList.push({id: response.result.items[i].id, videoId: response.result.items[i].snippet.resourceId.videoId,
+	        							title: response.result.items[i].snippet.title});
 	        	}
 	        	if(videoIdList.length > 0){
 	        		this.setState({kVideoList: videoIdList});
@@ -146,7 +148,10 @@ class KStudy extends React.PureComponent {
 				});
 				if(imageNameList.length > 0) {
 					// console.log('imageNameList = ',imageNameList.toString());
+					this.setState({showImageSection: true});
 					this.handleImgUrlRequest(imgRef, imageNameList);
+				} else {
+					this.setState({showImageSection: false, imageBanner: 'Loading Images...'});
 				}
 			}
 		})
@@ -160,11 +165,11 @@ class KStudy extends React.PureComponent {
 		for(let i = 0; i < imgArr.length; i++) {
 			// console.log('imageName = ',imgArr[i]);
 			let url = await imgRef.child(imgArr[i]).getDownloadURL();
-			imgList.push({id: (i+500).toString(), link: url});
+			imgList.push({id: (i+500).toString(), link: url, tag: imgArr[i].replace(/\.[^/.]+$/, "")});
 		}
 
 		if(imgList.length > 0) {
-			this.setState({kImgList: imgList});
+			this.setState({kImgList: imgList, imageBanner: 'Image Section'});
 			if(!isMobile) {
 				this.timerID = setTimeout(() => this.props.handleDeco(),5000);
 			}
@@ -176,10 +181,13 @@ class KStudy extends React.PureComponent {
 		let taskVideoListItems = this.state.kVideoList.map((vidL) => {
 			let embedUrl = `https://www.youtube.com/embed/${vidL.videoId}`;
 			return(
-				<div className={isMobile ? 'mTaskVideoContainer' : 'dTaskVideoContainer'} key={vidL.id}>
-				<iframe className="dTaskVideo" src={embedUrl} samesite="None; secure"
-					title={`kgms-video-${num++}`} type="text/html" allowFullScreen="allowfullscreen" frameBorder="0"/>
-				</div>	
+				<div key={vidL.id} className={isMobile ? 'mVidGap' : 'dVidGap'}>
+					<div className={isMobile ? 'mTaskVideoContainer' : 'dTaskVideoContainer'}>
+						<iframe className="dTaskVideo" src={embedUrl} samesite="None; secure"
+							title={`kgms-video-${num++}`} type="text/html" allowFullScreen="allowfullscreen" frameBorder="0"/>
+					</div>
+					<p><b className={isMobile ? 'mTextMain' : 'dMain'}><u>{vidL.title}</u></b></p>	
+				</div>
 			);
 		});
 
@@ -189,8 +197,15 @@ class KStudy extends React.PureComponent {
 	getTasksImgFrom(){
 		let taskImgListItems = this.state.kImgList.map((imgL) => {
 			return(
-				<img src={imgL.link} alt={imgL.id} className="dTaskImg" 
-					key={imgL.id} onClick={() => this.handleStartImgModal(imgL.link)}/>
+				<div className="dVidGap" key={imgL.id}>
+					<div>
+						<img src={imgL.link} alt={imgL.id} className="dTaskImg" 
+							onClick={() => this.handleStartImgModal(imgL.link)}/>
+					</div>	
+					<div>	
+						<h3 className="dMain dTextBlk"><u>{imgL.tag}</u></h3>
+					</div>
+				</div>	
 			);
 		});
 
@@ -249,8 +264,15 @@ class KStudy extends React.PureComponent {
 
 		let mTaskImgListItems = this.state.kImgList.map((imgL) => {
 			return(
-				<img src={imgL.link} alt={imgL.id} className="mTaskImg" 
-					key={imgL.id} onClick={() => this.handleStartImgModal(imgL.link)}/>
+				<div className="mVidGap" key={imgL.id}>
+					<div>
+						<img src={imgL.link} alt={imgL.id} className="mTaskImg" 
+							 onClick={() => this.handleStartImgModal(imgL.link)}/>
+					</div>
+					<div>	 
+						<p><b className="mTextMain"><u>{imgL.tag}</u></b></p>	
+					</div>
+				</div>	
 			);
 		});
 
@@ -269,8 +291,8 @@ class KStudy extends React.PureComponent {
 				</div>
 				<div align="center">
 					<h4 className={isMobile ? 'mTaskImgHeader' : 'dTaskImgHeader'}
-						style={{display: this.state.kImgList.length > 0 ? 'block':'none'}}>
-						<span className={isMobile ? 'mTextMain' : 'dTaskImgHeader-span'}>{'Image Section'}</span>
+						style={{display: this.state.showImageSection ? 'block':'none'}}>
+						<span className={isMobile ? 'mTextMain' : 'dTaskImgHeader-span'}>{this.state.imageBanner}</span>
 					</h4>
 				</div>
 				<div align="center">

@@ -171,11 +171,14 @@
     width: 75%;
     /*max-width: 80%;*/
     height: auto;
-    margin: 18px 25px;
     outline: none;
     border: none;
     border-radius: 10px;
     cursor: pointer;
+  }
+
+  .mTaskImgGap{
+    margin: 30px 25px;
   }
 
 .mImgModal{
@@ -377,10 +380,14 @@
   }
 
   .mTaskVideoContainer{
-    width: 90%;
+    width: 91%;
     height: 240px;
     position: relative;
-    margin: 50px 0px;
+    /*margin: 50px 0px;*/
+  }
+
+  .mVidGap{
+    margin: 50px 0px; 
   }
 
 @media only screen and (max-width: 320px) and (orientation: portrait) {
@@ -507,7 +514,11 @@
     width: 90%;
     height: 200px;
     position: relative;
-    margin: 50px 0px;
+    /*margin: 50px 0px;*/
+  }
+
+  .mVidGap{
+    margin: 50px 0px; 
   }
   
 }
@@ -563,11 +574,14 @@
     width: 60%;
     /*max-width: 80%;*/
     height: auto;
-    margin: 20px 25px;
     outline: none;
     border: none;
     border-radius: 10px;
     cursor: pointer;
+  }
+
+  .mTaskImgGap{
+    margin: 25px 25px;
   }
 
     .mImgModal{
@@ -620,7 +634,11 @@
     width: 88%;
     height: 230px;
     position: relative;
-    margin: 50px 0px;
+    /*margin: 50px 0px;*/
+  }
+
+  .mVidGap{
+    margin: 50px 0px; 
   }
 
 }
@@ -769,11 +787,14 @@
     width: 60%;
     /*max-width: 80%;*/
     height: auto;
-    margin: 20px 25px;
     outline: none;
     border: none;
     border-radius: 10px;
     cursor: pointer;
+  }
+
+  .mTaskImgGap{
+    margin: 25px 25px;
   }
 
   .mImgModal{
@@ -826,7 +847,11 @@
     width: 88%;
     height: 250px;
     position: relative;
-    margin: 50px 0px;
+    /*margin: 50px 0px;*/
+  }
+
+  .mVidGap{
+    margin: 50px 0px; 
   }
 
 }
@@ -983,11 +1008,14 @@
     width: 70%;
     /*max-width: 80%;*/
     height: auto;
-    margin: 40px 25px;
     outline: none;
     border: none;
     border-radius: 15px;
     cursor: pointer;
+  }
+
+  .mTaskImgGap{
+    margin: 50px 25px;
   }
 
    .mImgModal{
@@ -1040,7 +1068,11 @@
     width: 84%;
     height: 310px;
     position: relative;
-    margin: 55px 0px;
+    /*margin: 55px 0px;*/
+  }
+
+  .mVidGap{
+    margin: 55px 0px; 
   }
 
 }
@@ -1195,11 +1227,14 @@
     width: 55%;
     /*max-width: 80%;*/
     height: auto;
-    margin: 40px 25px;
     outline: none;
     border: none;
     border-radius: 15px;
     cursor: pointer;
+  }
+
+  .mTaskImgGap{
+    margin: 55px 25px;
   }
 
      .mImgModal{
@@ -1252,7 +1287,11 @@
       width: 82%;
       height: 370px;
       position: relative;
-      margin: 60px 0px;
+      /*margin: 60px 0px;*/
+    }
+
+    .mVidGap{
+      margin: 65px 0px; 
     }
 }
 
@@ -1406,11 +1445,14 @@
     width: 68%;
     /*max-width: 80%;*/
     height: auto;
-    margin: 45px 25px;
     outline: none;
     border: none;
     border-radius: 18px;
     cursor: pointer;
+  }
+
+  .mTaskImgGap{
+    margin: 55px 25px;
   }
 
   .mImgModal{
@@ -1460,10 +1502,14 @@
   }
 
   .mTaskVideoContainer{
-    width: 82%;
-    height: 350px;
+    width: 85%;
+    height: 360px;
     position: relative;
-    margin: 60px 0px;
+    /*margin: 60px 0px;*/
+  }
+
+  .mVidGap{
+    margin: 65px 0px; 
   }
 
 }
@@ -1618,11 +1664,14 @@
     width: 55%;
     /*max-width: 80%;*/
     height: auto;
-    margin: 45px 25px;
     outline: none;
     border: none;
     border-radius: 18px;
     cursor: pointer;
+  }
+
+  .mTaskImgGap{
+    margin: 60px 25px;
   }
 
   .mImgModal{
@@ -1675,7 +1724,11 @@
       width: 82%;
       height: 460px;
       position: relative;
-      margin: 64px 0px;
+      /*margin: 64px 0px;*/
+    }
+
+    .mVidGap{
+      margin: 80px 0px; 
     }
 }
 
@@ -1963,10 +2016,13 @@
   width: 35%;
   height: auto;
   max-height: 500px;
-  margin: 18px 25px;
   border: none;
   border-radius: 10px;
   cursor: pointer;
+}
+
+.dTaskImgGap{
+  margin: 28px 25px;
 }
 
 .dImgModal{
@@ -2033,5 +2089,9 @@
   width: 630px;
   height: 350px;
   position: relative;
+  /*margin: 55px 0px;*/
+}
+
+.dVidGap{
   margin: 55px 0px;
 }
