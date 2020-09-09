@@ -4,12 +4,16 @@ import {isMobile} from 'react-device-detect';
 import "firebase/storage";
 
 // document.cookie = "test1=Hello";
-document.cookie = "name1=kgmsstudy; SameSite=Lax";
-document.cookie = "name1-legacy=kgmsStudy; ";
+// document.cookie = "name1=kgmsstudy; SameSite=Lax";
+// document.cookie = "name1-legacy=kgmsStudy; ";
+document.cookie = "k1name=kgmsstudy; SameSite=None; Secure";
+document.cookie = "k1name-legacy=kgmsStudy; Secure";
 // document.cookie = "name1=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 const apiJsUrl = "https://apis.google.com/js/api.js";
-const apiKeyY = 'AIzaSyCMyBe3gjfvs38Yh_eiTwBEd5xlPVwnqK8';
+// const apiKeyYPrev = 'AIzaSyCMyBe3gjfvs38Yh_eiTwBEd5xlPVwnqK8';
+const apiKeyY = 'AIzaSyCjyx-Y-2yupi_mGz9YeaZvdGwutVM7LTw';
 const yJsUrl = 'https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest';
+// const yJsScope = 'https://www.googleapis.com/auth/youtube.readonly';
 
 class KStudy extends React.PureComponent {
 
@@ -72,13 +76,14 @@ class KStudy extends React.PureComponent {
 		      "part": [
 		        "snippet"
 		      ],
-		      "channelId": "UCuS-pL1W9DnAgw0ju4rDOKA"
+		      "channelId": "UCuS-pL1W9DnAgw0ju4rDOKA",
+		      "maxResults": 8
 		    });
         },(err)=>{
         	console.error("Error loading GAPI client for Youtube API Playlist list !", err);
         }).then((response) => {
         	// console.log("Youtube Response Playlist ->", response);
-        	if(response !== null || response !== undefined) {
+        	if(response !== null && response !== undefined) {
         		let playListId = null;
 	        	for(let i in response.result.items) {
 	        		if(response.result.items[i].snippet.title === this.props.kgmsMediaId){
@@ -101,7 +106,7 @@ class KStudy extends React.PureComponent {
         }).then((response)=>{
         	// console.log("GAPI client loaded for Youtube API PlaylistItems list !");
         	// console.log("Youtube PlaylistItems Response ->", response);
-        	if(response !== null || response !== undefined) {
+        	if(response !== null && response !== undefined) {
         		let videoIdList = [];
 	        	for(let i in response.result.items){
 	        		videoIdList.push({id: response.result.items[i].id, videoId: response.result.items[i].snippet.resourceId.videoId,
@@ -114,6 +119,7 @@ class KStudy extends React.PureComponent {
 					}
 	        	}
         	}
+        	
         },(err)=>{
         	console.error("Error loading GAPI client for Youtube API PlaylistItems list !", err);
         });
@@ -156,6 +162,7 @@ class KStudy extends React.PureComponent {
 			}
 		})
 		.catch((error) => {
+			this.setState({showImageSection: false, imageBanner: 'Loading Images...'});
 			console.log('firebase storage error = ',error.toString());
 		});
 	}

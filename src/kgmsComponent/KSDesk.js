@@ -72,7 +72,7 @@ class KSDesk extends React.PureComponent {
 		// console.log(`userId: ${userId} password: ${password}`);
 		let db = this.props.firebase.firestore();
 		return new Promise((resolve,reject) => {
-			db.collection("kgms-classes").where("classPassword", "==", password.toLowerCase()).limit(1)
+			db.collection("kgms-classes").where("classPassword", "==", password.trim().toLowerCase()).limit(1)
 			.get()
 			.then((querySnapshot)=>{
 				if(querySnapshot.empty){
