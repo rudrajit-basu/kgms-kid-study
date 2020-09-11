@@ -147,11 +147,11 @@
       font-size: 1.05em;
       font-weight: bold;
       color: black;
-      word-spacing: 0.8px;
+      word-spacing: 0.5px;
       letter-spacing: 0.6px;
-      line-height: 1.35;
+      line-height: 1.37;
       text-align: justify;
-      text-justify: inter-word
+      text-justify: inter-word;
   }
 
   .mGap2{
@@ -388,6 +388,10 @@
 
   .mVidGap{
     margin: 50px 0px; 
+  }
+
+  .mWordWrap{
+    word-break: break-word;
   }
 
 @media only screen and (max-width: 320px) and (orientation: portrait) {
@@ -1954,7 +1958,7 @@
 
 .TaskDeco{
   font-family: "Arial Black", Gadget, sans-serif;
-  border: 2.7px solid black;
+  border: 2.9px solid black;
   display: inline-block;
   padding: 5px;
   border-radius: 6px;
@@ -2094,4 +2098,8 @@
 
 .dVidGap{
   margin: 55px 0px;
+}
+
+.dWordWrap{
+  word-break: break-word;
 }

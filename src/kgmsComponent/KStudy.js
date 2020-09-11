@@ -220,22 +220,24 @@ class KStudy extends React.PureComponent {
 	}
 
 	getTasksFrom(){
-		// let tasks = [];
-		// for(let c = 1; c <= 10;c++){
-		// 	tasks.push(c);
-		// }
+		let lineKey = 1;
+		let spaceKey = 1;
+
 		let taskListItems = this.props.kgmsStudies.map((task) => {
+
 			return (
 				<div style={{marginTop: '40px'}} key={task.id.toString()}>
 					<div className="Row">
 						<div className="Column TaskLeft" align="center">
 							<p className="TaskDeco">{task.id.toString()}</p>
 						</div>
-						<div className="Column TaskRight" style={{marginTop:'2px'}}>
+						<div className="Column TaskRight dWordWrap" style={{marginTop:'2px'}}>
 							<h3 className="dMainHead dTextBlk">{task.header}</h3>
 							<h3 className="dMain dTextBlk">{task.subHeader}</h3>
-							<h3 className="dMain dTextBlk">{task.desc.split('\n').map((item,key)=>{
-								return <span key={key} className="dSpanStyl">{item}<br/></span>
+							<h3 className="dMain dTextBlk">{task.desc.split('\n').map((item)=>{
+								return <span key={(lineKey++).toString()+'lk'} className="dSpanStyl">{item.split(' ').map((sItem)=>{
+									return <span key={(spaceKey++).toString()+'sk'}>{sItem}&nbsp; </span>
+								})}<br/></span>
 							})}</h3>
 						</div>
 					</div>
@@ -247,18 +249,19 @@ class KStudy extends React.PureComponent {
 	}
 
 	getmTasksFrom() {
-		// let mTasks = [];
-		// for(let c = 1; c <= 5;c++){
-		// 	mTasks.push(c);
-		// }
+		let lineKey = 1;
+		let spaceKey = 1;
+
 		let mTaskListItems = this.props.kgmsStudies.map((task) => {
 			return(
-				<div key={task.id.toString()} className="mGap2">
+				<div key={task.id.toString()} className="mGap2 mWordWrap">
 					<p><b className="mNoticeDec mTextMain">{task.id.toString()}</b></p>
 					<p><b className="mTextMain">{task.header}</b></p>
 					<p><b className="mTextMain">{task.subHeader}</b></p>
-					<p><b className="mTextMain">{task.desc.split('\n').map((item,key)=>{
-						return <span key={key}>{item}<br/></span>
+					<p><b className="mTextMain">{task.desc.split('\n').map((item)=>{
+						return <span key={(lineKey++).toString()+'mlk'}>{item.split(' ').map((sItem)=>{
+							return <span key={(spaceKey++).toString()+'msk'}>{sItem}&nbsp; </span>
+						})}<br/></span>
 					})}</b></p>
 				</div>
 			);
