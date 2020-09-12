@@ -222,11 +222,12 @@ class KStudy extends React.PureComponent {
 	getTasksFrom(){
 		let lineKey = 1;
 		let spaceKey = 1;
+		let divKey = 88;
 
 		let taskListItems = this.props.kgmsStudies.map((task) => {
 
 			return (
-				<div style={{marginTop: '40px'}} key={task.id.toString()}>
+				<div style={{marginTop: '40px'}} key={(divKey++).toString()+'gtf'}>
 					<div className="Row">
 						<div className="Column TaskLeft" align="center">
 							<p className="TaskDeco">{task.id.toString()}</p>
@@ -251,10 +252,11 @@ class KStudy extends React.PureComponent {
 	getmTasksFrom() {
 		let lineKey = 1;
 		let spaceKey = 1;
+		let divKey = 89;
 
 		let mTaskListItems = this.props.kgmsStudies.map((task) => {
 			return(
-				<div key={task.id.toString()} className="mGap2 mWordWrap">
+				<div key={(divKey++).toString()+'gmtf'} className="mGap2 mWordWrap">
 					<p><b className="mNoticeDec mTextMain">{task.id.toString()}</b></p>
 					<p><b className="mTextMain">{task.header}</b></p>
 					<p><b className="mTextMain">{task.subHeader}</b></p>
