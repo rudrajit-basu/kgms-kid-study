@@ -235,7 +235,7 @@ class KStudy extends React.PureComponent {
 						<div className="Column TaskRight dWordWrap" style={{marginTop:'2px'}}>
 							<h3 className="dMainHead dTextBlk">{task.header}</h3>
 							<h3 className="dMain dTextBlk">{task.subHeader}</h3>
-							<h3 className="dMain dTextBlk">{task.desc.split('\n').map((item)=>{
+							<h3 className="dMain dTextBlkDesc">{task.desc.split('\n').map((item)=>{
 								return <span key={(lineKey++).toString()+'lk'} className="dSpanStyl">{item.split(' ').map((sItem)=>{
 									return <span key={(spaceKey++).toString()+'sk'}>{sItem}&nbsp; </span>
 								})}<br/></span>
@@ -260,7 +260,7 @@ class KStudy extends React.PureComponent {
 					<p><b className="mNoticeDec mTextMain">{task.id.toString()}</b></p>
 					<p><b className="mTextMain">{task.header}</b></p>
 					<p><b className="mTextMain">{task.subHeader}</b></p>
-					<p><b className="mTextMain">{task.desc.split('\n').map((item)=>{
+					<p><b className="mTextMainDesc">{task.desc.split('\n').map((item)=>{
 						return <span key={(lineKey++).toString()+'mlk'}>{item.split(' ').map((sItem)=>{
 							return <span key={(spaceKey++).toString()+'msk'}>{sItem}&nbsp; </span>
 						})}<br/></span>

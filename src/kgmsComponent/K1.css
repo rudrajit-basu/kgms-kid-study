@@ -154,6 +154,17 @@
       text-justify: inter-word;
   }
 
+  .mTextMainDesc{
+      font-size: 1.05em;
+      font-weight: bold;
+      color: black;
+      word-spacing: -1.3px;
+      letter-spacing: 0.6px;
+      line-height: 1.37;
+      text-align: justify;
+      text-justify: inter-word;
+  }  
+
   .mGap2{
     margin: 2em 0em;
   }
@@ -490,6 +501,17 @@
       text-justify: inter-word
   }
 
+  .mTextMainDesc{
+      font-size: 0.85em;
+      font-weight: bold;
+      color: black;
+      word-spacing: -1.2px;
+      letter-spacing: 0.6px;
+      line-height: 1.35;
+      text-align: justify;
+      text-justify: inter-word
+  }
+
   .mGap2{
     margin: 1.8em 0em;
   }
@@ -783,6 +805,17 @@
       text-justify: inter-word
   }
 
+  .mTextMainDesc{
+      font-size: 1.15em;
+      font-weight: bold;
+      color: black;
+      word-spacing: -1.5px;
+      letter-spacing: 0.6px;
+      line-height: 1.35;
+      text-align: justify;
+      text-justify: inter-word
+  }
+
   .mGap2{
     margin: 2.25em 0em;
   }
@@ -988,6 +1021,18 @@
       font-weight: bold;
       color: black;
       word-spacing: 0.8px;
+      letter-spacing: 0.6px;
+      line-height: 1.35;
+      text-align: justify;
+      text-justify: inter-word;
+      margin: 0.2em 0em;
+  }
+
+  .mTextMainDesc{
+      font-size: 1.8em;
+      font-weight: bold;
+      color: black;
+      word-spacing: -1.9px;
       letter-spacing: 0.6px;
       line-height: 1.35;
       text-align: justify;
@@ -1214,6 +1259,18 @@
       margin: 0.2em 0em;
   }
 
+  .mTextMainDesc{
+      font-size: 1.9em;
+      font-weight: bold;
+      color: black;
+      word-spacing: -2px;
+      letter-spacing: 0.6px;
+      line-height: 1.35;
+      text-align: justify;
+      text-justify: inter-word;
+      margin: 0.2em 0em;
+  }
+
   .mGap2{
     margin: 3.6em 0em;
   }
@@ -1425,6 +1482,18 @@
       font-weight: bold;
       color: black;
       word-spacing: 0.8px;
+      letter-spacing: 0.6px;
+      line-height: 1.35;
+      text-align: justify;
+      text-justify: inter-word;
+      margin: 0.4em 0em;
+  }
+
+  .mTextMainDesc{
+      font-size: 2.3em;
+      font-weight: bold;
+      color: black;
+      word-spacing: -2.5px;
       letter-spacing: 0.6px;
       line-height: 1.35;
       text-align: justify;
@@ -1644,6 +1713,18 @@
       font-weight: bold;
       color: black;
       word-spacing: 0.8px;
+      letter-spacing: 0.6px;
+      line-height: 1.35;
+      text-align: justify;
+      text-justify: inter-word;
+      margin: 0.4em 0em;
+  }
+
+  .mTextMainDesc{
+      font-size: 2.4em;
+      font-weight: bold;
+      color: black;
+      word-spacing: -2.6px;
       letter-spacing: 0.6px;
       line-height: 1.35;
       text-align: justify;
@@ -1944,6 +2025,13 @@
   padding-right: 10px;
   letter-spacing: 1px;
   word-spacing: 0.5px;
+  line-height: 1.46;
+}
+
+.dTextBlkDesc{
+  padding-right: 10px;
+  letter-spacing: 1px;
+  word-spacing: -1.4px;
   line-height: 1.46;
 }
 
