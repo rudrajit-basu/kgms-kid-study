@@ -96,7 +96,8 @@ class KStudy extends React.PureComponent {
 				      "part": [
 				      	"snippet"
 				      ],
-				      "playlistId": playListId
+				      "playlistId": playListId,
+				      "maxResults": 10
 				    });
 	        	}
         	}
@@ -113,6 +114,7 @@ class KStudy extends React.PureComponent {
 	        							title: response.result.items[i].snippet.title});
 	        	}
 	        	if(videoIdList.length > 0){
+	        		videoIdList.reverse();
 	        		this.setState({kVideoList: videoIdList});
 	        		if(!isMobile){
 						this.timerID = setTimeout(() => this.props.handleDeco(),900);
@@ -193,7 +195,7 @@ class KStudy extends React.PureComponent {
 						<iframe className="dTaskVideo" src={embedUrl} samesite="None; secure"
 							title={`kgms-video-${num++}`} type="text/html" allowFullScreen="allowfullscreen" frameBorder="0"/>
 					</div>
-					<p><b className={isMobile ? 'mTextMain' : 'dMain'}><u>{vidL.title}</u></b></p>	
+					<p className="mLetterWrap"><b className={isMobile ? 'mTextMain' : 'dMain'}><u>{vidL.title}</u></b></p>	
 				</div>
 			);
 		});
@@ -210,7 +212,7 @@ class KStudy extends React.PureComponent {
 							onClick={() => this.handleStartImgModal(imgL.link)}/>
 					</div>	
 					<div>	
-						<h3 className="dMain dTextBlk"><u>{imgL.tag}</u></h3>
+						<h3 className="dMain dTextBlk dLetterWrap"><u>{imgL.tag}</u></h3>
 					</div>
 				</div>	
 			);
@@ -282,7 +284,7 @@ class KStudy extends React.PureComponent {
 							 onClick={() => this.handleStartImgModal(imgL.link)}/>
 					</div>
 					<div>	 
-						<p><b className="mTextMain"><u>{imgL.tag}</u></b></p>	
+						<p><b className="mTextMain mLetterWrap"><u>{imgL.tag}</u></b></p>	
 					</div>
 				</div>	
 			);

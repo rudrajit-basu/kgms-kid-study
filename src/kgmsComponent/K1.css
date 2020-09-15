@@ -132,7 +132,7 @@
 
   .mTextHead1{
       /*font-size: 1.2em;*/
-      font-size: 5.4vw;
+      font-size: 5.25vw;
       font-weight: bold;
       color: black;
       text-align: center;
@@ -418,6 +418,10 @@
     word-break: break-word;
   }
 
+  .mLetterWrap{
+    word-break: break-all;
+  }
+
 @media only screen and (max-width: 320px) and (orientation: portrait) {
 
   .mLoginInp{
@@ -493,7 +497,7 @@
 
   .mTextHead1{
       /*font-size: 1em;*/
-      font-size: 5.4vw;
+      font-size: 5.25vw;
       font-weight: bold;
       color: black;
       letter-spacing: 0.8px;
@@ -695,7 +699,7 @@
 
   .mTextHead1{
       /*font-size: 1.3em;*/
-      font-size: 3.35vw;
+      font-size: 3.3vw;
       font-weight: bold;
       color: black;
       letter-spacing: 1.5px;
@@ -861,7 +865,7 @@
 
   .mTextHead1{
       /*font-size: 1.3em;*/
-      font-size: 3.35vw;
+      font-size: 3.25vw;
       font-weight: bold;
       color: black;
       letter-spacing: 1.5px;
@@ -1096,7 +1100,7 @@
 
   .mTextHead1{
       /*font-size: 2.05em;*/
-      font-size: 4.7vw;
+      font-size: 4.55vw;
       font-weight: bold;
       color: black;
       text-align: center;
@@ -1341,7 +1345,7 @@
 
   .mTextHead1{
       /*font-size: 2.05em;*/
-      font-size: 3.7vw;
+      font-size: 3.6vw;
       font-weight: bold;
       color: black;
       text-align: center;
@@ -1585,7 +1589,7 @@
 
   .mTextHead1{
       /*font-size: 2.05em;*/
-      font-size: 4.5vw;
+      font-size: 4.35vw;
       font-weight: bold;
       color: black;
       text-align: center;
@@ -1830,7 +1834,7 @@
 
   .mTextHead1{
       /*font-size: 2.05em;*/
-      font-size: 3.6vw;
+      font-size: 3.5vw;
       font-weight: bold;
       color: black;
       text-align: center;
@@ -2135,7 +2139,7 @@
 /*-------------------------Desktop KStudy---------------------------------*/ 
 
 .dTextHead1{
-      font-size: 2.03vw;
+      font-size: 2vw;
       font-weight: bold;
       color: black;
       text-align: center;
@@ -2340,6 +2344,10 @@
 
 .dWordWrap{
   word-break: break-word;
+}
+
+.dLetterWrap{
+  word-break: break-all;
 }
 
 .dWordGap{
