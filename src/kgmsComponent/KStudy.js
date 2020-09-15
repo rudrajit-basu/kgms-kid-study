@@ -237,7 +237,7 @@ class KStudy extends React.PureComponent {
 							<h3 className="dMain dTextBlk">{task.subHeader}</h3>
 							<h3 className="dMain dTextBlkDesc">{task.desc.split('\n').map((item)=>{
 								return <span key={(lineKey++).toString()+'lk'} className="dSpanStyl">{item.split(' ').map((sItem)=>{
-									return <span key={(spaceKey++).toString()+'sk'}>{sItem}&nbsp; </span>
+									return <span key={(spaceKey++).toString()+'sk'}>{sItem}<span className="dWordGap"/> </span>
 								})}<br/></span>
 							})}</h3>
 						</div>
@@ -262,7 +262,7 @@ class KStudy extends React.PureComponent {
 					<p><b className="mTextMain">{task.subHeader}</b></p>
 					<p><b className="mTextMainDesc">{task.desc.split('\n').map((item)=>{
 						return <span key={(lineKey++).toString()+'mlk'}>{item.split(' ').map((sItem)=>{
-							return <span key={(spaceKey++).toString()+'msk'}>{sItem}&nbsp; </span>
+							return <span key={(spaceKey++).toString()+'msk'}>{sItem}<span className="mWordGap"/> </span>
 						})}<br/></span>
 					})}</b></p>
 				</div>

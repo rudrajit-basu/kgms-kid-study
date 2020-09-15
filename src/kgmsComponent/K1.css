@@ -126,47 +126,60 @@
     border: 0.145em solid black;
     /*border: 3px solid black;*/
     display: inline-block;
-    padding: 0.1em 0.21em;
+    padding: 0.1em 0.25em;
     border-radius: 0.3em;
   }
 
   .mTextHead1{
-      font-size: 1.2em;
+      /*font-size: 1.2em;*/
+      font-size: 5.4vw;
       font-weight: bold;
       color: black;
       text-align: center;
+      letter-spacing: 1px;
+      word-spacing: 1px;
   }
 
   .mTextSubHead1{
-      font-size: 1.1em;
+      /*font-size: 1.1em;*/
+      font-size: 4.75vw;
       font-weight: bold;
       color: black;
+      letter-spacing: 0.8px;
+      word-spacing: 0.5px;
   }
 
   .mTextMain{
-      font-size: 1.05em;
+      /*font-size: 1.05em;*/
+      font-size: 4.75vw;
       font-weight: bold;
       color: black;
-      word-spacing: 0.5px;
-      letter-spacing: 0.6px;
+      word-spacing: 1px;
+      letter-spacing: 1px;
       line-height: 1.37;
-      text-align: justify;
-      text-justify: inter-word;
+      /*text-align: justify;
+      text-justify: inter-word;*/
   }
 
   .mTextMainDesc{
-      font-size: 1.05em;
+      /*font-size: 1.05em;*/
+      font-size: 4.75vw;
       font-weight: bold;
       color: black;
-      word-spacing: -1.3px;
-      letter-spacing: 0.6px;
-      line-height: 1.37;
-      text-align: justify;
-      text-justify: inter-word;
-  }  
+      word-spacing: 0px;
+      letter-spacing: 0.2px;
+      line-height: 1.5;
+      /*text-align: justify;
+      text-justify: inter-word;*/
+  }
+
+  .mWordGap{
+    display: inline-block;
+    width: 0.5px;
+  }
 
   .mGap2{
-    margin: 2em 0em;
+    padding: 0.3em 0em;
   }
 
   .mTaskImgHeader{
@@ -479,41 +492,54 @@
   }
 
   .mTextHead1{
-      font-size: 1em;
+      /*font-size: 1em;*/
+      font-size: 5.4vw;
       font-weight: bold;
       color: black;
+      letter-spacing: 0.8px;
+      word-spacing: 0.8px;
   }
 
   .mTextSubHead1{
-      font-size: 0.9em;
+      /*font-size: 0.9em;*/
+      font-size: 4.75vw;
       font-weight: bold;
       color: black;
+      letter-spacing: 0.8px;
+      word-spacing: 0.5px;
   }
 
   .mTextMain{
-      font-size: 0.85em;
+      /*font-size: 0.85em;*/
+      font-size: 4.75vw;
       font-weight: bold;
       color: black;
-      word-spacing: 0.8px;
-      letter-spacing: 0.6px;
-      line-height: 1.35;
-      text-align: justify;
-      text-justify: inter-word
+      word-spacing: 1px;
+      letter-spacing: 1px;
+      line-height: 1.36;
+      /*text-align: justify;
+      text-justify: inter-word*/
   }
 
   .mTextMainDesc{
-      font-size: 0.85em;
+      /*font-size: 0.85em;*/
+      font-size: 4.75vw;
       font-weight: bold;
       color: black;
-      word-spacing: -1.2px;
-      letter-spacing: 0.6px;
-      line-height: 1.35;
-      text-align: justify;
-      text-justify: inter-word
+      word-spacing: 0px;
+      letter-spacing: 0.2px;
+      line-height: 1.5;
+      /*text-align: justify;
+      text-justify: inter-word*/
+  }
+
+  .mWordGap{
+    display: inline-block;
+    width: 0.5px;
   }
 
   .mGap2{
-    margin: 1.8em 0em;
+    padding: 0.3em 0em;
   }
 
    .mTaskImgHeader{
@@ -667,6 +693,57 @@
     margin: 50px 0px; 
   }
 
+  .mTextHead1{
+      /*font-size: 1.3em;*/
+      font-size: 3.35vw;
+      font-weight: bold;
+      color: black;
+      letter-spacing: 1.5px;
+      word-spacing: 1.7px;
+  }
+
+  .mTextSubHead1{
+      /*font-size: 1.2em;*/
+      font-size: 2.9vw;
+      font-weight: bold;
+      color: black;
+      letter-spacing: 1px;
+      word-spacing: 0.8px;
+  }
+
+  .mTextMain{
+      /*font-size: 1.15em;*/
+      font-size: 2.85vw;
+      font-weight: bold;
+      color: black;
+      word-spacing: 1.1px;
+      letter-spacing: 1.1px;
+      line-height: 1.37;
+      /*text-align: justify;
+      text-justify: inter-word*/
+  }
+
+  .mTextMainDesc{
+      /*font-size: 1.15em;*/
+      font-size: 2.85vw;
+      font-weight: bold;
+      color: black;
+      word-spacing: 0px;
+      letter-spacing: 0.3px;
+      line-height: 1.5;
+      /*text-align: justify;
+      text-justify: inter-word*/
+  }
+
+  .mWordGap{
+    display: inline-block;
+    width: 0.7px;
+  }
+
+  .mGap2{
+    padding: 0.5em 0em;
+  }
+
 }
 
 @media only screen and (min-width: 600px) and (orientation: portrait) {
@@ -783,41 +860,54 @@
   }
 
   .mTextHead1{
-      font-size: 1.3em;
+      /*font-size: 1.3em;*/
+      font-size: 3.35vw;
       font-weight: bold;
       color: black;
+      letter-spacing: 1.5px;
+      word-spacing: 1.7px;
   }
 
   .mTextSubHead1{
-      font-size: 1.2em;
+      /*font-size: 1.2em;*/
+      font-size: 2.9vw;
       font-weight: bold;
       color: black;
+      letter-spacing: 1px;
+      word-spacing: 0.8px;
   }
 
   .mTextMain{
-      font-size: 1.15em;
+      /*font-size: 1.15em;*/
+      font-size: 2.85vw;
       font-weight: bold;
       color: black;
-      word-spacing: 0.8px;
-      letter-spacing: 0.6px;
-      line-height: 1.35;
-      text-align: justify;
-      text-justify: inter-word
+      word-spacing: 1.1px;
+      letter-spacing: 1.1px;
+      line-height: 1.37;
+      /*text-align: justify;
+      text-justify: inter-word*/
   }
 
   .mTextMainDesc{
-      font-size: 1.15em;
+      /*font-size: 1.15em;*/
+      font-size: 2.85vw;
       font-weight: bold;
       color: black;
-      word-spacing: -1.5px;
-      letter-spacing: 0.6px;
-      line-height: 1.35;
-      text-align: justify;
-      text-justify: inter-word
+      word-spacing: 0px;
+      letter-spacing: 0.3px;
+      line-height: 1.5;
+      /*text-align: justify;
+      text-justify: inter-word*/
+  }
+
+  .mWordGap{
+    display: inline-block;
+    width: 0.7px;
   }
 
   .mGap2{
-    margin: 2.25em 0em;
+    padding: 0.5em 0em;
   }
 
   .mTaskImg{
@@ -1005,43 +1095,57 @@
   }
 
   .mTextHead1{
-      font-size: 2.05em;
+      /*font-size: 2.05em;*/
+      font-size: 4.7vw;
       font-weight: bold;
       color: black;
+      text-align: center;
+      letter-spacing: 1.2px;
+      word-spacing: 1px;
   }
 
   .mTextSubHead1{
-      font-size: 1.9em;
+      /*font-size: 1.9em;*/
+      font-size: 4.1vw;
       font-weight: bold;
       color: black;
+      letter-spacing: 1px;
+      word-spacing: 0.6px;
   }
 
   .mTextMain{
-      font-size: 1.8em;
+      /*font-size: 1.8em;*/
+      font-size: 3.9vw;
       font-weight: bold;
       color: black;
-      word-spacing: 0.8px;
-      letter-spacing: 0.6px;
-      line-height: 1.35;
-      text-align: justify;
-      text-justify: inter-word;
+      word-spacing: 1px;
+      letter-spacing: 1px;
+      line-height: 1.5;
+      /*text-align: justify;
+      text-justify: inter-word;*/
       margin: 0.2em 0em;
   }
 
   .mTextMainDesc{
-      font-size: 1.8em;
+      /*font-size: 1.8em;*/
+      font-size: 3.9vw;
       font-weight: bold;
       color: black;
-      word-spacing: -1.9px;
-      letter-spacing: 0.6px;
-      line-height: 1.35;
-      text-align: justify;
-      text-justify: inter-word;
-      margin: 0.2em 0em;
+      word-spacing: 0px;
+      letter-spacing: 0.3px;
+      line-height: 1.5;
+      /*text-align: justify;
+      text-justify: inter-word;*/
+      /*margin: 0.2em 0em;*/
+  }
+
+  .mWordGap{
+    display: inline-block;
+    width: 0.6px;
   }
 
   .mGap2{
-    margin: 3.6em 0em;
+    padding: 1em 0em;
   }
 
   .mTaskImgHeader{
@@ -1236,43 +1340,57 @@
   }
 
   .mTextHead1{
-      font-size: 2.1em;
+      /*font-size: 2.05em;*/
+      font-size: 3.7vw;
       font-weight: bold;
       color: black;
+      text-align: center;
+      letter-spacing: 1.2px;
+      word-spacing: 1px;
   }
 
   .mTextSubHead1{
-      font-size: 2em;
+      /*font-size: 1.9em;*/
+      font-size: 3.2vw;
       font-weight: bold;
       color: black;
+      letter-spacing: 1px;
+      word-spacing: 0.6px;
   }
 
   .mTextMain{
-      font-size: 1.9em;
+      /*font-size: 1.8em;*/
+      font-size: 2.9vw;
       font-weight: bold;
       color: black;
-      word-spacing: 0.8px;
-      letter-spacing: 0.6px;
-      line-height: 1.35;
-      text-align: justify;
-      text-justify: inter-word;
+      word-spacing: 1px;
+      letter-spacing: 1px;
+      line-height: 1.5;
+      /*text-align: justify;
+      text-justify: inter-word;*/
       margin: 0.2em 0em;
   }
 
   .mTextMainDesc{
-      font-size: 1.9em;
+      /*font-size: 1.8em;*/
+      font-size: 2.9vw;
       font-weight: bold;
       color: black;
-      word-spacing: -2px;
-      letter-spacing: 0.6px;
-      line-height: 1.35;
-      text-align: justify;
-      text-justify: inter-word;
-      margin: 0.2em 0em;
+      word-spacing: 0px;
+      letter-spacing: 0.3px;
+      line-height: 1.5;
+      /*text-align: justify;
+      text-justify: inter-word;*/
+      /*margin: 0.2em 0em;*/
+  }
+
+  .mWordGap{
+    display: inline-block;
+    width: 0.6px;
   }
 
   .mGap2{
-    margin: 3.6em 0em;
+    padding: 1em 0em;
   }
 
   .mTaskImgHeader{
@@ -1466,43 +1584,57 @@
   }
 
   .mTextHead1{
-      font-size: 2.6em;
+      /*font-size: 2.05em;*/
+      font-size: 4.5vw;
       font-weight: bold;
       color: black;
+      text-align: center;
+      letter-spacing: 1.4px;
+      word-spacing: 1.2px;
   }
 
   .mTextSubHead1{
-      font-size: 2.4em;
+      /*font-size: 1.9em;*/
+      font-size: 3.9vw;
       font-weight: bold;
       color: black;
+      letter-spacing: 1.2px;
+      word-spacing: 0.8px;
   }
 
   .mTextMain{
-      font-size: 2.3em;
+      /*font-size: 1.8em;*/
+      font-size: 3.7vw;
       font-weight: bold;
       color: black;
-      word-spacing: 0.8px;
-      letter-spacing: 0.6px;
-      line-height: 1.35;
-      text-align: justify;
-      text-justify: inter-word;
-      margin: 0.4em 0em;
+      word-spacing: 1.2px;
+      letter-spacing: 1.2px;
+      line-height: 1.5;
+      /*text-align: justify;
+      text-justify: inter-word;*/
+      margin: 0.2em 0em;
   }
 
   .mTextMainDesc{
-      font-size: 2.3em;
+      /*font-size: 1.8em;*/
+      font-size: 3.7vw;
       font-weight: bold;
       color: black;
-      word-spacing: -2.5px;
-      letter-spacing: 0.6px;
-      line-height: 1.35;
-      text-align: justify;
-      text-justify: inter-word;
-      margin: 0.4em 0em;
+      word-spacing: 0px;
+      letter-spacing: 0.5px;
+      line-height: 1.5;
+      /*text-align: justify;
+      text-justify: inter-word;*/
+      /*margin: 0.2em 0em;*/
+  }
+
+  .mWordGap{
+    display: inline-block;
+    width: 0.8px;
   }
 
   .mGap2{
-    margin: 5em 0em;
+    padding: 1.2em 0em;
   }
 
   .mTaskImgHeader{
@@ -1697,43 +1829,57 @@
   }
 
   .mTextHead1{
-      font-size: 2.7em;
+      /*font-size: 2.05em;*/
+      font-size: 3.6vw;
       font-weight: bold;
       color: black;
+      text-align: center;
+      letter-spacing: 1.4px;
+      word-spacing: 1.2px;
   }
 
   .mTextSubHead1{
-      font-size: 2.5em;
+      /*font-size: 1.9em;*/
+      font-size: 3.1vw;
       font-weight: bold;
       color: black;
+      letter-spacing: 1.2px;
+      word-spacing: 0.8px;
   }
 
   .mTextMain{
-      font-size: 2.4em;
+      /*font-size: 1.8em;*/
+      font-size: 3vw;
       font-weight: bold;
       color: black;
-      word-spacing: 0.8px;
-      letter-spacing: 0.6px;
-      line-height: 1.35;
-      text-align: justify;
-      text-justify: inter-word;
-      margin: 0.4em 0em;
+      word-spacing: 1.2px;
+      letter-spacing: 1.2px;
+      line-height: 1.5;
+      /*text-align: justify;
+      text-justify: inter-word;*/
+      margin: 0.2em 0em;
   }
 
   .mTextMainDesc{
-      font-size: 2.4em;
+      /*font-size: 1.8em;*/
+      font-size: 3vw;
       font-weight: bold;
       color: black;
-      word-spacing: -2.6px;
-      letter-spacing: 0.6px;
-      line-height: 1.35;
-      text-align: justify;
-      text-justify: inter-word;
-      margin: 0.4em 0em;
+      word-spacing: 0px;
+      letter-spacing: 0.3px;
+      line-height: 1.5;
+      /*text-align: justify;
+      text-justify: inter-word;*/
+      /*margin: 0.2em 0em;*/
+  }
+
+  .mWordGap{
+    display: inline-block;
+    width: 0.6px;
   }
 
   .mGap2{
-    margin: 5em 0em;
+    padding: 1em 0em;
   } 
 
   .mTaskImgHeader{
@@ -1989,29 +2135,31 @@
 /*-------------------------Desktop KStudy---------------------------------*/ 
 
 .dTextHead1{
-      font-size: 2.05vw;
+      font-size: 2.03vw;
       font-weight: bold;
       color: black;
       text-align: center;
       letter-spacing: 1.5px;
+      word-spacing: 1.5px;
   }
 
 .dTextSubHead1{
-      font-size: 1.74vw;
+      font-size: 1.727vw;
       font-weight: bold;
       color: black;
       margin-left: 6px;
-      letter-spacing: 0.6px;
+      letter-spacing: 1px;
+      word-spacing: 1px;
   }
 
 .dMainHead{
-  font-size: 1.57vw;
+  font-size: 1.575vw;
   color: black;
   font-weight: bold;
 }
 
 .dMain{
-  font-size: 1.46vw;
+  font-size: 1.503vw;
   color: black;
   font-weight: bold;
 }  
@@ -2030,9 +2178,9 @@
 
 .dTextBlkDesc{
   padding-right: 10px;
-  letter-spacing: 1px;
-  word-spacing: -1.4px;
-  line-height: 1.46;
+  letter-spacing: 0.9px;
+  word-spacing: 0px;
+  line-height: 1.5;
 }
 
 
@@ -2070,9 +2218,11 @@
 }
 
 .dTaskImgHeader-span{
-  font-size: 1.55vw;
+  font-size: 1.575vw;
   color: black;
   font-weight: bold;
+  letter-spacing: 0.8px;
+  word-spacing: 0.5px;
 }
 
 .TaskHLeft{
@@ -2190,4 +2340,9 @@
 
 .dWordWrap{
   word-break: break-word;
+}
+
+.dWordGap{
+  display: inline-block;
+  width: 0.3px;
 }
