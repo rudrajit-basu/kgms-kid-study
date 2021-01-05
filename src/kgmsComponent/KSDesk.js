@@ -307,7 +307,7 @@ class KSDesk extends React.PureComponent {
 				</div /*modal ends*/>
 				<div /*footer starts*/>
 					<div align="center" style={{width: '100vw', marginTop:'3.2em'}}>
-						<img src={F1} alt="footer" style={{width:'88%'}} className="noSelect"/>
+						<img src={F1} alt="footer" style={{width:'75vw'}} className="noSelect"/>
 					</div>
 				</div /*footer ends*/>
 			</div /*app ends*/>
