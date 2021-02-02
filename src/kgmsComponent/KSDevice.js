@@ -7,6 +7,7 @@ import F1 from './images/F1.png';
 import KSLogin from './KSLogin';
 import KStudy from './KStudy';
 import "firebase/firestore";
+import "firebase/analytics";
 
 class KSDevice extends React.PureComponent {
 
@@ -94,6 +95,11 @@ class KSDevice extends React.PureComponent {
 	}
 
 	componentDidMount(){
+		try{
+			this.props.firebase.analytics();
+		}catch(e){
+			console.error(e);
+		}
 		window.addEventListener('popstate', this.handleHistoryPop,false);
 		window.history.replaceState({page: 'mLogin'},'','');
 	}

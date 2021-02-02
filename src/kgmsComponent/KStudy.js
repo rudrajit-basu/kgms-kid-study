@@ -193,7 +193,8 @@ class KStudy extends React.PureComponent {
 				<div key={vidL.id} className={isMobile ? 'mVidGap' : 'dVidGap'}>
 					<div className={isMobile ? 'mTaskVideoContainer' : 'dTaskVideoContainer'}>
 						<iframe className="dTaskVideo" src={embedUrl} samesite="None; secure"
-							title={`kgms-video-${num++}`} type="text/html" allowFullScreen="allowfullscreen" frameBorder="0"/>
+							title={`kgms-video-${num++}`} type="text/html" allowFullScreen="allowfullscreen" 
+							frameBorder="0" loading="lazy"/>
 					</div>
 					<p className="mLetterWrap"><b className={isMobile ? 'mTextMain' : 'dMain'}><u>{vidL.title}</u></b></p>	
 				</div>

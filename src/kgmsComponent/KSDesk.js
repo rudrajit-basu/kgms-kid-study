@@ -12,6 +12,7 @@ import O3 from './images/O3.png';
 import KSLogin from './KSLogin';
 import KStudy from './KStudy';
 import "firebase/firestore";
+import "firebase/analytics";
 
 const KB1 = <img src={M3} alt="M3" style={{width:'23%'}} className="noSelect pt-page-moveFromBottomFade" />;
 const KB2 = <img src={M2} alt="M2" style={{width:'29%'}} className="noSelect pt-page-moveFromBottomFade" />;
@@ -247,6 +248,11 @@ class KSDesk extends React.PureComponent {
 
 
 	componentDidMount(){
+		try{
+			this.props.firebase.analytics();
+		}catch(e){
+			console.error(e);
+		}
 		window.addEventListener('popstate', this.handleHistoryPop,false);
 		window.history.replaceState({page: 'kLogin'},'','');
 	}
