@@ -111,10 +111,10 @@
 
 
 
-@keyframes zoom {
+/*@keyframes zoom {
   from {transform:scale(0)}
   to {transform:scale(1)}
-}
+}*/
 
 
 /*<img src={P1} alt="P1" className="TaskImg" onClick={() => this.handleStartImgModal(P1)}/>
@@ -205,25 +205,23 @@
     margin: 30px 25px;
   }
 
-.mImgModal{
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+/*.mImgModal{
+  display: none; 
+  position: fixed;
+  z-index: 1;
   padding-top: 10vh; 
   left: 0;
   top: 0;
-  width: 100vw; /* Full width */
-  height: 100vh; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.9);
 }
 
-/* The Close Button */
 .mImgModalClose {
   position: absolute;
   top: 1vh;
-  /*right: 20vw;*/
   right: 5vw;
   color: #f1f1f1;
   font-size: 2.5em;
@@ -231,7 +229,6 @@
   transition: 0.3s;
 }
 
-/*.ImgModalClose:hover,*/
 .mImgModalClose:focus {
   color: #bbb;
   text-decoration: none;
@@ -244,13 +241,11 @@
   width: auto;
   height: auto;
   max-width: 90vw;
-  /*max-height: 96vh;*/
   animation-name: zoom;
   animation-duration: 0.6s;
   overflow-y: auto;
   margin-bottom: 2em;
-  /*transform: rotate(90deg);*/
-}
+}*/
 
 /*------------------------------------------------------------*/
 .mInpText{
@@ -342,10 +337,11 @@
     /*border: 0.1em solid #202020;
     border-radius: 0.2em;*/
     color: black;
-    font-weight: bold;
+    font-weight: 650;
     resize: vertical;
     outline: none;
     font-size: 1.1em;
+    letter-spacing: 0.4px;
   }
 
   .mLoginLabel{
@@ -408,6 +404,8 @@
     height: 240px;
     position: relative;
     /*margin: 50px 0px;*/
+    margin-left: 4.5%;
+    margin-top: 25%;
   }
 
   .mVidGap{
@@ -571,10 +569,12 @@
     height: 200px;
     position: relative;
     /*margin: 50px 0px;*/
+    margin-left: 4.5%;
+    margin-top: 25%;
   }
 
   .mVidGap{
-    margin: 50px 0px; 
+    margin: 45px 0px; 
   }
   
 }
@@ -640,25 +640,23 @@
     margin: 25px 25px;
   }
 
-    .mImgModal{
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+  /*.mImgModal{
+    display: none;
+    position: fixed;
+    z-index: 1;
     padding-top: 18vh; 
     left: 0;
     top: 0;
-    width: 100vw; /* Full width */
-    height: 100vh; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.9);
   }
 
-  /* The Close Button */
   .mImgModalClose {
     position: absolute;
     top: 1.2vh;
-    /*right: 20vw;*/
     left: 2.4vw;
     color: #f1f1f1;
     font-size: 2.3em;
@@ -666,7 +664,6 @@
     transition: 0.3s;
   }
 
-  /*.ImgModalClose:hover,*/
   .mImgModalClose:focus {
     color: #bbb;
     text-decoration: none;
@@ -679,18 +676,19 @@
     width: auto;
     height: auto;
     max-width: 90vw;
-    /*max-height: 96vh;*/
     animation-name: zoom;
     animation-duration: 0.6s;
     overflow-y: auto;
     margin-bottom: 2.5em;
-  }
+  }*/
 
   .mTaskVideoContainer{
     width: 88%;
     height: 230px;
     position: relative;
     /*margin: 50px 0px;*/
+    margin-left: 6%;
+    margin-top: 0.5%;
   }
 
   .mVidGap{
@@ -928,25 +926,23 @@
     margin: 25px 25px;
   }
 
-  .mImgModal{
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+ /* .mImgModal{
+  display: none;
+  position: fixed;
+  z-index: 1;
   padding-top: 18vh; 
   left: 0;
   top: 0;
-  width: 100vw; /* Full width */
-  height: 100vh; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.9);
 }
 
-/* The Close Button */
 .mImgModalClose {
   position: absolute;
   top: 1.5vh;
-  /*right: 20vw;*/
   left: 2.5vw;
   color: #f1f1f1;
   font-size: 2.6em;
@@ -954,7 +950,6 @@
   transition: 0.3s;
 }
 
-/*.ImgModalClose:hover,*/
 .mImgModalClose:focus {
   color: #bbb;
   text-decoration: none;
@@ -967,18 +962,19 @@
   width: auto;
   height: auto;
   max-width: 90vw;
-  /*max-height: 96vh;*/
   animation-name: zoom;
   animation-duration: 0.6s;
   overflow-y: auto;
   margin-bottom: 3em;
-}
+}*/
 
 .mTaskVideoContainer{
     width: 88%;
     height: 250px;
     position: relative;
     /*margin: 50px 0px;*/
+    margin-left: 6%;
+    margin-top: 0.5%;
   }
 
   .mVidGap{
@@ -1175,25 +1171,23 @@
     margin: 50px 25px;
   }
 
-   .mImgModal{
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+   /*.mImgModal{
+    display: none; 
+    position: fixed;
+    z-index: 1;
     padding-top: 11vh; 
     left: 0;
     top: 0;
-    width: 100vw; /* Full width */
-    height: 100vh; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.9);
   }
 
-  /* The Close Button */
   .mImgModalClose {
     position: absolute;
     top: 1vh;
-    /*right: 20vw;*/
     right: 5vw;
     color: #f1f1f1;
     font-size: 4.5em;
@@ -1201,7 +1195,6 @@
     transition: 0.3s;
   }
 
-  /*.ImgModalClose:hover,*/
   .mImgModalClose:focus {
     color: #bbb;
     text-decoration: none;
@@ -1214,22 +1207,23 @@
     width: auto;
     height: auto;
     max-width: 90vw;
-    /*max-height: 96vh;*/
     animation-name: zoom;
     animation-duration: 0.6s;
     overflow-y: auto;
     margin-bottom: 4em;
-  }
+  }*/
 
   .mTaskVideoContainer{
     width: 84%;
-    height: 310px;
+    height: 335px;
     position: relative;
     /*margin: 55px 0px;*/
+    margin-left: 8.15%;
+    margin-top: 21%;
   }
 
   .mVidGap{
-    margin: 55px 0px; 
+    margin: 65px 0px; 
   }
 
 }
@@ -1420,57 +1414,55 @@
     margin: 55px 25px;
   }
 
-     .mImgModal{
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 15vh; 
-    left: 0;
-    top: 0;
-    width: 100vw; /* Full width */
-    height: 100vh; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+    /*.mImgModal{
+      display: none;
+      position: fixed;
+      z-index: 1;
+      padding-top: 15vh; 
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: auto;
+      background-color: rgb(0,0,0);
+      background-color: rgba(0,0,0,0.9);
     }
 
-    /* The Close Button */
     .mImgModalClose {
-    position: absolute;
-    top: 1.5vh;
-    /*right: 20vw;*/
-    left: 2.5vw;
-    color: #f1f1f1;
-    font-size: 4.2em;
-    font-weight: bold;
-    transition: 0.3s;
+      position: absolute;
+      top: 1.5vh;
+      left: 2.5vw;
+      color: #f1f1f1;
+      font-size: 4.2em;
+      font-weight: bold;
+      transition: 0.3s;
     }
 
-    /*.ImgModalClose:hover,*/
     .mImgModalClose:focus {
-    color: #bbb;
-    text-decoration: none;
-    cursor: pointer;
+      color: #bbb;
+      text-decoration: none;
+      cursor: pointer;
     }
 
     .mImgModalImage{
-        margin: auto;
+      margin: auto;
       display: block;
       width: auto;
       height: auto;
       max-width: 90vw;
-      /*max-height: 96vh;*/
       animation-name: zoom;
       animation-duration: 0.6s;
       overflow-y: auto;
       margin-bottom: 3em;
-    }
+    }*/
 
     .mTaskVideoContainer{
       width: 82%;
       height: 370px;
       position: relative;
       /*margin: 60px 0px;*/
+      margin-left: 9.5%;
+      margin-top: 6%;
     }
 
     .mVidGap{
@@ -1664,25 +1656,23 @@
     margin: 55px 25px;
   }
 
-  .mImgModal{
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+  /*.mImgModal{
+    display: none;
+    position: fixed;
+    z-index: 1;
     padding-top: 11vh; 
     left: 0;
     top: 0;
-    width: 100vw; /* Full width */
-    height: 100vh; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.9);
   }
 
-  /* The Close Button */
   .mImgModalClose {
     position: absolute;
     top: 1.5vh;
-    /*right: 20vw;*/
     right: 5.5vw;
     color: #f1f1f1;
     font-size: 5.5em;
@@ -1690,7 +1680,6 @@
     transition: 0.3s;
   }
 
-  /*.ImgModalClose:hover,*/
   .mImgModalClose:focus {
     color: #bbb;
     text-decoration: none;
@@ -1698,27 +1687,28 @@
   }
 
   .mImgModalImage{
-      margin: auto;
+    margin: auto;
     display: block;
     width: auto;
     height: auto;
     max-width: 90vw;
-    /*max-height: 96vh;*/
     animation-name: zoom;
     animation-duration: 0.6s;
     overflow-y: auto;
     margin-bottom: 4em;
-  }
+  }*/
 
   .mTaskVideoContainer{
     width: 85%;
-    height: 360px;
+    height: 420px;
     position: relative;
     /*margin: 60px 0px;*/
+    margin-left: 8%;
+    margin-top: 21%;
   }
 
   .mVidGap{
-    margin: 65px 0px; 
+    margin: 75px 0px; 
   }
 
 }
@@ -1909,57 +1899,55 @@
     margin: 60px 25px;
   }
 
-  .mImgModal{
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 15vh; 
-    left: 0;
-    top: 0;
-    width: 100vw; /* Full width */
-    height: 100vh; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+  /*.mImgModal{
+      display: none;
+      position: fixed;
+      z-index: 1;
+      padding-top: 15vh; 
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: auto;
+      background-color: rgb(0,0,0);
+      background-color: rgba(0,0,0,0.9);
     }
 
-    /* The Close Button */
     .mImgModalClose {
-    position: absolute;
-    top: 2vh;
-    /*right: 20vw;*/
-    left: 3vw;
-    color: #f1f1f1;
-    font-size: 5.4em;
-    font-weight: bold;
-    transition: 0.3s;
+      position: absolute;
+      top: 2vh;
+      left: 3vw;
+      color: #f1f1f1;
+      font-size: 5.4em;
+      font-weight: bold;
+      transition: 0.3s;
     }
 
-    /*.ImgModalClose:hover,*/
     .mImgModalClose:focus {
-    color: #bbb;
-    text-decoration: none;
-    cursor: pointer;
+      color: #bbb;
+      text-decoration: none;
+      cursor: pointer;
     }
 
     .mImgModalImage{
-        margin: auto;
+      margin: auto;
       display: block;
       width: auto;
       height: auto;
       max-width: 90vw;
-      /*max-height: 96vh;*/
       animation-name: zoom;
       animation-duration: 0.6s;
       overflow-y: auto;
       margin-bottom: 3em;
-    }
+    }*/
 
     .mTaskVideoContainer{
       width: 82%;
       height: 460px;
       position: relative;
       /*margin: 64px 0px;*/
+      margin-left: 9.5%;
+      margin-top: 6%;
     }
 
     .mVidGap{
@@ -2008,10 +1996,12 @@
     /*border: 0.1em solid #202020;
     border-radius: 0.2em;*/
     color: black;
-    font-weight: bold;
+    /*font-weight: bold;*/
+    font-weight: 650;
     resize: vertical;
     outline: none;
     font-size: 1.35em;
+    letter-spacing: 0.4px;
   }
 
   .dLoginLabel{
@@ -2271,25 +2261,23 @@
   margin: 28px 25px;
 }
 
-.dImgModal{
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+/*.dImgModal{
+  display: none;
+  position: fixed;
+  z-index: 1;
   padding-top: 2.6vh; 
   left: 0;
   top: 0;
-  width: 100vw; /* Full width */
-  height: 100vh; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.9); 
 }
 
-/* The Close Button */
 .dImgModalClose {
   position: absolute;
   top: 4vh;
-  /*right: 20vw;*/
   right: 6vw;
   color: #f1f1f1;
   font-size: 4vw;
@@ -2313,8 +2301,7 @@
   max-height: 95vh;
   animation-name: zoom;
   animation-duration: 0.6s;
-  /*overflow-y: auto;*/
-}
+}*/
 
 .dSpanStyl{
   display: block;
@@ -2326,20 +2313,31 @@
   height: 100%;
   border-radius: 10px;
   border: none;
-  position: absolute;
+  /*position: absolute;
   top: 0;
-  left: 0;
+  left: 0;*/
 }
 
 .dTaskVideoContainer{
-  width: 630px;
-  height: 350px;
+  /*width: 630px;
+  height: 350px;*/
+  width: 640px;
+  height: 400px;
   position: relative;
-  /*margin: 55px 0px;*/
+  /*margin: 12% 26%;*/
+  margin-left: 26.5%;
+  margin-top: 8%;
+}
+
+.dTaskVideoImg{
+  width: 600px;
+  height: 350px;
+  border-radius: 10px;
 }
 
 .dVidGap{
-  margin: 55px 0px;
+  /*margin: 55px 0px;*/
+  margin: 65px 0px;
 }
 
 .dWordWrap{

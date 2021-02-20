@@ -19,13 +19,11 @@ class KStudy extends React.PureComponent {
 
 	constructor(props){
 		super(props);
-		this.state = {isImgModal: false, kImgList: [], ImgModalSrc: '', kVideoList: [], showImageSection: false,
+		this.state = {kImgList: [], kVideoList: [], showImageSection: false,
 						imageBanner: 'Loading Images...'};
 		this.getTasksFrom = this.getTasksFrom.bind(this);
 		this.handleImgAlbumRequest = this.handleImgAlbumRequest.bind(this);
 		this.getTasksImgFrom = this.getTasksImgFrom.bind(this);
-		this.handleStartImgModal = this.handleStartImgModal.bind(this);
-		this.handleCloseImgModal = this.handleCloseImgModal.bind(this);
 		this.getmTasksFrom = this.getmTasksFrom.bind(this);
 		this.getmTasksImgFrom = this.getmTasksImgFrom.bind(this);
 		this.loadGapiClient = this.loadGapiClient.bind(this);
@@ -111,7 +109,7 @@ class KStudy extends React.PureComponent {
         		let videoIdList = [];
 	        	for(let i in response.result.items){
 	        		videoIdList.push({id: response.result.items[i].id, videoId: response.result.items[i].snippet.resourceId.videoId,
-	        							title: response.result.items[i].snippet.title});
+	        							title: response.result.items[i].snippet.title, thumbnail: response.result.items[i].snippet.thumbnails.standard.url});
 	        	}
 	        	if(videoIdList.length > 0){
 	        		videoIdList.reverse();
@@ -129,16 +127,6 @@ class KStudy extends React.PureComponent {
 
 	componentWillUnmount(){
 		clearTimeout(this.timerID);
-	}
-
-	handleStartImgModal(src){
-		this.setState({isImgModal: true,ImgModalSrc: src});
-			
-	}
-
-	handleCloseImgModal(event){
-		this.setState({isImgModal: false, ImgModalSrc: ''});
-		event.preventDefault();
 	}
 
 	async handleImgAlbumRequest(){
@@ -186,15 +174,14 @@ class KStudy extends React.PureComponent {
 	}
 
 	getTaskVideoFrom(){
-		let num = 1;
+		// let num = 1;
 		let taskVideoListItems = this.state.kVideoList.map((vidL) => {
 			let embedUrl = `https://www.youtube.com/embed/${vidL.videoId}`;
 			return(
 				<div key={vidL.id} className={isMobile ? 'mVidGap' : 'dVidGap'}>
-					<div className={isMobile ? 'mTaskVideoContainer' : 'dTaskVideoContainer'}>
-						<iframe className="dTaskVideo" src={embedUrl} samesite="None; secure"
-							title={`kgms-video-${num++}`} type="text/html" allowFullScreen="allowfullscreen" 
-							frameBorder="0" loading="lazy"/>
+					<div>
+						<img src={vidL.thumbnail} alt={vidL.title} className={isMobile ? 'mTaskImg' : 'dTaskVideoImg'}
+							onClick={()=>this.props.handleStartVideoModal(embedUrl)}/>
 					</div>
 					<p className="mLetterWrap"><b className={isMobile ? 'mTextMain' : 'dMain'}><u>{vidL.title}</u></b></p>	
 				</div>
@@ -210,7 +197,7 @@ class KStudy extends React.PureComponent {
 				<div className="dVidGap" key={imgL.id}>
 					<div>
 						<img src={imgL.link} alt={imgL.id} className="dTaskImg" 
-							onClick={() => this.handleStartImgModal(imgL.link)}/>
+							onClick={() => this.props.handleStartImgModal(imgL.link)}/>
 					</div>	
 					<div>	
 						<h3 className="dMain dTextBlk dLetterWrap"><u>{imgL.tag}</u></h3>
@@ -282,7 +269,7 @@ class KStudy extends React.PureComponent {
 				<div className="mVidGap" key={imgL.id}>
 					<div>
 						<img src={imgL.link} alt={imgL.id} className="mTaskImg" 
-							 onClick={() => this.handleStartImgModal(imgL.link)}/>
+							 onClick={() => this.props.handleStartImgModal(imgL.link)}/>
 					</div>
 					<div>	 
 						<p><b className="mTextMain mLetterWrap"><u>{imgL.tag}</u></b></p>	
@@ -322,15 +309,6 @@ class KStudy extends React.PureComponent {
 				<div align="center">
 					{this.getTaskVideoFrom()}
 				</div>
-				<div style={{display: this.state.isImgModal ? 'block' : 'none'}} 
-					className={isMobile ? 'mImgModal' : 'dImgModal'} /*modal starts*/>
-					<span className={isMobile ? 'mImgModalClose' : 'dImgModalClose'} 
-						onClick={this.handleCloseImgModal}>&times;</span>
-					<div > 
-						<img src={this.state.ImgModalSrc} alt="modal img" 
-							className={isMobile ? 'mImgModalImage' : 'dImgModalImage'}/>
-					</div>
-				</div /*modal ends*/>
 			</div /*study ends*/>
 		);
 	}

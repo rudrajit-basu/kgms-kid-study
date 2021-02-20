@@ -14,7 +14,8 @@ class KSDevice extends React.PureComponent {
 	constructor(props){
 		super(props);
 		this.state = {isMLogin: false, isModalLogOut: false, KMClassName: "", KMediaId: "",
-						KMStudies:[{id:0,header:"Please wait... Fetching Events >>",desc:""}]}
+						KMStudies:[{id:0,header:"Please wait... Fetching Events >>",desc:""}],
+						isMImgModal: false, MImgModalSrc: '', isMVidModal: false, MVidModalSrc: ''}
 		this.getmBodyContent = this.getmBodyContent.bind(this);
 		this.handleMKSLogin = this.handleMKSLogin.bind(this);
 		this.handleMKSLogOut = this.handleMKSLogOut.bind(this);
@@ -23,6 +24,10 @@ class KSDevice extends React.PureComponent {
 		this.handleHistoryPop = this.handleHistoryPop.bind(this);
 		this.fetchMKgmsStudy = this.fetchMKgmsStudy.bind(this);
 		this.checkMCredentials = this.checkMCredentials.bind(this);
+		this.handleStartMImgModal = this.handleStartMImgModal.bind(this);
+		this.handleCloseMImgModal = this.handleCloseMImgModal.bind(this);
+		this.handleStartMVidModal = this.handleStartMVidModal.bind(this);
+		this.handleCloseMVidModal = this.handleCloseMVidModal.bind(this);
 	}
 
 	async fetchMKgmsStudy(db,kStudyDoc){
@@ -82,9 +87,15 @@ class KSDevice extends React.PureComponent {
 	}
 
 	handleHistoryPop(event){
+		// event.preventDefault();
 		// console.log(`History state: ${JSON.stringify(event.state)}`);
 		if(event.state !== null){
 			if(this.state.isMLogin){
+				if(this.state.isMImgModal){
+					this.handleCloseMImgModal(event);
+				}else if(this.state.isMVidModal){
+					this.handleCloseMVidModal(event);
+				}
 				this.handleLogOutModalStart();
 			}else{
 				window.history.back();	
@@ -95,13 +106,9 @@ class KSDevice extends React.PureComponent {
 	}
 
 	componentDidMount(){
-		try{
-			this.props.firebase.analytics();
-		}catch(e){
-			console.error(e);
-		}
-		window.addEventListener('popstate', this.handleHistoryPop,false);
 		window.history.replaceState({page: 'mLogin'},'','');
+		window.addEventListener('popstate', this.handleHistoryPop, false);
+		this.props.firebase.analytics();
 	}
 
 	componentWillUnmount(){
@@ -126,6 +133,24 @@ class KSDevice extends React.PureComponent {
 		this.setState({isModalLogOut: false});
 	}
 
+	handleStartMImgModal(src){
+		this.setState({isMImgModal: true, MImgModalSrc: src});	
+	}
+
+	handleCloseMImgModal(event){
+		this.setState({isMImgModal: false, MImgModalSrc: ''});
+		event.preventDefault();
+	}
+
+	handleStartMVidModal(src){
+		this.setState({isMVidModal: true, MVidModalSrc: src});	
+	}
+
+	handleCloseMVidModal(event){
+		this.setState({isMVidModal: false, MVidModalSrc: ''});
+		event.preventDefault();
+	}
+
 	getmBodyContent(loginState){
 
 		if(!loginState){
@@ -141,7 +166,9 @@ class KSDevice extends React.PureComponent {
 				<div key={'mKStudy'} className="mOrange mBord pt-page-rotateUnfoldRight">
 					<div className="mBodyContent2">
 						<KStudy kgmsClassName={this.state.KMClassName} kgmsStudies={this.state.KMStudies}
-								kgmsMediaId={this.state.KMediaId} firebase={this.props.firebase}/>
+								kgmsMediaId={this.state.KMediaId} firebase={this.props.firebase}
+								handleStartImgModal={(src) => this.handleStartMImgModal(src)}
+								handleStartVideoModal={(src) => this.handleStartMVidModal(src)}/>
 					</div>
 				</div>
 			);
@@ -188,6 +215,27 @@ class KSDevice extends React.PureComponent {
 						</div>
 					</div>
 				</div /*modal ends*/>
+				<div style={{display: this.state.isMImgModal ? 'block' : 'none'}} 
+					className="mImgModal" /*image modal starts*/>
+					<span className="mImgModalClose" 
+						onClick={this.handleCloseMImgModal}>&times;</span>
+					<div > 
+						<img src={this.state.MImgModalSrc} alt="modal img" 
+							className="mImgModalImage"/>
+					</div>
+				</div /*image modal ends*/>
+				<div style={{display: this.state.isMVidModal ? 'block' : 'none'}} 
+					className="mImgModal" /*video modal starts*/>
+					<span className="mImgModalClose" 
+						onClick={this.handleCloseMVidModal}>&times;</span>
+					<div> 
+						<div className="mTaskVideoContainer">
+							<iframe className="dTaskVideo" src={this.state.MVidModalSrc} samesite="None; secure"
+								title="modal video" type="text/html" allowFullScreen="allowfullscreen" 
+								frameBorder="0" loading="lazy"/>
+						</div>
+					</div>
+				</div /*video modal ends*/>
 				<div /*footer starts*/>
 					<img src={F1} alt="footer" className="mFooter noSelect mTextGap3"/>
 				</div /*footer ends*/>

@@ -140,6 +140,48 @@
   border-radius: 0.6em;
 }
 
+.mImgModal{
+  display: none; 
+  position: fixed;
+  z-index: 1;
+  padding-top: 10vh; 
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.9);
+}
+
+.mImgModalClose {
+  position: absolute;
+  top: 1vh;
+  right: 5vw;
+  color: #f1f1f1;
+  font-size: 2.5em;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.mImgModalClose:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.mImgModalImage{
+    margin: auto;
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 90vw;
+  animation-name: zoom;
+  animation-duration: 0.6s;
+  overflow-y: auto;
+  margin-bottom: 2em;
+}
+
 @media only screen and (max-width: 320px) and (orientation: portrait) {
 
 	.mLogOutModalContent{
@@ -259,6 +301,48 @@
 		padding-top: 7px;	
 	}
 
+	.mImgModal{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 18vh; 
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.9);
+  }
+
+  .mImgModalClose {
+    position: absolute;
+    top: 1.2vh;
+    left: 2.4vw;
+    color: #f1f1f1;
+    font-size: 2.3em;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+
+  .mImgModalClose:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .mImgModalImage{
+      margin: auto;
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 90vw;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+    overflow-y: auto;
+    margin-bottom: 2.5em;
+  }
+
 }
 
 @media only screen and (min-width: 600px) and (orientation: portrait) {
@@ -333,6 +417,48 @@
 
 	.mLogOutModalBtnContainer{
 		padding-top: 7px;	
+	}
+
+	.mImgModal{
+	  display: none;
+	  position: fixed;
+	  z-index: 1;
+	  padding-top: 18vh; 
+	  left: 0;
+	  top: 0;
+	  width: 100vw;
+	  height: 100vh;
+	  overflow: auto;
+	  background-color: rgb(0,0,0);
+	  background-color: rgba(0,0,0,0.9);
+	}
+
+	.mImgModalClose {
+	  position: absolute;
+	  top: 1.5vh;
+	  left: 2.5vw;
+	  color: #f1f1f1;
+	  font-size: 2.6em;
+	  font-weight: bold;
+	  transition: 0.3s;
+	}
+
+	.mImgModalClose:focus {
+	  color: #bbb;
+	  text-decoration: none;
+	  cursor: pointer;
+	}
+
+	.mImgModalImage{
+	    margin: auto;
+	  display: block;
+	  width: auto;
+	  height: auto;
+	  max-width: 90vw;
+	  animation-name: zoom;
+	  animation-duration: 0.6s;
+	  overflow-y: auto;
+	  margin-bottom: 3em;
 	}
 }
 
@@ -412,6 +538,48 @@
 	.mLogOutModalBtnContainer{
 		padding-top: 12px;	
 	}
+
+	.mImgModal{
+	    display: none; 
+	    position: fixed;
+	    z-index: 1;
+	    padding-top: 11vh; 
+	    left: 0;
+	    top: 0;
+	    width: 100vw;
+	    height: 100vh;
+	    overflow: auto;
+	    background-color: rgb(0,0,0);
+	    background-color: rgba(0,0,0,0.9);
+	  }
+
+	  .mImgModalClose {
+	    position: absolute;
+	    top: 1vh;
+	    right: 5vw;
+	    color: #f1f1f1;
+	    font-size: 4.5em;
+	    font-weight: bold;
+	    transition: 0.3s;
+	  }
+
+	  .mImgModalClose:focus {
+	    color: #bbb;
+	    text-decoration: none;
+	    cursor: pointer;
+	  }
+
+	  .mImgModalImage{
+	      margin: auto;
+	    display: block;
+	    width: auto;
+	    height: auto;
+	    max-width: 90vw;
+	    animation-name: zoom;
+	    animation-duration: 0.6s;
+	    overflow-y: auto;
+	    margin-bottom: 4em;
+	  }
 }
 
 @media only screen and (min-width: 768px) and (orientation: landscape) {
@@ -478,6 +646,48 @@
 	.mLogOutModalBtnContainer{
 		padding-top: 12px;	
 	}
+
+	.mImgModal{
+      display: none;
+      position: fixed;
+      z-index: 1;
+      padding-top: 15vh; 
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: auto;
+      background-color: rgb(0,0,0);
+      background-color: rgba(0,0,0,0.9);
+    }
+
+    .mImgModalClose {
+      position: absolute;
+      top: 1.5vh;
+      left: 2.5vw;
+      color: #f1f1f1;
+      font-size: 4.2em;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .mImgModalClose:focus {
+      color: #bbb;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .mImgModalImage{
+      margin: auto;
+      display: block;
+      width: auto;
+      height: auto;
+      max-width: 90vw;
+      animation-name: zoom;
+      animation-duration: 0.6s;
+      overflow-y: auto;
+      margin-bottom: 3em;
+    }
 }
 
 @media only screen and (min-width: 1024px) and (orientation: portrait) {
@@ -535,6 +745,48 @@
 	.mLogOutModalBtnContainer{
 		padding-top: 12px;	
 	}
+
+	.mImgModal{
+	    display: none;
+	    position: fixed;
+	    z-index: 1;
+	    padding-top: 11vh; 
+	    left: 0;
+	    top: 0;
+	    width: 100vw;
+	    height: 100vh;
+	    overflow: auto;
+	    background-color: rgb(0,0,0);
+	    background-color: rgba(0,0,0,0.9);
+	  }
+
+	  .mImgModalClose {
+	    position: absolute;
+	    top: 1.5vh;
+	    right: 5.5vw;
+	    color: #f1f1f1;
+	    font-size: 5.5em;
+	    font-weight: bold;
+	    transition: 0.3s;
+	  }
+
+	  .mImgModalClose:focus {
+	    color: #bbb;
+	    text-decoration: none;
+	    cursor: pointer;
+	  }
+
+	  .mImgModalImage{
+	    margin: auto;
+	    display: block;
+	    width: auto;
+	    height: auto;
+	    max-width: 90vw;
+	    animation-name: zoom;
+	    animation-duration: 0.6s;
+	    overflow-y: auto;
+	    margin-bottom: 4em;
+	  }
 }
 
 @media only screen and (min-width: 1366px) and (orientation: landscape) {
@@ -592,6 +844,48 @@
 	.mLogOutModalBtnContainer{
 		padding-top: 12px;	
 	}
+
+	.mImgModal{
+      display: none;
+      position: fixed;
+      z-index: 1;
+      padding-top: 15vh; 
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: auto;
+      background-color: rgb(0,0,0);
+      background-color: rgba(0,0,0,0.9);
+    }
+
+    .mImgModalClose {
+      position: absolute;
+      top: 2vh;
+      left: 3vw;
+      color: #f1f1f1;
+      font-size: 5.4em;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .mImgModalClose:focus {
+      color: #bbb;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .mImgModalImage{
+      margin: auto;
+      display: block;
+      width: auto;
+      height: auto;
+      max-width: 90vw;
+      animation-name: zoom;
+      animation-duration: 0.6s;
+      overflow-y: auto;
+      margin-bottom: 3em;
+    }
 }
 
 @media only screen and (orientation: landscape) {
@@ -627,4 +921,9 @@
 @keyframes animatetop {
   from {top:-300px; opacity:0}
   to {top:0; opacity:1}
+}
+
+@keyframes zoom {
+  from {transform:scale(0)}
+  to {transform:scale(1)}
 }

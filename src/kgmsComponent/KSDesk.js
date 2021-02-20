@@ -29,7 +29,8 @@ class KSDesk extends React.PureComponent {
 	constructor(props){
 		super(props);
 		this.state = {isLogin: false, isModalLogOut: false, kBodyHeight: 0, kBodyNum: [], KClassName: "",
-						KStudies:[{id:0,header:"Please wait... Fetching Events >>",desc:""}], KMediaId: ""}
+						KStudies:[{id:0,header:"Please wait... Fetching Events >>",desc:""}], KMediaId: "",
+						isDImgModal: false, DImgModalSrc: '', isDVidModal: false, DVidModalSrc: ''}
 		this.getBodyContent = this.getBodyContent.bind(this);
 		this.handleLogOutModalStart = this.handleLogOutModalStart.bind(this);
 		this.handleLogOutModalClose = this.handleLogOutModalClose.bind(this);
@@ -41,6 +42,10 @@ class KSDesk extends React.PureComponent {
 		this.handleHistoryPop = this.handleHistoryPop.bind(this);
 		this.checkCredentials = this.checkCredentials.bind(this);
 		this.fetchKgmsStudy = this.fetchKgmsStudy.bind(this);
+		this.handleStartDImgModal = this.handleStartDImgModal.bind(this);
+		this.handleCloseDImgModal = this.handleCloseDImgModal.bind(this);
+		this.handleStartDVidModal = this.handleStartDVidModal.bind(this);
+		this.handleCloseDVidModal = this.handleCloseDVidModal.bind(this);
 		this.bodyRef = React.createRef();
 	}
 
@@ -102,9 +107,15 @@ class KSDesk extends React.PureComponent {
 	}
 
 	handleHistoryPop(event){
+		// event.preventDefault();
 		// console.log(`History state: ${JSON.stringify(event.state)}`);
 		if(event.state !== null){
 			if(this.state.isLogin){
+				if(this.state.isDImgModal){
+					this.handleCloseDImgModal(event);
+				}else if(this.state.isDVidModal){
+					this.handleCloseDVidModal(event);
+				}
 				this.handleLogOutModalStart();
 			}else{
 				window.history.back();
@@ -132,6 +143,24 @@ class KSDesk extends React.PureComponent {
 		this.setState({isModalLogOut: false});
 	}
 
+	handleStartDImgModal(src){
+		this.setState({isDImgModal: true, DImgModalSrc: src});	
+	}
+
+	handleCloseDImgModal(event){
+		this.setState({isDImgModal: false, DImgModalSrc: ''});
+		event.preventDefault();
+	}
+
+	handleStartDVidModal(src){
+		this.setState({isDVidModal: true, DVidModalSrc: src});	
+	}
+
+	handleCloseDVidModal(event){
+		this.setState({isDVidModal: false, DVidModalSrc: ''});
+		event.preventDefault();
+	}
+
 	getBodyContent(loginState){
 		if(!loginState){
 			return(
@@ -147,7 +176,8 @@ class KSDesk extends React.PureComponent {
 					<div className="Orange BorderRound dKStudyContent BoxShadow">
 						<KStudy handleDeco={()=>this.handleCurrentDecoList()} kgmsClassName={this.state.KClassName}
 								kgmsStudies={this.state.KStudies} kgmsMediaId={this.state.KMediaId} 
-								firebase={this.props.firebase}/>
+								firebase={this.props.firebase} handleStartImgModal={(src) => this.handleStartDImgModal(src)}
+								handleStartVideoModal={(src) => this.handleStartDVidModal(src)}/>
 					</div>
 				</div>
 			);
@@ -248,17 +278,24 @@ class KSDesk extends React.PureComponent {
 
 
 	componentDidMount(){
-		try{
-			this.props.firebase.analytics();
-		}catch(e){
-			console.error(e);
-		}
-		window.addEventListener('popstate', this.handleHistoryPop,false);
 		window.history.replaceState({page: 'kLogin'},'','');
+		window.addEventListener('popstate', this.handleHistoryPop, false);
+		this.onEscapeKeyDown = (event) => {
+			if(event.keyCode === 27){
+				if(this.state.isDImgModal){
+					this.handleCloseDImgModal(event);
+				}else if(this.state.isDVidModal){
+					this.handleCloseDVidModal(event);
+				}
+			}
+		};
+		window.addEventListener('keydown', this.onEscapeKeyDown, false);
+		this.props.firebase.analytics();
 	}
 
 	componentWillUnmount(){
 		window.removeEventListener('popstate',this.handleHistoryPop,false);
+		window.removeEventListener('keydown', this.onEscapeKeyDown, false);
 	}
 
 
@@ -311,6 +348,27 @@ class KSDesk extends React.PureComponent {
 						</div>
 					</div>
 				</div /*modal ends*/>
+				<div style={{display: this.state.isDImgModal ? 'block' : 'none'}} 
+					className="dImgModal" /*image modal starts*/>
+					<span className="dImgModalClose" 
+						onClick={this.handleCloseDImgModal}>&times;</span>
+					<div > 
+						<img src={this.state.DImgModalSrc} alt="modal img" 
+							className="dImgModalImage"/>
+					</div>
+				</div /*image modal ends*/>
+				<div style={{display: this.state.isDVidModal ? 'block' : 'none'}} 
+					className="dImgModal" /*video modal starts*/>
+					<span className="dImgModalClose" 
+						onClick={this.handleCloseDVidModal}>&times;</span>
+					<div> 
+						<div className="dTaskVideoContainer">
+							<iframe className="dTaskVideo" src={this.state.DVidModalSrc} samesite="None; secure"
+								title="modal video" type="text/html" allowFullScreen="allowfullscreen" 
+								frameBorder="0" loading="lazy"/>
+						</div>
+					</div>
+				</div /*video modal ends*/>
 				<div /*footer starts*/>
 					<div align="center" style={{width: '100vw', marginTop:'3.2em'}}>
 						<img src={F1} alt="footer" style={{width:'75vw'}} className="noSelect"/>
