@@ -125,7 +125,7 @@ class KSDevice extends React.PureComponent {
 					KMStudies:[{id:0,header:"Please wait... Fetching Events >>",desc:""}]});
 	}
 
-	handleLogOutModalStart(){
+	async handleLogOutModalStart(){
 		this.setState({isModalLogOut: true});
 	}
 
@@ -232,7 +232,7 @@ class KSDevice extends React.PureComponent {
 						<div className="mTaskVideoContainer">
 							<iframe className="dTaskVideo" src={this.state.MVidModalSrc} samesite="None; secure"
 								title="modal video" type="text/html" allowFullScreen="allowfullscreen" 
-								frameBorder="0" loading="lazy"/>
+								frameBorder="0" loading="eager"/>
 						</div>
 					</div>
 				</div /*video modal ends*/>

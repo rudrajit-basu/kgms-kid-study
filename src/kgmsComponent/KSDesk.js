@@ -135,7 +135,7 @@ class KSDesk extends React.PureComponent {
 				KStudies:[{id:0,header:"Please wait... Fetching Events >>",desc:""}], KMediaId: ""});
 	}
 
-	handleLogOutModalStart(){
+	async handleLogOutModalStart(){
 		this.setState({isModalLogOut: true});
 	}
 
@@ -365,7 +365,7 @@ class KSDesk extends React.PureComponent {
 						<div className="dTaskVideoContainer">
 							<iframe className="dTaskVideo" src={this.state.DVidModalSrc} samesite="None; secure"
 								title="modal video" type="text/html" allowFullScreen="allowfullscreen" 
-								frameBorder="0" loading="lazy"/>
+								frameBorder="0" loading="eager"/>
 						</div>
 					</div>
 				</div /*video modal ends*/>

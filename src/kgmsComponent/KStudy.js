@@ -191,6 +191,7 @@ class KStudy extends React.PureComponent {
 		return taskVideoListItems;
 	}
 
+
 	getTasksImgFrom(){
 		let taskImgListItems = this.state.kImgList.map((imgL) => {
 			return(
