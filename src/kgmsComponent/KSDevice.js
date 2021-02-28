@@ -15,7 +15,7 @@ class KSDevice extends React.PureComponent {
 		super(props);
 		this.state = {isMLogin: false, isModalLogOut: false, KMClassName: "", KMediaId: "",
 						KMStudies:[{id:0,header:"Please wait... Fetching Events >>",desc:""}],
-						isMImgModal: false, MImgModalSrc: '', isMVidModal: false, MVidModalSrc: ''}
+						isMImgModal: false, MImgModalSrc: '', isMVidModal: false, MVidModalSrc: '', isMShowLoading: true}
 		this.getmBodyContent = this.getmBodyContent.bind(this);
 		this.handleMKSLogin = this.handleMKSLogin.bind(this);
 		this.handleMKSLogOut = this.handleMKSLogOut.bind(this);
@@ -28,6 +28,7 @@ class KSDevice extends React.PureComponent {
 		this.handleCloseMImgModal = this.handleCloseMImgModal.bind(this);
 		this.handleStartMVidModal = this.handleStartMVidModal.bind(this);
 		this.handleCloseMVidModal = this.handleCloseMVidModal.bind(this);
+		this.handleMOnYtLoad = this.handleMOnYtLoad.bind(this);
 	}
 
 	async fetchMKgmsStudy(db,kStudyDoc){
@@ -92,9 +93,9 @@ class KSDevice extends React.PureComponent {
 		if(event.state !== null){
 			if(this.state.isMLogin){
 				if(this.state.isMImgModal){
-					this.handleCloseMImgModal(event);
+					this.handleCloseMImgModal();
 				}else if(this.state.isMVidModal){
-					this.handleCloseMVidModal(event);
+					this.handleCloseMVidModal();
 				}
 				this.handleLogOutModalStart();
 			}else{
@@ -137,18 +138,25 @@ class KSDevice extends React.PureComponent {
 		this.setState({isMImgModal: true, MImgModalSrc: src});	
 	}
 
-	handleCloseMImgModal(event){
+	handleCloseMImgModal(){
 		this.setState({isMImgModal: false, MImgModalSrc: ''});
-		event.preventDefault();
+		// event.preventDefault();
 	}
 
 	handleStartMVidModal(src){
 		this.setState({isMVidModal: true, MVidModalSrc: src});	
 	}
 
-	handleCloseMVidModal(event){
-		this.setState({isMVidModal: false, MVidModalSrc: ''});
-		event.preventDefault();
+	handleCloseMVidModal(){
+		this.setState({isMVidModal: false, MVidModalSrc: '', isMShowLoading: true});
+		// event.preventDefault();
+	}
+
+	handleMOnYtLoad(){
+		if(this.state.isMVidModal){
+			// console.log('yeah');
+			this.setState({isMShowLoading: false});
+		}
 	}
 
 	getmBodyContent(loginState){
@@ -218,7 +226,7 @@ class KSDevice extends React.PureComponent {
 				<div style={{display: this.state.isMImgModal ? 'block' : 'none'}} 
 					className="mImgModal" /*image modal starts*/>
 					<span className="mImgModalClose" 
-						onClick={this.handleCloseMImgModal}>&times;</span>
+						onClick={() => this.handleCloseMImgModal()}>&times;</span>
 					<div > 
 						<img src={this.state.MImgModalSrc} alt="modal img" 
 							className="mImgModalImage"/>
@@ -227,12 +235,14 @@ class KSDevice extends React.PureComponent {
 				<div style={{display: this.state.isMVidModal ? 'block' : 'none'}} 
 					className="mImgModal" /*video modal starts*/>
 					<span className="mImgModalClose" 
-						onClick={this.handleCloseMVidModal}>&times;</span>
+						onClick={() => this.handleCloseMVidModal()}>&times;</span>
 					<div> 
 						<div className="mTaskVideoContainer">
+							<div align="center" style={{display: this.state.isMShowLoading ? 'block' : 'none'}}>
+								<p className="mTextMainWhiteTag">{'Loading...'}</p></div>
 							<iframe className="dTaskVideo" src={this.state.MVidModalSrc} samesite="None; secure"
 								title="modal video" type="text/html" allowFullScreen="allowfullscreen" 
-								frameBorder="0" loading="eager"/>
+								frameBorder="0" loading="lazy" onLoad={() => this.handleMOnYtLoad()}/>
 						</div>
 					</div>
 				</div /*video modal ends*/>

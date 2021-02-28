@@ -30,7 +30,7 @@ class KSDesk extends React.PureComponent {
 		super(props);
 		this.state = {isLogin: false, isModalLogOut: false, kBodyHeight: 0, kBodyNum: [], KClassName: "",
 						KStudies:[{id:0,header:"Please wait... Fetching Events >>",desc:""}], KMediaId: "",
-						isDImgModal: false, DImgModalSrc: '', isDVidModal: false, DVidModalSrc: ''}
+						isDImgModal: false, DImgModalSrc: '', isDVidModal: false, DVidModalSrc: '', isShowLoading: true}
 		this.getBodyContent = this.getBodyContent.bind(this);
 		this.handleLogOutModalStart = this.handleLogOutModalStart.bind(this);
 		this.handleLogOutModalClose = this.handleLogOutModalClose.bind(this);
@@ -46,6 +46,7 @@ class KSDesk extends React.PureComponent {
 		this.handleCloseDImgModal = this.handleCloseDImgModal.bind(this);
 		this.handleStartDVidModal = this.handleStartDVidModal.bind(this);
 		this.handleCloseDVidModal = this.handleCloseDVidModal.bind(this);
+		this.handleDOnYtLoad = this.handleDOnYtLoad.bind(this);
 		this.bodyRef = React.createRef();
 	}
 
@@ -112,9 +113,9 @@ class KSDesk extends React.PureComponent {
 		if(event.state !== null){
 			if(this.state.isLogin){
 				if(this.state.isDImgModal){
-					this.handleCloseDImgModal(event);
+					this.handleCloseDImgModal();
 				}else if(this.state.isDVidModal){
-					this.handleCloseDVidModal(event);
+					this.handleCloseDVidModal();
 				}
 				this.handleLogOutModalStart();
 			}else{
@@ -147,18 +148,25 @@ class KSDesk extends React.PureComponent {
 		this.setState({isDImgModal: true, DImgModalSrc: src});	
 	}
 
-	handleCloseDImgModal(event){
+	handleCloseDImgModal(){
 		this.setState({isDImgModal: false, DImgModalSrc: ''});
-		event.preventDefault();
+		// event.preventDefault();
 	}
 
 	handleStartDVidModal(src){
 		this.setState({isDVidModal: true, DVidModalSrc: src});	
 	}
 
-	handleCloseDVidModal(event){
-		this.setState({isDVidModal: false, DVidModalSrc: ''});
-		event.preventDefault();
+	handleCloseDVidModal(){
+		this.setState({isDVidModal: false, DVidModalSrc: '', isShowLoading: true});
+		// event.preventDefault();
+	}
+
+	handleDOnYtLoad(){
+		if(this.state.isDVidModal){
+			// console.log('yeah d');
+			this.setState({isShowLoading: false});
+		}
 	}
 
 	getBodyContent(loginState){
@@ -283,9 +291,9 @@ class KSDesk extends React.PureComponent {
 		this.onEscapeKeyDown = (event) => {
 			if(event.keyCode === 27){
 				if(this.state.isDImgModal){
-					this.handleCloseDImgModal(event);
+					this.handleCloseDImgModal();
 				}else if(this.state.isDVidModal){
-					this.handleCloseDVidModal(event);
+					this.handleCloseDVidModal();
 				}
 			}
 		};
@@ -351,7 +359,7 @@ class KSDesk extends React.PureComponent {
 				<div style={{display: this.state.isDImgModal ? 'block' : 'none'}} 
 					className="dImgModal" /*image modal starts*/>
 					<span className="dImgModalClose" 
-						onClick={this.handleCloseDImgModal}>&times;</span>
+						onClick={() => this.handleCloseDImgModal()}>&times;</span>
 					<div > 
 						<img src={this.state.DImgModalSrc} alt="modal img" 
 							className="dImgModalImage"/>
@@ -360,12 +368,14 @@ class KSDesk extends React.PureComponent {
 				<div style={{display: this.state.isDVidModal ? 'block' : 'none'}} 
 					className="dImgModal" /*video modal starts*/>
 					<span className="dImgModalClose" 
-						onClick={this.handleCloseDVidModal}>&times;</span>
+						onClick={() => this.handleCloseDVidModal()}>&times;</span>
 					<div> 
 						<div className="dTaskVideoContainer">
+							<div align="center" style={{display: this.state.isShowLoading ? 'block' : 'none'}}>
+								<h3 className="dLoadingTag">{'Loading...'}</h3></div>
 							<iframe className="dTaskVideo" src={this.state.DVidModalSrc} samesite="None; secure"
 								title="modal video" type="text/html" allowFullScreen="allowfullscreen" 
-								frameBorder="0" loading="eager"/>
+								frameBorder="0" loading="lazy" onLoad={() => this.handleDOnYtLoad()}/>
 						</div>
 					</div>
 				</div /*video modal ends*/>

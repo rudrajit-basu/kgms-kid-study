@@ -161,6 +161,13 @@
       text-justify: inter-word;*/
   }
 
+  .mTextMainWhiteTag{
+    font-size: 4.75vw;
+    font-weight: bold;
+    color: white;
+    letter-spacing: 1px;
+  }
+
   .mTextMainDesc{
       /*font-size: 1.05em;*/
       font-size: 4.75vw;
@@ -523,6 +530,13 @@
       text-justify: inter-word*/
   }
 
+  .mTextMainWhiteTag{
+    font-size: 4.75vw;
+    font-weight: bold;
+    color: white;
+    letter-spacing: 1px;
+  }
+
   .mTextMainDesc{
       /*font-size: 0.85em;*/
       font-size: 4.75vw;
@@ -582,7 +596,7 @@
     .kc-modal {
     position: absolute; /* Stay in place */
     z-index: 1; /* Sit on top */
-    padding-top: 35%; /* Location of the box */
+    padding-top: 36%; /* Location of the box */
     padding-left: 10%;
     left: 0;
     top: 0;
@@ -607,7 +621,7 @@
   .kc-modal {
     position: absolute; /* Stay in place */
     z-index: 1; /* Sit on top */
-    padding-top: 22%; /* Location of the box */
+    padding-top: 23%; /* Location of the box */
     padding-left: 10%;
     left: 0;
     top: 0;
@@ -723,6 +737,13 @@
       line-height: 1.37;
       /*text-align: justify;
       text-justify: inter-word*/
+  }
+
+  .mTextMainWhiteTag{
+    font-size: 2.85vw;
+    font-weight: bold;
+    color: white;
+    letter-spacing: 1.1px;
   }
 
   .mTextMainDesc{
@@ -842,7 +863,7 @@
   .kc-modal {
     position: absolute; /* Stay in place */
     z-index: 1; /* Sit on top */
-    padding-top: 20%; /* Location of the box */
+    padding-top: 21%; /* Location of the box */
     padding-left: 10%;
     left: 0;
     top: 0;
@@ -889,6 +910,13 @@
       line-height: 1.37;
       /*text-align: justify;
       text-justify: inter-word*/
+  }
+
+  .mTextMainWhiteTag{
+    font-size: 2.85vw;
+    font-weight: bold;
+    color: white;
+    letter-spacing: 1.1px;
   }
 
   .mTextMainDesc{
@@ -1075,7 +1103,7 @@
   .kc-modal {
     position: absolute; /* Stay in place */
     z-index: 1; /* Sit on top */
-    padding-top: 30%; /* Location of the box */
+    padding-top: 31%; /* Location of the box */
     padding-left: 10%;
     left: 0;
     top: 0;
@@ -1124,6 +1152,13 @@
       /*text-align: justify;
       text-justify: inter-word;*/
       margin: 0.2em 0em;
+  }
+
+  .mTextMainWhiteTag{
+    font-size: 3.9vw;
+    font-weight: bold;
+    color: white;
+    letter-spacing: 1px;
   }
 
   .mTextMainDesc{
@@ -1318,7 +1353,7 @@
   .kc-modal {
     position: absolute; /* Stay in place */
     z-index: 1; /* Sit on top */
-    padding-top: 23%; /* Location of the box */
+    padding-top: 24%; /* Location of the box */
     padding-left: 10%;
     left: 0;
     top: 0;
@@ -1367,6 +1402,13 @@
       /*text-align: justify;
       text-justify: inter-word;*/
       margin: 0.2em 0em;
+  }
+
+  .mTextMainWhiteTag{
+    font-size: 2.9vw;
+    font-weight: bold;
+    color: white;
+    letter-spacing: 1px;
   }
 
   .mTextMainDesc{
@@ -1560,7 +1602,7 @@
   .kc-modal {
     position: absolute; /* Stay in place */
     z-index: 1; /* Sit on top */
-    padding-top: 28%; /* Location of the box */
+    padding-top: 29%; /* Location of the box */
     padding-left: 10%;
     left: 0;
     top: 0;
@@ -1609,6 +1651,13 @@
       /*text-align: justify;
       text-justify: inter-word;*/
       margin: 0.2em 0em;
+  }
+
+  .mTextMainWhiteTag{
+    font-size: 3.7vw;
+    font-weight: bold;
+    color: white;
+    letter-spacing: 1.2px;
   }
 
   .mTextMainDesc{
@@ -1803,7 +1852,7 @@
   .kc-modal {
     position: absolute; /* Stay in place */
     z-index: 1; /* Sit on top */
-    padding-top: 22%; /* Location of the box */
+    padding-top: 23%; /* Location of the box */
     padding-left: 10%;
     left: 0;
     top: 0;
@@ -1852,6 +1901,13 @@
       /*text-align: justify;
       text-justify: inter-word;*/
       margin: 0.2em 0em;
+  }
+
+  .mTextMainWhiteTag{
+    font-size: 3vw;
+    font-weight: bold;
+    color: white;
+    letter-spacing: 1.2px;
   }
 
   .mTextMainDesc{
@@ -2326,13 +2382,14 @@
   position: relative;
   /*margin: 12% 26%;*/
   margin-left: 26.5%;
-  margin-top: 8%;
+  margin-top: 8.5%;
 }
 
 .dTaskVideoImg{
   width: 600px;
   height: 350px;
   border-radius: 10px;
+  cursor: pointer;
 }
 
 .dVidGap{
