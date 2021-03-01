@@ -93,9 +93,9 @@ class KSDevice extends React.PureComponent {
 		if(event.state !== null){
 			if(this.state.isMLogin){
 				if(this.state.isMImgModal){
-					this.handleCloseMImgModal();
+					this.handleCloseMImgModal(event);
 				}else if(this.state.isMVidModal){
-					this.handleCloseMVidModal();
+					this.handleCloseMVidModal(event);
 				}
 				this.handleLogOutModalStart();
 			}else{
@@ -121,35 +121,37 @@ class KSDevice extends React.PureComponent {
 		window.history.pushState({page: 'mStudy'},'','');
 	}
 
-	handleMKSLogOut(){
+	handleMKSLogOut(event){
 		this.setState({isModalLogOut: false,isMLogin: false, KMClassName: "", KMediaId: "",
 					KMStudies:[{id:0,header:"Please wait... Fetching Events >>",desc:""}]});
+		event.preventDefault();
 	}
 
 	async handleLogOutModalStart(){
 		this.setState({isModalLogOut: true});
 	}
 
-	handleLogOutModalClose(){
+	handleLogOutModalClose(event){
 		this.setState({isModalLogOut: false});
+		event.preventDefault();
 	}
 
 	handleStartMImgModal(src){
 		this.setState({isMImgModal: true, MImgModalSrc: src});	
 	}
 
-	handleCloseMImgModal(){
+	handleCloseMImgModal(event){
 		this.setState({isMImgModal: false, MImgModalSrc: ''});
-		// event.preventDefault();
+		event.preventDefault();
 	}
 
 	handleStartMVidModal(src){
 		this.setState({isMVidModal: true, MVidModalSrc: src});	
 	}
 
-	handleCloseMVidModal(){
+	handleCloseMVidModal(event){
 		this.setState({isMVidModal: false, MVidModalSrc: '', isMShowLoading: true});
-		// event.preventDefault();
+		event.preventDefault();
 	}
 
 	handleMOnYtLoad(){
@@ -213,11 +215,11 @@ class KSDevice extends React.PureComponent {
 							<div className="Row">
 								<div className="Column mLogOutLeft">
 									<span className="mLogOutModalActionBtn"
-										onClick={() => this.handleMKSLogOut()}>&#10003;</span>
+										onClick={this.handleMKSLogOut}>&#10003;</span>
 								</div>
 								<div className="Column mLogOutRight">
 									<span className="mLogOutModalActionBtn" 
-										onClick={() => this.handleLogOutModalClose()}>&#10007;</span>
+										onClick={this.handleLogOutModalClose}>&#10007;</span>
 								</div>
 							</div>
 						</div>
@@ -226,7 +228,7 @@ class KSDevice extends React.PureComponent {
 				<div style={{display: this.state.isMImgModal ? 'block' : 'none'}} 
 					className="mImgModal" /*image modal starts*/>
 					<span className="mImgModalClose" 
-						onClick={() => this.handleCloseMImgModal()}>&times;</span>
+						onClick={this.handleCloseMImgModal}>&times;</span>
 					<div > 
 						<img src={this.state.MImgModalSrc} alt="modal img" 
 							className="mImgModalImage"/>
@@ -235,7 +237,7 @@ class KSDevice extends React.PureComponent {
 				<div style={{display: this.state.isMVidModal ? 'block' : 'none'}} 
 					className="mImgModal" /*video modal starts*/>
 					<span className="mImgModalClose" 
-						onClick={() => this.handleCloseMVidModal()}>&times;</span>
+						onClick={this.handleCloseMVidModal}>&times;</span>
 					<div> 
 						<div className="mTaskVideoContainer">
 							<div align="center" style={{display: this.state.isMShowLoading ? 'block' : 'none'}}>

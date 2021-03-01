@@ -112,7 +112,7 @@ class KStudy extends React.PureComponent {
 	        							title: response.result.items[i].snippet.title, thumbnail: response.result.items[i].snippet.thumbnails.standard.url});
 	        	}
 	        	if(videoIdList.length > 0){
-	        		videoIdList.reverse();
+	        		// videoIdList.reverse();
 	        		this.setState({kVideoList: videoIdList});
 	        		if(!isMobile){
 						this.timerID = setTimeout(() => this.props.handleDeco(),900);

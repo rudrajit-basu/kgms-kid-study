@@ -113,11 +113,11 @@ class KSDesk extends React.PureComponent {
 		if(event.state !== null){
 			if(this.state.isLogin){
 				if(this.state.isDImgModal){
-					this.handleCloseDImgModal();
+					this.handleCloseDImgModal(event);
 				}else if(this.state.isDVidModal){
-					this.handleCloseDVidModal();
+					this.handleCloseDVidModal(event);
 				}
-				this.handleLogOutModalStart();
+				this.handleLogOutModalStart(event);
 			}else{
 				window.history.back();
 			}
@@ -131,42 +131,46 @@ class KSDesk extends React.PureComponent {
 		window.history.pushState({page: 'KStudy'},'','');
 	}
 
-	handleKSLogOut(){
+	handleKSLogOut(event){
 		this.setState({isModalLogOut: false, isLogin: false, kBodyHeight: 0, kBodyNum: [], KClassName: "",
 				KStudies:[{id:0,header:"Please wait... Fetching Events >>",desc:""}], KMediaId: ""});
+		event.preventDefault();
 	}
 
-	async handleLogOutModalStart(){
+	async handleLogOutModalStart(event){
 		this.setState({isModalLogOut: true});
+		event.preventDefault();
 	}
 
-	handleLogOutModalClose(){
+	handleLogOutModalClose(event){
 		this.setState({isModalLogOut: false});
+		event.preventDefault();
 	}
 
 	handleStartDImgModal(src){
 		this.setState({isDImgModal: true, DImgModalSrc: src});	
 	}
 
-	handleCloseDImgModal(){
+	handleCloseDImgModal(event){
 		this.setState({isDImgModal: false, DImgModalSrc: ''});
-		// event.preventDefault();
+		event.preventDefault();
 	}
 
 	handleStartDVidModal(src){
 		this.setState({isDVidModal: true, DVidModalSrc: src});	
 	}
 
-	handleCloseDVidModal(){
+	handleCloseDVidModal(event){
 		this.setState({isDVidModal: false, DVidModalSrc: '', isShowLoading: true});
-		// event.preventDefault();
+		event.preventDefault();
 	}
 
-	handleDOnYtLoad(){
+	handleDOnYtLoad(event){
 		if(this.state.isDVidModal){
 			// console.log('yeah d');
 			this.setState({isShowLoading: false});
 		}
+		event.preventDefault();
 	}
 
 	getBodyContent(loginState){
@@ -291,9 +295,9 @@ class KSDesk extends React.PureComponent {
 		this.onEscapeKeyDown = (event) => {
 			if(event.keyCode === 27){
 				if(this.state.isDImgModal){
-					this.handleCloseDImgModal();
+					this.handleCloseDImgModal(event);
 				}else if(this.state.isDVidModal){
-					this.handleCloseDVidModal();
+					this.handleCloseDVidModal(event);
 				}
 			}
 		};
@@ -310,7 +314,7 @@ class KSDesk extends React.PureComponent {
 	render(){
 		const log_out_btn = <input type="image" src={LO} alt="log_out" className="dLog-out noSelect pt-page-rotateUnfoldTop"
 								style={{visibility: this.state.isLogin ? 'visible' : 'hidden'}} 
-								key={this.state.isLogin.toString()} onClick={() => this.handleLogOutModalStart()}/>;
+								key={this.state.isLogin.toString()} onClick={this.handleLogOutModalStart}/>;
 		return(
 			<div className="App" /*app starts*/>
 				<div style={{marginTop:'20px'}} /*header starts*/>
@@ -346,11 +350,11 @@ class KSDesk extends React.PureComponent {
 							<div className="Row">
 								<div className="Column dLogOutLeft">
 									<span className="dLogOutModalActionBtn"
-										onClick={() => this.handleKSLogOut()}>&#10003;</span>
+										onClick={this.handleKSLogOut}>&#10003;</span>
 								</div>
 								<div className="Column dLogOutRight">
 									<span className="dLogOutModalActionBtn" 
-										onClick={() => this.handleLogOutModalClose()}>&#10007;</span>
+										onClick={this.handleLogOutModalClose}>&#10007;</span>
 								</div>
 							</div>
 						</div>
@@ -359,7 +363,7 @@ class KSDesk extends React.PureComponent {
 				<div style={{display: this.state.isDImgModal ? 'block' : 'none'}} 
 					className="dImgModal" /*image modal starts*/>
 					<span className="dImgModalClose" 
-						onClick={() => this.handleCloseDImgModal()}>&times;</span>
+						onClick={this.handleCloseDImgModal}>&times;</span>
 					<div > 
 						<img src={this.state.DImgModalSrc} alt="modal img" 
 							className="dImgModalImage"/>
@@ -368,14 +372,14 @@ class KSDesk extends React.PureComponent {
 				<div style={{display: this.state.isDVidModal ? 'block' : 'none'}} 
 					className="dImgModal" /*video modal starts*/>
 					<span className="dImgModalClose" 
-						onClick={() => this.handleCloseDVidModal()}>&times;</span>
+						onClick={this.handleCloseDVidModal}>&times;</span>
 					<div> 
 						<div className="dTaskVideoContainer">
 							<div align="center" style={{display: this.state.isShowLoading ? 'block' : 'none'}}>
 								<h3 className="dLoadingTag">{'Loading...'}</h3></div>
 							<iframe className="dTaskVideo" src={this.state.DVidModalSrc} samesite="None; secure"
 								title="modal video" type="text/html" allowFullScreen="allowfullscreen" 
-								frameBorder="0" loading="lazy" onLoad={() => this.handleDOnYtLoad()}/>
+								frameBorder="0" loading="lazy" onLoad={this.handleDOnYtLoad}/>
 						</div>
 					</div>
 				</div /*video modal ends*/>
