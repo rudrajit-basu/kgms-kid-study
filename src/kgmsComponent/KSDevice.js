@@ -97,7 +97,7 @@ class KSDevice extends React.PureComponent {
 				}else if(this.state.isMVidModal){
 					this.handleCloseMVidModal(event);
 				}
-				this.handleLogOutModalStart();
+				this.handleLogOutModalStart(event);
 			}else{
 				window.history.back();	
 			}
@@ -127,8 +127,9 @@ class KSDevice extends React.PureComponent {
 		event.preventDefault();
 	}
 
-	async handleLogOutModalStart(){
+	async handleLogOutModalStart(event){
 		this.setState({isModalLogOut: true});
+		event.preventDefault();
 	}
 
 	handleLogOutModalClose(event){
@@ -154,11 +155,12 @@ class KSDevice extends React.PureComponent {
 		event.preventDefault();
 	}
 
-	handleMOnYtLoad(){
+	handleMOnYtLoad(event){
 		if(this.state.isMVidModal){
 			// console.log('yeah');
 			this.setState({isMShowLoading: false});
 		}
+		event.preventDefault();
 	}
 
 	getmBodyContent(loginState){
@@ -188,7 +190,7 @@ class KSDevice extends React.PureComponent {
 	render(){
 		const mLog_out_btn = <input type="image" src={LO} alt="log_out"
 								style={{visibility: this.state.isMLogin ? 'visible' : 'hidden'}} 
-								key={this.state.isMLogin.toString()} onClick={() => this.handleLogOutModalStart()}
+								key={this.state.isMLogin.toString()} onClick={this.handleLogOutModalStart}
 								className="mLog-out noSelect pt-page-rotateUnfoldTop"/>;
 		return(
 			<div className="mApp" /*app starts*/>
@@ -244,7 +246,7 @@ class KSDevice extends React.PureComponent {
 								<p className="mTextMainWhiteTag">{'Loading...'}</p></div>
 							<iframe className="dTaskVideo" src={this.state.MVidModalSrc} samesite="None; secure"
 								title="modal video" type="text/html" allowFullScreen="allowfullscreen" 
-								frameBorder="0" loading="lazy" onLoad={() => this.handleMOnYtLoad()}/>
+								frameBorder="0" loading="lazy" onLoad={this.handleMOnYtLoad}/>
 						</div>
 					</div>
 				</div /*video modal ends*/>

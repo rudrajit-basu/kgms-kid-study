@@ -181,7 +181,7 @@ class KStudy extends React.PureComponent {
 				<div key={vidL.id} className={isMobile ? 'mVidGap' : 'dVidGap'}>
 					<div>
 						<img src={vidL.thumbnail} alt={vidL.title} className={isMobile ? 'mTaskImg' : 'dTaskVideoImg'}
-							onClick={()=>this.props.handleStartVideoModal(embedUrl)}/>
+							onClick={(event)=>{this.props.handleStartVideoModal(embedUrl); event.preventDefault();}}/>
 					</div>
 					<p className="mLetterWrap"><b className={isMobile ? 'mTextMain' : 'dMain'}><u>{vidL.title}</u></b></p>	
 				</div>
@@ -198,7 +198,7 @@ class KStudy extends React.PureComponent {
 				<div className="dVidGap" key={imgL.id}>
 					<div>
 						<img src={imgL.link} alt={imgL.id} className="dTaskImg" 
-							onClick={() => this.props.handleStartImgModal(imgL.link)}/>
+							onClick={(event) => {this.props.handleStartImgModal(imgL.link); event.preventDefault();}}/>
 					</div>	
 					<div>	
 						<h3 className="dMain dTextBlk dLetterWrap"><u>{imgL.tag}</u></h3>
@@ -270,7 +270,7 @@ class KStudy extends React.PureComponent {
 				<div className="mVidGap" key={imgL.id}>
 					<div>
 						<img src={imgL.link} alt={imgL.id} className="mTaskImg" 
-							 onClick={() => this.props.handleStartImgModal(imgL.link)}/>
+							 onClick={(event) => {this.props.handleStartImgModal(imgL.link); event.preventDefault();}}/>
 					</div>
 					<div>	 
 						<p><b className="mTextMain mLetterWrap"><u>{imgL.tag}</u></b></p>	
