@@ -30,7 +30,8 @@ class KSDesk extends React.PureComponent {
 		super(props);
 		this.state = {isLogin: false, isModalLogOut: false, kBodyHeight: 0, kBodyNum: [], KClassName: "",
 						KStudies:[{id:0,header:"Please wait... Fetching Events >>",desc:""}], KMediaId: "",
-						isDImgModal: false, DImgModalSrc: '', isDVidModal: false, DVidModalSrc: '', isShowLoading: true}
+						isDImgModal: false, DImgModalSrc: '', isDVidModal: false, DVidModalSrc: '', 
+						isShowLoading: true, isDAudModal: false, isShowAudLoading: true, DAudModalSrc: ''}
 		this.getBodyContent = this.getBodyContent.bind(this);
 		this.handleLogOutModalStart = this.handleLogOutModalStart.bind(this);
 		this.handleLogOutModalClose = this.handleLogOutModalClose.bind(this);
@@ -47,6 +48,10 @@ class KSDesk extends React.PureComponent {
 		this.handleStartDVidModal = this.handleStartDVidModal.bind(this);
 		this.handleCloseDVidModal = this.handleCloseDVidModal.bind(this);
 		this.handleDOnYtLoad = this.handleDOnYtLoad.bind(this);
+		this.handleStartDAudModal = this.handleStartDAudModal.bind(this);
+		this.handleCloseDAudModal = this.handleCloseDAudModal.bind(this);
+		this.handleOnAudioLoad = this.handleOnAudioLoad.bind(this);
+		this.getAudioPlayer = this.getAudioPlayer.bind(this);
 		this.bodyRef = React.createRef();
 	}
 
@@ -173,6 +178,41 @@ class KSDesk extends React.PureComponent {
 		event.preventDefault();
 	}
 
+	handleStartDAudModal(){
+		// console.log(`load audio file --> ${src}`);
+		// this.setState({isDAudModal: true, DAudModalSrc: src});
+		this.setState({isDAudModal: true});
+	}
+
+	handleCloseDAudModal(event){
+		this.setState({isDAudModal: false, DAudModalSrc: '', isShowAudLoading: true});
+		event.preventDefault();
+	}
+
+	handleOnAudioLoad(event){
+		// console.log('player can play !');
+		if(this.state.isDAudModal){
+			this.setState({isShowAudLoading: false});
+		}
+		event.preventDefault();
+	}
+
+	getAudioPlayer(src){
+		if(src !== ''){
+			return(
+				<div style={{visibility: this.state.isShowAudLoading ? 'hidden' : 'visible'}} className="dTaskAudioControl">
+					<audio controls autoPlay onCanPlay={this.handleOnAudioLoad}>
+					  <source src={src} type="audio/mpeg"/>
+					</audio>
+				</div>
+			);
+		} else {
+			return(
+				<div/>
+			);
+		}
+	}
+
 	getBodyContent(loginState){
 		if(!loginState){
 			return(
@@ -189,7 +229,9 @@ class KSDesk extends React.PureComponent {
 						<KStudy handleDeco={()=>this.handleCurrentDecoList()} kgmsClassName={this.state.KClassName}
 								kgmsStudies={this.state.KStudies} kgmsMediaId={this.state.KMediaId} 
 								firebase={this.props.firebase} handleStartImgModal={(src) => this.handleStartDImgModal(src)}
-								handleStartVideoModal={(src) => this.handleStartDVidModal(src)}/>
+								handleStartVideoModal={(src) => this.handleStartDVidModal(src)}
+								handleStartAudioModal={() => this.handleStartDAudModal()}
+								handleSetAudioSrc={(src) => this.setState({DAudModalSrc: src})}/>
 					</div>
 				</div>
 			);
@@ -298,6 +340,8 @@ class KSDesk extends React.PureComponent {
 					this.handleCloseDImgModal(event);
 				}else if(this.state.isDVidModal){
 					this.handleCloseDVidModal(event);
+				}else if(this.state.isDAudModal){
+					this.handleCloseDAudModal(event);
 				}
 			}
 		};
@@ -383,6 +427,18 @@ class KSDesk extends React.PureComponent {
 						</div>
 					</div>
 				</div /*video modal ends*/>
+				<div style={{display: this.state.isDAudModal ? 'block' : 'none', overflowX: 'hidden'}} 
+					className="dImgModal" /*audio modal starts*/>
+					<span className="dImgModalClose" 
+						onClick={this.handleCloseDAudModal}>&times;</span>
+					<div > 
+						<div className="dTaskAudioContainer" align="center">
+							<div style={{display: this.state.isShowAudLoading ? 'block' : 'none'}}>
+								<h3 className="dLoadingTag">{'Loading...'}</h3></div>	
+							{this.getAudioPlayer(this.state.DAudModalSrc)}
+						</div>
+					</div>
+				</div /*audio modal ends*/>
 				<div /*footer starts*/>
 					<div align="center" style={{width: '100vw', marginTop:'3.2em'}}>
 						<img src={F1} alt="footer" style={{width:'75vw'}} className="noSelect"/>

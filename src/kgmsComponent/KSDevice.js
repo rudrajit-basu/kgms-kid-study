@@ -15,7 +15,8 @@ class KSDevice extends React.PureComponent {
 		super(props);
 		this.state = {isMLogin: false, isModalLogOut: false, KMClassName: "", KMediaId: "",
 						KMStudies:[{id:0,header:"Please wait... Fetching Events >>",desc:""}],
-						isMImgModal: false, MImgModalSrc: '', isMVidModal: false, MVidModalSrc: '', isMShowLoading: true}
+						isMImgModal: false, MImgModalSrc: '', isMVidModal: false, MVidModalSrc: '', 
+						isMShowLoading: true, isMAudModal: false, isMShowAudLoading: true, MAudModalSrc: ''}
 		this.getmBodyContent = this.getmBodyContent.bind(this);
 		this.handleMKSLogin = this.handleMKSLogin.bind(this);
 		this.handleMKSLogOut = this.handleMKSLogOut.bind(this);
@@ -29,6 +30,10 @@ class KSDevice extends React.PureComponent {
 		this.handleStartMVidModal = this.handleStartMVidModal.bind(this);
 		this.handleCloseMVidModal = this.handleCloseMVidModal.bind(this);
 		this.handleMOnYtLoad = this.handleMOnYtLoad.bind(this);
+		this.handleStartMAudModal = this.handleStartMAudModal.bind(this);
+		this.handleCloseMAudModal = this.handleCloseMAudModal.bind(this);
+		this.handleOnMAudioLoad = this.handleOnMAudioLoad.bind(this);
+		this.getMAudioPlayer = this.getMAudioPlayer.bind(this);
 	}
 
 	async fetchMKgmsStudy(db,kStudyDoc){
@@ -163,6 +168,40 @@ class KSDevice extends React.PureComponent {
 		event.preventDefault();
 	}
 
+	handleStartMAudModal(){
+		// console.log(`load audio file --> ${src}`);
+		this.setState({isMAudModal: true});	
+	}
+
+	handleCloseMAudModal(event){
+		this.setState({isMAudModal: false, isMShowAudLoading: true, MAudModalSrc: ''});
+		event.preventDefault();
+	}
+
+	handleOnMAudioLoad(event){
+		// console.log('player can play !');
+		if(this.state.isMAudModal){
+			this.setState({isMShowAudLoading: false});
+		}
+		event.preventDefault();
+	}
+
+	getMAudioPlayer(src){
+		if(src !== ''){
+			return(
+				<div style={{visibility: this.state.isMShowAudLoading ? 'hidden' : 'visible'}} className="mTaskAudioControl">
+					<audio controls autoPlay onCanPlay={this.handleOnMAudioLoad}>
+					  <source src={src} type="audio/mpeg"/>
+					</audio>
+				</div>
+			);
+		} else {
+			return(
+				<div/>
+			);
+		}
+	}
+
 	getmBodyContent(loginState){
 
 		if(!loginState){
@@ -180,7 +219,9 @@ class KSDevice extends React.PureComponent {
 						<KStudy kgmsClassName={this.state.KMClassName} kgmsStudies={this.state.KMStudies}
 								kgmsMediaId={this.state.KMediaId} firebase={this.props.firebase}
 								handleStartImgModal={(src) => this.handleStartMImgModal(src)}
-								handleStartVideoModal={(src) => this.handleStartMVidModal(src)}/>
+								handleStartVideoModal={(src) => this.handleStartMVidModal(src)}
+								handleStartAudioModal={() => this.handleStartMAudModal()}
+								handleSetAudioSrc={(src) => this.setState({MAudModalSrc: src})}/>
 					</div>
 				</div>
 			);
@@ -250,6 +291,18 @@ class KSDevice extends React.PureComponent {
 						</div>
 					</div>
 				</div /*video modal ends*/>
+				<div style={{display: this.state.isMAudModal ? 'block' : 'none', overflowX: 'hidden'}} 
+					className="mImgModal" /*audio modal starts*/>
+					<span className="mImgModalClose" 
+						onClick={this.handleCloseMAudModal}>&times;</span>
+					<div>
+						<div className="mTaskAudioContainer" align="center">
+							<div style={{display: this.state.isMShowAudLoading ? 'block' : 'none'}}>
+								<p className="mTextMainWhiteTag">{'Loading...'}</p></div>
+							{this.getMAudioPlayer(this.state.MAudModalSrc)}
+						</div>
+					</div>
+				</div /*audio modal ends*/>
 				<div /*footer starts*/>
 					<img src={F1} alt="footer" className="mFooter noSelect mTextGap3"/>
 				</div /*footer ends*/>

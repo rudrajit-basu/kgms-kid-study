@@ -415,6 +415,18 @@
     margin-top: 25%;
   }
 
+  .mTaskAudioContainer{
+    position: relative;
+    margin-top: 40%;
+  }
+
+  .mTaskAudioControl{
+    -webkit-transform: scale(1.02);
+    -moz-transform: scale(1.02);
+    -ms-transform: scale(1.02);
+    transform: scale(1.02);
+  }
+
   .mVidGap{
     margin: 50px 0px; 
   }
@@ -425,6 +437,11 @@
 
   .mLetterWrap{
     word-break: break-all;
+  }
+
+  .mGIcon{
+    font-size: 10.50vw;
+    color: #2F4F4F;
   }
 
 @media only screen and (max-width: 320px) and (orientation: portrait) {
@@ -589,6 +606,18 @@
 
   .mVidGap{
     margin: 45px 0px; 
+  }
+
+  .mTaskAudioContainer{
+    position: relative;
+    margin-top: 40%;
+  }
+
+  .mTaskAudioControl{
+    -webkit-transform: scale(0.80);
+    -moz-transform: scale(0.80);
+    -ms-transform: scale(0.80);
+    transform: scale(0.80);
   }
   
 }
@@ -765,6 +794,24 @@
 
   .mGap2{
     padding: 0.5em 0em;
+  }
+
+  .mGIcon{
+    font-size: 8.00vw;
+    color: #2F4F4F;
+  }
+
+  .mTaskAudioContainer{
+    position: relative;
+    margin-top: 10%;
+    /*-webkit-transform: scale(0.89);
+    -moz-transform: scale(0.89);
+    -ms-transform: scale(0.89);
+    transform: scale(0.89);*/
+  }
+
+  .mTaskAudioControl{
+
   }
 
 }
@@ -1007,6 +1054,23 @@
 
   .mVidGap{
     margin: 50px 0px; 
+  }
+
+  .mGIcon{
+    font-size: 7.50vw;
+    color: #2F4F4F;
+  }
+
+  .mTaskAudioContainer{
+    position: relative;
+    margin-top: 10%;
+  }
+
+  .mTaskAudioControl{
+    -webkit-transform: scale(1.05);
+    -moz-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    transform: scale(1.05);
   }
 
 }
@@ -1258,7 +1322,24 @@
   }
 
   .mVidGap{
-    margin: 65px 0px; 
+    margin: 90px 0px; 
+  }
+
+  .mGIcon{
+    font-size: 8.50vw;
+    color: #2F4F4F;
+  }
+
+  .mTaskAudioContainer{
+    position: relative;
+    margin-top: 35%;
+  }
+
+  .mTaskAudioControl{
+    -webkit-transform: scale(1.80);
+    -moz-transform: scale(1.80);
+    -ms-transform: scale(1.80);
+    transform: scale(1.80);
   }
 
 }
@@ -1508,7 +1589,24 @@
     }
 
     .mVidGap{
-      margin: 65px 0px; 
+      margin: 90px 0px; 
+    }
+
+    .mGIcon{
+      font-size: 6.70vw;
+      color: #2F4F4F;
+    }
+
+    .mTaskAudioContainer{
+      position: relative;
+      margin-top: 15%;
+    }
+
+    .mTaskAudioControl{
+      -webkit-transform: scale(1.80);
+      -moz-transform: scale(1.80);
+      -ms-transform: scale(1.80);
+      transform: scale(1.80);
     }
 }
 
@@ -1757,7 +1855,19 @@
   }
 
   .mVidGap{
-    margin: 75px 0px; 
+    margin: 100px 0px; 
+  }
+
+  .mTaskAudioContainer{
+    position: relative;
+    margin-top: 35%;
+  }
+
+  .mTaskAudioControl{
+    -webkit-transform: scale(2.2);
+    -moz-transform: scale(2.2);
+    -ms-transform: scale(2.2);
+    transform: scale(2.2);
   }
 
 }
@@ -2007,7 +2117,19 @@
     }
 
     .mVidGap{
-      margin: 80px 0px; 
+      margin: 105px 0px; 
+    }
+
+    .mTaskAudioContainer{
+      position: relative;
+      margin-top: 15%;
+    }
+
+    .mTaskAudioControl{
+      -webkit-transform: scale(2.2);
+      -moz-transform: scale(2.2);
+      -ms-transform: scale(2.2);
+      transform: scale(2.2);
     }
 }
 
@@ -2385,6 +2507,18 @@
   margin-top: 8.5%;
 }
 
+.dTaskAudioContainer{
+  position: relative;
+  margin-top: 15%;
+}
+
+.dTaskAudioControl{
+  -webkit-transform: scale(1.25);
+  -moz-transform: scale(1.25);
+  -ms-transform: scale(1.25);
+  transform: scale(1.25);
+}
+
 .dTaskVideoImg{
   width: 600px;
   height: 350px;
@@ -2394,7 +2528,7 @@
 
 .dVidGap{
   /*margin: 55px 0px;*/
-  margin: 65px 0px;
+  margin: 80px 0px;
 }
 
 .dWordWrap{
@@ -2408,4 +2542,11 @@
 .dWordGap{
   display: inline-block;
   width: 0.3px;
+}
+
+.dGIcon{
+  font-size: 4.003vw;
+  color: #2F4F4F;
+  cursor: pointer;
+  /*font-weight: bold;*/
 }

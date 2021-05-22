@@ -9,7 +9,9 @@ import "firebase/storage";
 document.cookie = "k1name=kgmsstudy; SameSite=None; Secure";
 document.cookie = "k1name-legacy=kgmsStudy; Secure";
 // document.cookie = "name1=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
 const apiJsUrl = "https://apis.google.com/js/api.js";
+
 // const apiKeyYPrev = 'AIzaSyCMyBe3gjfvs38Yh_eiTwBEd5xlPVwnqK8';
 const apiKeyY = 'AIzaSyCjyx-Y-2yupi_mGz9YeaZvdGwutVM7LTw';
 const yJsUrl = 'https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest';
@@ -20,7 +22,7 @@ class KStudy extends React.PureComponent {
 	constructor(props){
 		super(props);
 		this.state = {kImgList: [], kVideoList: [], showImageSection: false,
-						imageBanner: 'Loading Images...'};
+						imageBanner: 'Loading Images...', kAudioList: [], kAudioUrlSet: new Map()};
 		this.getTasksFrom = this.getTasksFrom.bind(this);
 		this.handleImgAlbumRequest = this.handleImgAlbumRequest.bind(this);
 		this.getTasksImgFrom = this.getTasksImgFrom.bind(this);
@@ -29,6 +31,9 @@ class KStudy extends React.PureComponent {
 		this.loadGapiClient = this.loadGapiClient.bind(this);
 		this.getTaskVideoFrom = this.getTaskVideoFrom.bind(this);
 		this.handleImgUrlRequest = this.handleImgUrlRequest.bind(this);
+		this.getTaskAudioFrom = this.getTaskAudioFrom.bind(this);
+		this.handleAudioAlbumRequest = this.handleAudioAlbumRequest.bind(this);
+		this.handleAudioUrlRequest = this.handleAudioUrlRequest.bind(this);
 	}
 
 
@@ -38,7 +43,9 @@ class KStudy extends React.PureComponent {
 		}
 
 		// console.log('cookie = ',document.cookie);
+
 		this.handleImgAlbumRequest();
+		this.handleAudioAlbumRequest();
 		if(!window.gapi){
 			const script = document.createElement('script');
 			script.type = 'text/javascript';
@@ -59,7 +66,6 @@ class KStudy extends React.PureComponent {
 					this.loadGapiClient();
 				});
 		}
-		
 	}
 
 	 async loadGapiClient(){
@@ -173,6 +179,67 @@ class KStudy extends React.PureComponent {
 		}
 	}
 
+	async handleAudioAlbumRequest(){
+		let kStorage = this.props.firebase.storage();
+		let kStorageRef = kStorage.ref();
+		let audRef = kStorageRef.child('kgms-voice-notes').child(this.props.kgmsMediaId);
+		audRef.listAll()
+		.then((res) => {
+			// console.log('firebase storage data = ',res);
+			if(res !== null && res !== undefined) {
+				let audioNameList = [];
+				res.items.forEach((itemRef)=>{
+					// console.log('item ref = ',itemRef.name);
+					audioNameList.push({title: itemRef.name});
+				});
+				if(audioNameList.length > 0) {
+					// console.log('imageNameList = ',imageNameList.toString());
+					// this.setState({showImageSection: true});
+					// this.handleImgUrlRequest(imgRef, imageNameList);
+					this.setState({kAudioList: audioNameList});
+					// this.handleAudioUrlRequest(audRef, audioNameList);
+				}
+			}
+		})
+		.catch((error) => {
+			// this.setState({showImageSection: false, imageBanner: 'Loading Images...'});
+			console.log('firebase storage error = ',error.toString());
+		});
+	}
+
+	// async handleAudioUrlRequest(audRef, audArr){
+	// 	let audList = [];
+	// 	for(let i = 0; i < audArr.length; i++) {
+	// 		// console.log('imageName = ',imgArr[i]);
+	// 		let url = await audRef.child(audArr[i]).getDownloadURL();
+	// 		audList.push({id: (i+700).toString(), link: url, title: audArr[i].replace(/\.[^/.]+$/, "")});
+	// 	}
+
+	// 	if(audList.length > 0) {
+	// 		this.setState({kAudioList: audList});
+	// 		if(!isMobile) {
+	// 			this.timerID = setTimeout(() => this.props.handleDeco(),5000);
+	// 		}
+	// 	}
+	// }
+	async handleAudioUrlRequest(fileName){
+		if(this.state.kAudioUrlSet.has(fileName)){
+			// console.log('handleAudioUrlRequest from cache');
+			let url = this.state.kAudioUrlSet.get(fileName).url;
+			// console.log(`url from cache --> ${url}`);
+			this.props.handleSetAudioSrc(url);
+		}else{
+			// console.log('handleAudioUrlRequest http request');
+			let kStorage = this.props.firebase.storage();
+			let kStorageRef = kStorage.ref();
+			let audRef = kStorageRef.child('kgms-voice-notes').child(this.props.kgmsMediaId);
+			let url = await audRef.child(fileName).getDownloadURL();
+			let urlSet = this.state.kAudioUrlSet.set(fileName, {url: url});
+			this.setState({kAudioUrlSet: urlSet});
+			this.props.handleSetAudioSrc(url);
+		}
+	}
+
 	getTaskVideoFrom(){
 		// let num = 1;
 		let taskVideoListItems = this.state.kVideoList.map((vidL) => {
@@ -191,6 +258,20 @@ class KStudy extends React.PureComponent {
 		return taskVideoListItems;
 	}
 
+	getTaskAudioFrom(){
+		let i = 701;
+		let taskAudioListItems = this.state.kAudioList.map((audL) => {
+			return(
+				<div key={(i++).toString()} className={isMobile ? 'mVidGap' : 'dVidGap'}>
+					<div onClick={(event) => {this.props.handleStartAudioModal(); this.handleAudioUrlRequest(audL.title); event.preventDefault();}}>
+						<i className={isMobile ? 'material-icons mGIcon' : 'material-icons dGIcon'}>volume_up</i>
+					</div>
+					<p className="mLetterWrap"><b className={isMobile ? 'mTextMain' : 'dMain'}><u>{audL.title.replace(/\.[^/.]+$/, "")}</u></b></p>
+				</div>
+			);
+		});
+		return taskAudioListItems;
+	}
 
 	getTasksImgFrom(){
 		let taskImgListItems = this.state.kImgList.map((imgL) => {
@@ -291,6 +372,15 @@ class KStudy extends React.PureComponent {
 				</div>
 				<div>
 					{isMobile ? this.getmTasksFrom() : this.getTasksFrom()}
+				</div>
+				<div align="center">
+					<h4 className={isMobile ? 'mTaskImgHeader' : 'dTaskImgHeader'}
+						style={{display: this.state.kAudioList.length > 0 ? 'block':'none'}}>
+						<span className={isMobile ? 'mTextMain' : 'dTaskImgHeader-span'}>{'Audio Section'}</span>
+					</h4>
+				</div>
+				<div align="center">
+					{this.getTaskAudioFrom()}
 				</div>
 				<div align="center">
 					<h4 className={isMobile ? 'mTaskImgHeader' : 'dTaskImgHeader'}
