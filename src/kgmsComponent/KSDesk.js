@@ -14,12 +14,12 @@ import KStudy from './KStudy';
 import "firebase/firestore";
 import "firebase/analytics";
 
-const KB1 = <img src={M3} alt="M3" style={{width:'23%'}} className="noSelect pt-page-moveFromBottomFade" />;
-const KB2 = <img src={M2} alt="M2" style={{width:'29%'}} className="noSelect pt-page-moveFromBottomFade" />;
-const KB3 = <img src={M1} alt="M1" style={{width:'22%'}}className="noSelect pt-page-moveFromBottomFade" />;
-const KO1 = <img src={O1} alt="O1" style={{width:'70%'}} className="noSelect ImgTilt pt-page-moveFromBottomFade"/>;
-const KO3 = <img src={O3} alt="O3" style={{width:'55%'}} className="noSelect ImgTilt2 pt-page-moveFromBottomFade" />;
-const KB4 = <img src={M2} alt="M2" style={{width:'29%'}} className="noSelect ImgTilt3 pt-page-moveFromBottomFade" />;
+const KB1 = <img src={M3} alt="M3" style={{width:'23%'}} className="noSelect pt-page-moveFromBottomFade" referrerPolicy="same-origin"/>;
+const KB2 = <img src={M2} alt="M2" style={{width:'29%'}} className="noSelect pt-page-moveFromBottomFade" referrerPolicy="same-origin"/>;
+const KB3 = <img src={M1} alt="M1" style={{width:'22%'}}className="noSelect pt-page-moveFromBottomFade" referrerPolicy="same-origin"/>;
+const KO1 = <img src={O1} alt="O1" style={{width:'70%'}} className="noSelect ImgTilt pt-page-moveFromBottomFade" referrerPolicy="same-origin"/>;
+const KO3 = <img src={O3} alt="O3" style={{width:'55%'}} className="noSelect ImgTilt2 pt-page-moveFromBottomFade" referrerPolicy="same-origin"/>;
+const KB4 = <img src={M2} alt="M2" style={{width:'29%'}} className="noSelect ImgTilt3 pt-page-moveFromBottomFade" referrerPolicy="same-origin"/>;
 
 const imgArr = [KB1,KB2,KB3,KO3,KB4];
 
@@ -52,6 +52,7 @@ class KSDesk extends React.PureComponent {
 		this.handleCloseDAudModal = this.handleCloseDAudModal.bind(this);
 		this.handleOnAudioLoad = this.handleOnAudioLoad.bind(this);
 		this.getAudioPlayer = this.getAudioPlayer.bind(this);
+		this.getVideoPlayer = this.getVideoPlayer.bind(this);
 		this.bodyRef = React.createRef();
 	}
 
@@ -113,7 +114,7 @@ class KSDesk extends React.PureComponent {
 	}
 
 	handleHistoryPop(event){
-		// event.preventDefault();
+		event.preventDefault();
 		// console.log(`History state: ${JSON.stringify(event.state)}`);
 		if(event.state !== null){
 			if(this.state.isLogin){
@@ -204,6 +205,24 @@ class KSDesk extends React.PureComponent {
 					<audio controls autoPlay onCanPlay={this.handleOnAudioLoad}>
 					  <source src={src} type="audio/mpeg"/>
 					</audio>
+				</div>
+			);
+		} else {
+			return(
+				<div/>
+			);
+		}
+	}
+
+	getVideoPlayer(src){
+		if(src !== ''){
+			return(
+				<div className="dTaskVideoContainer">
+					<div align="center" style={{display: this.state.isShowLoading ? 'block' : 'none'}}>
+						<h3 className="dLoadingTag">{'Loading...'}</h3></div>
+					<iframe className="dTaskVideo" src={src} samesite="None; secure"
+						title="modal video" type="text/html" allowFullScreen="allowfullscreen" referrerPolicy="same-origin"
+						frameBorder="0" loading="lazy" onLoad={this.handleDOnYtLoad}/>
 				</div>
 			);
 		} else {
@@ -367,10 +386,10 @@ class KSDesk extends React.PureComponent {
 							{log_out_btn}
 						</div>
 						<div className="Column HeaderMiddle" align="center" style={{marginTop:'2.5em'}}>
-							<img src={HH} alt="kgms" style={{width: '90%'}} className="noSelect"/>
+							<img src={HH} alt="kgms" style={{width: '90%'}} className="noSelect" referrerPolicy="same-origin"/>
 						</div>
 						<div className="Column HeaderRight" align="center">
-							<img src={H4} alt="sun" style={{width: '65%'}} className="noSelect"/>
+							<img src={H4} alt="sun" style={{width: '65%'}} className="noSelect" referrerPolicy="same-origin"/>
 						</div>
 					</div>
 				</div /*header ends*/>
@@ -410,7 +429,7 @@ class KSDesk extends React.PureComponent {
 						onClick={this.handleCloseDImgModal}>&times;</span>
 					<div > 
 						<img src={this.state.DImgModalSrc} alt="modal img" 
-							className="dImgModalImage"/>
+							className="dImgModalImage" referrerPolicy="same-origin"/>
 					</div>
 				</div /*image modal ends*/>
 				<div style={{display: this.state.isDVidModal ? 'block' : 'none'}} 
@@ -418,13 +437,7 @@ class KSDesk extends React.PureComponent {
 					<span className="dImgModalClose" 
 						onClick={this.handleCloseDVidModal}>&times;</span>
 					<div> 
-						<div className="dTaskVideoContainer">
-							<div align="center" style={{display: this.state.isShowLoading ? 'block' : 'none'}}>
-								<h3 className="dLoadingTag">{'Loading...'}</h3></div>
-							<iframe className="dTaskVideo" src={this.state.DVidModalSrc} samesite="None; secure"
-								title="modal video" type="text/html" allowFullScreen="allowfullscreen" 
-								frameBorder="0" loading="lazy" onLoad={this.handleDOnYtLoad}/>
-						</div>
+						{this.getVideoPlayer(this.state.DVidModalSrc)}
 					</div>
 				</div /*video modal ends*/>
 				<div style={{display: this.state.isDAudModal ? 'block' : 'none', overflowX: 'hidden'}} 
@@ -441,7 +454,7 @@ class KSDesk extends React.PureComponent {
 				</div /*audio modal ends*/>
 				<div /*footer starts*/>
 					<div align="center" style={{width: '100vw', marginTop:'3.2em'}}>
-						<img src={F1} alt="footer" style={{width:'75vw'}} className="noSelect"/>
+						<img src={F1} alt="footer" style={{width:'75vw'}} className="noSelect" referrerPolicy="same-origin"/>
 					</div>
 				</div /*footer ends*/>
 			</div /*app ends*/>

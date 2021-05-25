@@ -34,6 +34,7 @@ class KSDevice extends React.PureComponent {
 		this.handleCloseMAudModal = this.handleCloseMAudModal.bind(this);
 		this.handleOnMAudioLoad = this.handleOnMAudioLoad.bind(this);
 		this.getMAudioPlayer = this.getMAudioPlayer.bind(this);
+		this.getMVideoPlayer = this.getMVideoPlayer.bind(this);
 	}
 
 	async fetchMKgmsStudy(db,kStudyDoc){
@@ -93,8 +94,9 @@ class KSDevice extends React.PureComponent {
 	}
 
 	handleHistoryPop(event){
-		// event.preventDefault();
+		event.preventDefault();
 		// console.log(`History state: ${JSON.stringify(event.state)}`);
+		// console.log(`History state length: ${window.history.length}`);
 		if(event.state !== null){
 			if(this.state.isMLogin){
 				if(this.state.isMImgModal){
@@ -104,16 +106,18 @@ class KSDevice extends React.PureComponent {
 				}
 				this.handleLogOutModalStart(event);
 			}else{
+				// console.log('this.state.isMLogin === false');
 				window.history.back();	
 			}
 		}else{
+			// console.log('event.state === null');
 			window.history.back();
 		}
 	}
 
 	componentDidMount(){
-		window.history.replaceState({page: 'mLogin'},'','');
 		window.addEventListener('popstate', this.handleHistoryPop, false);
+		window.history.replaceState({page: 'mLogin'},'','');
 		this.props.firebase.analytics();
 	}
 
@@ -202,6 +206,24 @@ class KSDevice extends React.PureComponent {
 		}
 	}
 
+	getMVideoPlayer(src){
+		if(src !== ''){
+			return(
+				<div className="mTaskVideoContainer">
+					<div align="center" style={{display: this.state.isMShowLoading ? 'block' : 'none'}}>
+						<p className="mTextMainWhiteTag">{'Loading...'}</p></div>
+					<iframe className="dTaskVideo" src={src} samesite="None; secure"
+						title="modal video" type="text/html" allowFullScreen="allowfullscreen" referrerPolicy="same-origin"
+						frameBorder="0" loading="lazy" onLoad={this.handleMOnYtLoad}/>
+				</div>
+			);
+		} else {
+			return(
+				<div/>
+			);	
+		}
+	}
+
 	getmBodyContent(loginState){
 
 		if(!loginState){
@@ -240,11 +262,11 @@ class KSDevice extends React.PureComponent {
 						{mLog_out_btn}
 					</div>
 					<div className="Column mTopRight" align="right">
-						<img src={H4} alt="sun" className="mSun noSelect"/>
+						<img src={H4} alt="sun" className="mSun noSelect" referrerPolicy="same-origin"/>
 					</div>
 				</div>
 				<div align="left" className="mHDiv">
-						<img src={HHM} alt="kgms" className="mHH noSelect"/>
+						<img src={HHM} alt="kgms" className="mHH noSelect" referrerPolicy="same-origin"/>
 				</div /*header ends*/>
 				<div style={{width:'100%'}} /*body starts*/>
 					<div className="mBodyContent1">
@@ -274,7 +296,7 @@ class KSDevice extends React.PureComponent {
 						onClick={this.handleCloseMImgModal}>&times;</span>
 					<div > 
 						<img src={this.state.MImgModalSrc} alt="modal img" 
-							className="mImgModalImage"/>
+							className="mImgModalImage" referrerPolicy="same-origin"/>
 					</div>
 				</div /*image modal ends*/>
 				<div style={{display: this.state.isMVidModal ? 'block' : 'none'}} 
@@ -282,13 +304,7 @@ class KSDevice extends React.PureComponent {
 					<span className="mImgModalClose" 
 						onClick={this.handleCloseMVidModal}>&times;</span>
 					<div> 
-						<div className="mTaskVideoContainer">
-							<div align="center" style={{display: this.state.isMShowLoading ? 'block' : 'none'}}>
-								<p className="mTextMainWhiteTag">{'Loading...'}</p></div>
-							<iframe className="dTaskVideo" src={this.state.MVidModalSrc} samesite="None; secure"
-								title="modal video" type="text/html" allowFullScreen="allowfullscreen" 
-								frameBorder="0" loading="lazy" onLoad={this.handleMOnYtLoad}/>
-						</div>
+						{this.getMVideoPlayer(this.state.MVidModalSrc)}
 					</div>
 				</div /*video modal ends*/>
 				<div style={{display: this.state.isMAudModal ? 'block' : 'none', overflowX: 'hidden'}} 
@@ -304,7 +320,7 @@ class KSDevice extends React.PureComponent {
 					</div>
 				</div /*audio modal ends*/>
 				<div /*footer starts*/>
-					<img src={F1} alt="footer" className="mFooter noSelect mTextGap3"/>
+					<img src={F1} alt="footer" className="mFooter noSelect mTextGap3" referrerPolicy="same-origin"/>
 				</div /*footer ends*/>
 			</div /*app ends*/>
 		);

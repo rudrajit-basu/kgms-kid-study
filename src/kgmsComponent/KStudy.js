@@ -248,7 +248,8 @@ class KStudy extends React.PureComponent {
 				<div key={vidL.id} className={isMobile ? 'mVidGap' : 'dVidGap'}>
 					<div>
 						<img src={vidL.thumbnail} alt={vidL.title} className={isMobile ? 'mTaskImg' : 'dTaskVideoImg'}
-							onClick={(event)=>{this.props.handleStartVideoModal(embedUrl); event.preventDefault();}}/>
+							onClick={(event)=>{this.props.handleStartVideoModal(embedUrl); event.preventDefault();}}
+							referrerPolicy="same-origin"/>
 					</div>
 					<p className="mLetterWrap"><b className={isMobile ? 'mTextMain' : 'dMain'}><u>{vidL.title}</u></b></p>	
 				</div>
@@ -279,7 +280,8 @@ class KStudy extends React.PureComponent {
 				<div className="dVidGap" key={imgL.id}>
 					<div>
 						<img src={imgL.link} alt={imgL.id} className="dTaskImg" 
-							onClick={(event) => {this.props.handleStartImgModal(imgL.link); event.preventDefault();}}/>
+							onClick={(event) => {this.props.handleStartImgModal(imgL.link); event.preventDefault();}}
+							referrerPolicy="same-origin"/>
 					</div>	
 					<div>	
 						<h3 className="dMain dTextBlk dLetterWrap"><u>{imgL.tag}</u></h3>
@@ -351,7 +353,8 @@ class KStudy extends React.PureComponent {
 				<div className="mVidGap" key={imgL.id}>
 					<div>
 						<img src={imgL.link} alt={imgL.id} className="mTaskImg" 
-							 onClick={(event) => {this.props.handleStartImgModal(imgL.link); event.preventDefault();}}/>
+							 onClick={(event) => {this.props.handleStartImgModal(imgL.link); event.preventDefault();}}
+							 referrerPolicy="same-origin"/>
 					</div>
 					<div>	 
 						<p><b className="mTextMain mLetterWrap"><u>{imgL.tag}</u></b></p>	
