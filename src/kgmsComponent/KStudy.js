@@ -17,11 +17,19 @@ const apiKeyY = 'AIzaSyCjyx-Y-2yupi_mGz9YeaZvdGwutVM7LTw';
 const yJsUrl = 'https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest';
 // const yJsScope = 'https://www.googleapis.com/auth/youtube.readonly';
 
+const mIcBtnCss = 'material-icons mNavIconButton noSelect';
+const dIcBtnCss = 'material-icons dNavIconButton noSelect';
+
+const assignmentIcBtn = <i className={isMobile ? mIcBtnCss : dIcBtnCss}>assignment</i>;
+const audioIcBtn = <i className={isMobile ? mIcBtnCss : dIcBtnCss}>audiotrack</i>;
+const imageIcBtn = <i className={isMobile ? mIcBtnCss : dIcBtnCss}>image</i>;
+const videoIcBtn = <i className={isMobile ? mIcBtnCss : dIcBtnCss}>ondemand_video</i>;
+
 class KStudy extends React.PureComponent {
 
 	constructor(props){
 		super(props);
-		this.state = {kImgList: [], kVideoList: [], showImageSection: false,
+		this.state = {kImgList: [], kVideoList: [], showImageSection: false, showNavBar: false,
 						imageBanner: 'Loading Images...', kAudioList: [], kAudioUrlSet: new Map()};
 		this.getTasksFrom = this.getTasksFrom.bind(this);
 		this.handleImgAlbumRequest = this.handleImgAlbumRequest.bind(this);
@@ -34,6 +42,9 @@ class KStudy extends React.PureComponent {
 		this.getTaskAudioFrom = this.getTaskAudioFrom.bind(this);
 		this.handleAudioAlbumRequest = this.handleAudioAlbumRequest.bind(this);
 		this.handleAudioUrlRequest = this.handleAudioUrlRequest.bind(this);
+		this.handleScrollToElement = this.handleScrollToElement.bind(this);
+		this.getMarginPos = this.getMarginPos.bind(this);
+		this.handleScrollNavBar = this.handleScrollNavBar.bind(this);
 	}
 
 
@@ -66,6 +77,7 @@ class KStudy extends React.PureComponent {
 					this.loadGapiClient();
 				});
 		}
+		window.addEventListener('scroll', this.handleScrollNavBar, false);
 	}
 
 	 async loadGapiClient(){
@@ -131,8 +143,25 @@ class KStudy extends React.PureComponent {
         });
 	}
 
+	handleScrollNavBar(event){
+		if(this.hRef !== null){
+			let sticky = this.hRef.offsetTop;
+			if(window.pageYOffset >= sticky){
+				if(!this.state.showNavBar){
+					this.setState({showNavBar: true});
+				}
+			} else {
+				if(this.state.showNavBar){
+					this.setState({showNavBar: false});
+				}
+			}
+		}
+		event.preventDefault();	
+	}
+
 	componentWillUnmount(){
 		clearTimeout(this.timerID);
+		window.removeEventListener('scroll', this.handleScrollNavBar, false);
 	}
 
 	async handleImgAlbumRequest(){
@@ -366,17 +395,49 @@ class KStudy extends React.PureComponent {
 		return mTaskImgListItems;
 	}
 
+
+	handleScrollToElement(btn){
+		let wH = this.getMarginPos();
+
+		if(btn === 'task'){
+			let vPos = this.tskRef.offsetTop;
+			window.scrollTo(0, vPos-20);
+			// console.log(`wh task --> ${wH}`);
+		} else if(btn === 'audio'){
+			let vPos = this.audioRef.offsetTop;
+			// console.log(`wh audio --> ${wH}`);
+			window.scrollTo(0, vPos-wH);
+		} else if(btn === 'image'){
+			let vPos = this.imgRef.offsetTop;
+			// console.log(`wh image --> ${wH}`);
+			window.scrollTo(0, vPos-wH);
+		} else if(btn === 'video'){
+			let vPos = this.vidRef.offsetTop;
+			// console.log(`wh video --> ${wH}`);
+			window.scrollTo(0, vPos-wH);
+		}
+	}
+
+	getMarginPos(){
+		let wH = window.outerHeight;
+		if(wH > 500){
+			return wH / 8;
+		} else {
+			return wH / 5;
+		}
+	}
+
 	render(){
 		return(
 			<div /*study starts*/ >
-				<div>
+				<div ref={hrf => this.hRef = hrf}>
 					<h2 className={isMobile ? 'mTextHead1' : 'dTextHead1'}>{'Welcome to KGMS Study'}</h2>
-					<h3 className={isMobile ? 'mTextSubHead1' : 'dTextSubHead1'}>{`Class ~ ${this.props.kgmsClassName}`}</h3>
+					<h3 ref={tsk => this.tskRef = tsk} className={isMobile ? 'mTextSubHead1' : 'dTextSubHead1'}>{`Class ~ ${this.props.kgmsClassName}`}</h3>
 				</div>
 				<div>
 					{isMobile ? this.getmTasksFrom() : this.getTasksFrom()}
 				</div>
-				<div align="center">
+				<div align="center" ref={audioRf => this.audioRef = audioRf}>
 					<h4 className={isMobile ? 'mTaskImgHeader' : 'dTaskImgHeader'}
 						style={{display: this.state.kAudioList.length > 0 ? 'block':'none'}}>
 						<span className={isMobile ? 'mTextMain' : 'dTaskImgHeader-span'}>{'Audio Section'}</span>
@@ -385,7 +446,7 @@ class KStudy extends React.PureComponent {
 				<div align="center">
 					{this.getTaskAudioFrom()}
 				</div>
-				<div align="center">
+				<div align="center" ref={imgRf => this.imgRef = imgRf}>
 					<h4 className={isMobile ? 'mTaskImgHeader' : 'dTaskImgHeader'}
 						style={{display: this.state.showImageSection ? 'block':'none'}}>
 						<span className={isMobile ? 'mTextMain' : 'dTaskImgHeader-span'}>{this.state.imageBanner}</span>
@@ -394,7 +455,7 @@ class KStudy extends React.PureComponent {
 				<div align="center">
 					{isMobile ? this.getmTasksImgFrom() : this.getTasksImgFrom()}
 				</div>
-				<div align="center">
+				<div align="center" ref={vidRf => this.vidRef = vidRf}>
 					<h4 className={isMobile ? 'mTaskImgHeader' : 'dTaskImgHeader'}
 						style={{display: this.state.kVideoList.length > 0 ? 'block':'none'}}>
 						<span className={isMobile ? 'mTextMain' : 'dTaskImgHeader-span'}>{'Video Section'}</span>
@@ -402,6 +463,34 @@ class KStudy extends React.PureComponent {
 				</div>
 				<div align="center">
 					{this.getTaskVideoFrom()}
+				</div>
+				<div align="center" className={isMobile ? 'mNavButtonBar pt-page-moveFromTopFade' : 'dNavButtonBar pt-page-moveFromTopFade'} 
+					style={{display: this.state.showNavBar ? 'block' : 'none'}} key="kNavBar">
+					<div className="Row">
+						<div className="ColumnR" style={{width: '25%'}}>
+							<button className={isMobile ? 'mNavBtn' : 'dNavBtn'} onClick={() => this.handleScrollToElement('video')}
+								style={{display: this.state.kVideoList.length > 0 ? 'block' : 'none'}}>
+								{videoIcBtn}
+							</button>	
+						</div>
+						<div className="ColumnR" style={{width: '25%'}}>
+							<button className={isMobile ? 'mNavBtn' : 'dNavBtn'} onClick={() => this.handleScrollToElement('image')} 
+								style={{display: this.state.kImgList.length > 0 ? 'block' : 'none'}}>
+								{imageIcBtn}
+							</button>
+						</div>
+						<div className="ColumnR" style={{width: '25%'}}>
+							<button className={isMobile ? 'mNavBtn' : 'dNavBtn'} onClick={() => this.handleScrollToElement('audio')}
+								style={{display: this.state.kAudioList.length > 0 ? 'block' : 'none'}}>
+								{audioIcBtn}
+							</button>
+						</div>
+						<div className="ColumnR" style={{width: '25%'}}>
+							<button className={isMobile ? 'mNavBtn' : 'dNavBtn'} onClick={() => this.handleScrollToElement('task')}>
+								{assignmentIcBtn}
+							</button>
+						</div>
+					</div>
 				</div>
 			</div /*study ends*/>
 		);

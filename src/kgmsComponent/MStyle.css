@@ -232,6 +232,20 @@
 		overflow: hidden;
 		margin-bottom: 0.1%;
 	}
+
+	.mFooterTip{
+		position: relative;
+		background-color: rgba(0,0,0,0.7);
+		color: #fff;
+		text-align: center;
+		letter-spacing: 1.1;
+		padding: 0.25em 0.5em;
+		border-radius: 0.3em;
+	}
+
+	.mFooterText{
+		font-size: 4.2vw;
+	}
 }
 
 @media only screen and (max-width: 600px) and (orientation: landscape) {
@@ -343,6 +357,20 @@
     margin-bottom: 2.5em;
   }
 
+  .mFooterTip{
+		position: relative;
+		background-color: rgba(0,0,0,0.7);
+		color: #fff;
+		text-align: center;
+		letter-spacing: 1.1;
+		padding: 0.25em 0.5em;
+		border-radius: 0.3em;
+	}
+
+	.mFooterText{
+		font-size: 2.9vw;
+	}
+
 }
 
 @media only screen and (min-width: 600px) and (orientation: portrait) {
@@ -350,6 +378,10 @@
 		width: 44%;
 		margin-top: 7%;
 		margin-right: 10%;
+	}
+
+	.mFooterText{
+		font-size: 2.65vw;
 	}
 }
 
@@ -459,6 +491,20 @@
 	  animation-duration: 0.6s;
 	  overflow-y: auto;
 	  margin-bottom: 3em;
+	}
+
+	.mFooterTip{
+		position: relative;
+		background-color: rgba(0,0,0,0.7);
+		color: #fff;
+		text-align: center;
+		letter-spacing: 1.1;
+		padding: 0.25em 0.5em;
+		border-radius: 0.3em;
+	}
+
+	.mFooterText{
+		font-size: 2.55vw;
 	}
 }
 
@@ -580,6 +626,20 @@
 	    overflow-y: auto;
 	    margin-bottom: 4em;
 	  }
+
+	  .mFooterTip{
+			position: relative;
+			background-color: rgba(0,0,0,0.7);
+			color: #fff;
+			text-align: center;
+			letter-spacing: 1.1;
+			padding: 0.25em 0.5em;
+			border-radius: 0.3em;
+		}
+
+	.mFooterText{
+		font-size: 3.5vw;
+	}
 }
 
 @media only screen and (min-width: 768px) and (orientation: landscape) {
@@ -689,6 +749,10 @@
       margin-bottom: 3em;
     }
 
+    .mFooterText{
+			font-size: 2.4vw;
+		}
+
 }
 
 @media only screen and (min-width: 1024px) and (orientation: portrait) {
@@ -788,6 +852,10 @@
 	    overflow-y: auto;
 	    margin-bottom: 4em;
 	  }
+
+	  .mFooterText{
+			font-size: 3.3vw;
+		}
 }
 
 @media only screen and (min-width: 1366px) and (orientation: landscape) {
@@ -887,6 +955,10 @@
       overflow-y: auto;
       margin-bottom: 3em;
     }
+
+    .mFooterText{
+			font-size: 2.6vw;
+		}
 }
 
 @media only screen and (orientation: landscape) {

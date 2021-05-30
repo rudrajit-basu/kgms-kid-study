@@ -133,6 +133,7 @@ class KSDesk extends React.PureComponent {
 	}
 
 	handleKSLogIn(){
+		window.scrollTo(0, 0);
 		this.setState({isLogin: true});
 		window.history.pushState({page: 'KStudy'},'','');
 	}
@@ -452,8 +453,11 @@ class KSDesk extends React.PureComponent {
 						</div>
 					</div>
 				</div /*audio modal ends*/>
-				<div /*footer starts*/>
+				<div className="dFooterContainer" /*footer starts*/>
 					<div align="center" style={{width: '100vw', marginTop:'3.2em'}}>
+						<div align="center">
+							<span className="footerTip">&#169; {'Khela Ghar Montessory School, 2021'}</span>
+						</div>
 						<img src={F1} alt="footer" style={{width:'75vw'}} className="noSelect" referrerPolicy="same-origin"/>
 					</div>
 				</div /*footer ends*/>

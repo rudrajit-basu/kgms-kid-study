@@ -16,7 +16,8 @@ class KSDevice extends React.PureComponent {
 		this.state = {isMLogin: false, isModalLogOut: false, KMClassName: "", KMediaId: "",
 						KMStudies:[{id:0,header:"Please wait... Fetching Events >>",desc:""}],
 						isMImgModal: false, MImgModalSrc: '', isMVidModal: false, MVidModalSrc: '', 
-						isMShowLoading: true, isMAudModal: false, isMShowAudLoading: true, MAudModalSrc: ''}
+						isMShowLoading: true, isMAudModal: false, isMShowAudLoading: true, MAudModalSrc: '',
+						ismFooterAnimation: false}
 		this.getmBodyContent = this.getmBodyContent.bind(this);
 		this.handleMKSLogin = this.handleMKSLogin.bind(this);
 		this.handleMKSLogOut = this.handleMKSLogOut.bind(this);
@@ -35,6 +36,7 @@ class KSDevice extends React.PureComponent {
 		this.handleOnMAudioLoad = this.handleOnMAudioLoad.bind(this);
 		this.getMAudioPlayer = this.getMAudioPlayer.bind(this);
 		this.getMVideoPlayer = this.getMVideoPlayer.bind(this);
+		this.handleFooterAnimation = this.handleFooterAnimation.bind(this);
 	}
 
 	async fetchMKgmsStudy(db,kStudyDoc){
@@ -126,6 +128,7 @@ class KSDevice extends React.PureComponent {
 	}
 
 	handleMKSLogin(){
+		window.scrollTo(0, 0);
 		this.setState({isMLogin: true});
 		window.history.pushState({page: 'mStudy'},'','');
 	}
@@ -224,6 +227,11 @@ class KSDevice extends React.PureComponent {
 		}
 	}
 
+	async handleFooterAnimation(event) {
+		this.setState(prevState=>({ismFooterAnimation: !prevState.ismFooterAnimation}));
+		event.preventDefault();
+	}
+
 	getmBodyContent(loginState){
 
 		if(!loginState){
@@ -319,7 +327,11 @@ class KSDevice extends React.PureComponent {
 						</div>
 					</div>
 				</div /*audio modal ends*/>
-				<div /*footer starts*/>
+				<div onClick={this.handleFooterAnimation} /*footer starts*/>
+					<div align="center">
+						<span style={{visibility: this.state.ismFooterAnimation ? 'visible' : 'hidden'}}
+							className="mFooterTip mFooterText">&#169; {'Khela Ghar Montessory School, 2021'}</span>
+					</div>
 					<img src={F1} alt="footer" className="mFooter noSelect mTextGap3" referrerPolicy="same-origin"/>
 				</div /*footer ends*/>
 			</div /*app ends*/>

@@ -26,6 +26,10 @@
   clear: both;
 }
 
+.ColumnR{
+  float: right;
+}
+
 /*.Col-20{
   float: left;
   width: 20%;
@@ -444,6 +448,39 @@
     color: #2F4F4F;
   }
 
+  .mNavButtonBar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0,0,0,0.15);
+    padding: 0.5em 0em;
+    border-radius: 0.6em;
+  }
+
+  .mNavIconButton{
+    font-size: 8.50vw;
+    color: #0000CD;
+    background-color: #ff7f2a;
+    outline: none;
+    border: none;
+  }
+
+  .mNavIconButton:active{
+    /*box-shadow: 0 1.5px #666;*/
+    /*transform: translateY(2px);*/
+    background-color: rgba(0,0,0,0.15);
+  }
+
+  .mNavBtn{
+    margin: 0;
+    outline: none;
+    border: none;
+    border-color: transparent;
+    background-color: transparent;
+    /*box-shadow: 0 2px rgba(0, 0, 0, 0.2);*/
+  }
+
 @media only screen and (max-width: 320px) and (orientation: portrait) {
 
   .mLoginInp{
@@ -618,6 +655,24 @@
     -moz-transform: scale(0.80);
     -ms-transform: scale(0.80);
     transform: scale(0.80);
+  }
+
+  .mNavButtonBar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0,0,0,0.15);
+    padding: 0.3em 0em;
+    border-radius: 0.4em;
+  }
+
+  .mNavIconButton{
+    font-size: 8.50vw;
+    color: #0000CD;
+    background-color: #ff7f2a;
+    outline: none;
+    border: none;
   }
   
 }
@@ -812,6 +867,24 @@
 
   .mTaskAudioControl{
 
+  }
+
+  .mNavButtonBar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0,0,0,0.15);
+    padding: 0.3em 0em;
+    border-radius: 0.4em;
+  }
+
+  .mNavIconButton{
+    font-size: 5.00vw;
+    color: #0000CD;
+    background-color: #ff7f2a;
+    outline: none;
+    border: none;
   }
 
 }
@@ -1071,6 +1144,14 @@
     -moz-transform: scale(1.05);
     -ms-transform: scale(1.05);
     transform: scale(1.05);
+  }
+
+  .mNavIconButton{
+    font-size: 5.00vw;
+    color: #0000CD;
+    background-color: #ff7f2a;
+    outline: none;
+    border: none;
   }
 
 }
@@ -1342,6 +1423,24 @@
     transform: scale(1.80);
   }
 
+  .mNavButtonBar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0,0,0,0.15);
+    padding: 0.7em 0em;
+    border-radius: 0.8em;
+  }
+
+  .mNavIconButton{
+    font-size: 7.50vw;
+    color: #0000CD;
+    background-color: #ff7f2a;
+    outline: none;
+    border: none;
+  }
+
 }
 
 @media only screen and (min-width: 768px) and (orientation: landscape) {
@@ -1608,6 +1707,16 @@
       -ms-transform: scale(1.80);
       transform: scale(1.80);
     }
+
+    .mNavButtonBar{
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(0,0,0,0.15);
+      padding: 0.8em 0em;
+      border-radius: 0.9em;
+    }
 }
 
 @media only screen and (min-width: 1024px) and (orientation: portrait) {
@@ -1870,6 +1979,24 @@
     transform: scale(2.2);
   }
 
+  .mNavButtonBar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0,0,0,0.15);
+    padding: 1.0em 0em;
+    border-radius: 1.0em;
+  }
+
+  .mNavIconButton{
+    font-size: 7.00vw;
+    color: #0000CD;
+    background-color: #ff7f2a;
+    outline: none;
+    border: none;
+  }
+
 }
 
 @media only screen and (min-width: 1366px) and (orientation: landscape) {
@@ -2130,6 +2257,16 @@
       -moz-transform: scale(2.2);
       -ms-transform: scale(2.2);
       transform: scale(2.2);
+    }
+
+    .mNavButtonBar{
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(0,0,0,0.15);
+      padding: 1.1em 0em;
+      border-radius: 1.1em;
     }
 }
 
@@ -2549,4 +2686,52 @@
   color: #2F4F4F;
   cursor: pointer;
   /*font-weight: bold;*/
+}
+
+.dNavButtonBar{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0,0,0,0.15);
+  padding: 0.5em 0em;
+  border-radius: 0.8em;
+}
+
+.dNavIconButton{
+  font-size: 2.77vw;
+  color: #0000CD;
+  background-color: #ff7f2a;
+  outline: none;
+  border: none;
+}
+
+.dNavIconButton:hover{
+  background-color: rgba(0,0,0,0.09);
+}
+
+.dNavIconButton:active{
+  background-color: rgba(0,0,0,0.15);
+}
+
+.dNavBtn{
+  margin: 0;
+  outline: none;
+  border: none;
+  border-color: transparent;
+  background-color: transparent;
+  cursor: pointer;
+  /*box-shadow: 0 2px rgba(0, 0, 0, 0.2);*/
+}
+
+.pt-page-moveFromTopFade {
+  -webkit-animation: moveFromTopFade .7s ease both;
+  animation: moveFromTopFade .7s ease both;
+}
+
+@-webkit-keyframes moveFromTopFade {
+  from { opacity: 0.3; -webkit-transform: translateY(-100%); }
+}
+@keyframes moveFromTopFade {
+  from { opacity: 0.3; -webkit-transform: translateY(-100%); transform: translateY(-100%); }
 }

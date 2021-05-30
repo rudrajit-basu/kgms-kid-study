@@ -390,3 +390,21 @@
   from {transform:scale(0)}
   to {transform:scale(1)}
 }
+
+.dFooterContainer:hover .footerTip {
+  visibility: visible;
+}
+
+.dFooterContainer .footerTip {
+  background-color: rgba(0,0,0,0.7);
+  color: #fff;
+  text-align: center;
+  font-size: 1.2vw;
+  letter-spacing: 1.1;
+  border-radius: 6px;
+  padding: 5.5px 11px;
+
+  /* Position the tooltip */
+  visibility: hidden;
+  position: relative;  
+}
