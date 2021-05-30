@@ -2733,5 +2733,5 @@
   from { opacity: 0.3; -webkit-transform: translateY(-100%); }
 }
 @keyframes moveFromTopFade {
-  from { opacity: 0.3; -webkit-transform: translateY(-100%); transform: translateY(-100%); }
+  from { opacity: 0.3; -webkit-transform: translateY(-100%); -moz-transform: translateY(-100%); transform: translateY(-100%);}
 }

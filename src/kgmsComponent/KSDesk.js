@@ -31,7 +31,9 @@ class KSDesk extends React.PureComponent {
 		this.state = {isLogin: false, isModalLogOut: false, kBodyHeight: 0, kBodyNum: [], KClassName: "",
 						KStudies:[{id:0,header:"Please wait... Fetching Events >>",desc:""}], KMediaId: "",
 						isDImgModal: false, DImgModalSrc: '', isDVidModal: false, DVidModalSrc: '', 
-						isShowLoading: true, isDAudModal: false, isShowAudLoading: true, DAudModalSrc: ''}
+						isShowLoading: true, isDAudModal: false, isShowAudLoading: true, DAudModalSrc: '',
+						handleNavBtn: undefined, showDNavBar: false, showDNavVidBtn: false, showDNavImgBtn: false,
+						showDNavAudBtn: false}
 		this.getBodyContent = this.getBodyContent.bind(this);
 		this.handleLogOutModalStart = this.handleLogOutModalStart.bind(this);
 		this.handleLogOutModalClose = this.handleLogOutModalClose.bind(this);
@@ -53,6 +55,7 @@ class KSDesk extends React.PureComponent {
 		this.handleOnAudioLoad = this.handleOnAudioLoad.bind(this);
 		this.getAudioPlayer = this.getAudioPlayer.bind(this);
 		this.getVideoPlayer = this.getVideoPlayer.bind(this);
+		this.handleShowNavBtn = this.handleShowNavBtn.bind(this);
 		this.bodyRef = React.createRef();
 	}
 
@@ -233,6 +236,16 @@ class KSDesk extends React.PureComponent {
 		}
 	}
 
+	handleShowNavBtn(btn){
+		if(btn === 'video'){
+			this.setState({showDNavVidBtn: true});
+		}else if(btn === 'image'){
+			this.setState({showDNavImgBtn: true});
+		} else if(btn === 'audio'){
+			this.setState({showDNavAudBtn: true});
+		}
+	}
+
 	getBodyContent(loginState){
 		if(!loginState){
 			return(
@@ -251,7 +264,10 @@ class KSDesk extends React.PureComponent {
 								firebase={this.props.firebase} handleStartImgModal={(src) => this.handleStartDImgModal(src)}
 								handleStartVideoModal={(src) => this.handleStartDVidModal(src)}
 								handleStartAudioModal={() => this.handleStartDAudModal()}
-								handleSetAudioSrc={(src) => this.setState({DAudModalSrc: src})}/>
+								handleSetAudioSrc={(src) => this.setState({DAudModalSrc: src})}
+								handleSetNavBarOnClick={(src) => this.setState({handleNavBtn: src})}
+								handleShowNavBtn={(src) => this.handleShowNavBtn(src)} showNavBar={this.state.showDNavBar}
+								setShowNavBar={(src) => this.setState({showDNavBar: src})}/>
 					</div>
 				</div>
 			);
@@ -379,6 +395,7 @@ class KSDesk extends React.PureComponent {
 		const log_out_btn = <input type="image" src={LO} alt="log_out" className="dLog-out noSelect pt-page-rotateUnfoldTop"
 								style={{visibility: this.state.isLogin ? 'visible' : 'hidden'}} 
 								key={this.state.isLogin.toString()} onClick={this.handleLogOutModalStart}/>;
+		const dIcBtnCss = 'material-icons dNavIconButton noSelect';								
 		return(
 			<div className="App" /*app starts*/>
 				<div style={{marginTop:'20px'}} /*header starts*/>
@@ -453,6 +470,34 @@ class KSDesk extends React.PureComponent {
 						</div>
 					</div>
 				</div /*audio modal ends*/>
+				<div align="center" className='dNavButtonBar pt-page-moveFromTopFade' 
+					style={{display: this.state.showDNavBar ? 'block' : 'none'}} key="kDNavBar" /*nav bar starts*/>
+					<div className="Row">
+						<div className="ColumnR" style={{width: '25%'}}>
+							<button className='dNavBtn' onClick={() => this.state.handleNavBtn('video')}
+								style={{display: this.state.showDNavVidBtn ? 'block' : 'none'}}>
+								<i className={dIcBtnCss}>ondemand_video</i>
+							</button>	
+						</div>
+						<div className="ColumnR" style={{width: '25%'}}>
+							<button className='dNavBtn' onClick={() => this.state.handleNavBtn('image')} 
+								style={{display: this.state.showDNavImgBtn ? 'block' : 'none'}}>
+								<i className={dIcBtnCss}>image</i>
+							</button>
+						</div>
+						<div className="ColumnR" style={{width: '25%'}}>
+							<button className='dNavBtn' onClick={() => this.state.handleNavBtn('audio')}
+								style={{display: this.state.showDNavAudBtn ? 'block' : 'none'}}>
+								<i className={dIcBtnCss}>audiotrack</i>
+							</button>
+						</div>
+						<div className="ColumnR" style={{width: '25%'}}>
+							<button className='dNavBtn' onClick={() => this.state.handleNavBtn('task')}>
+								<i className={dIcBtnCss}>assignment</i>
+							</button>
+						</div>
+					</div>
+				</div /*nav bar ends*/>
 				<div className="dFooterContainer" /*footer starts*/>
 					<div align="center" style={{width: '100vw', marginTop:'3.2em'}}>
 						<div align="center">

@@ -17,19 +17,11 @@ const apiKeyY = 'AIzaSyCjyx-Y-2yupi_mGz9YeaZvdGwutVM7LTw';
 const yJsUrl = 'https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest';
 // const yJsScope = 'https://www.googleapis.com/auth/youtube.readonly';
 
-const mIcBtnCss = 'material-icons mNavIconButton noSelect';
-const dIcBtnCss = 'material-icons dNavIconButton noSelect';
-
-const assignmentIcBtn = <i className={isMobile ? mIcBtnCss : dIcBtnCss}>assignment</i>;
-const audioIcBtn = <i className={isMobile ? mIcBtnCss : dIcBtnCss}>audiotrack</i>;
-const imageIcBtn = <i className={isMobile ? mIcBtnCss : dIcBtnCss}>image</i>;
-const videoIcBtn = <i className={isMobile ? mIcBtnCss : dIcBtnCss}>ondemand_video</i>;
-
 class KStudy extends React.PureComponent {
 
 	constructor(props){
 		super(props);
-		this.state = {kImgList: [], kVideoList: [], showImageSection: false, showNavBar: false,
+		this.state = {kImgList: [], kVideoList: [], showImageSection: false,
 						imageBanner: 'Loading Images...', kAudioList: [], kAudioUrlSet: new Map()};
 		this.getTasksFrom = this.getTasksFrom.bind(this);
 		this.handleImgAlbumRequest = this.handleImgAlbumRequest.bind(this);
@@ -78,6 +70,7 @@ class KStudy extends React.PureComponent {
 				});
 		}
 		window.addEventListener('scroll', this.handleScrollNavBar, false);
+		this.props.handleSetNavBarOnClick(this.handleScrollToElement);
 	}
 
 	 async loadGapiClient(){
@@ -132,6 +125,7 @@ class KStudy extends React.PureComponent {
 	        	if(videoIdList.length > 0){
 	        		// videoIdList.reverse();
 	        		this.setState({kVideoList: videoIdList});
+	        		this.props.handleShowNavBtn('video');
 	        		if(!isMobile){
 						this.timerID = setTimeout(() => this.props.handleDeco(),900);
 					}
@@ -147,12 +141,18 @@ class KStudy extends React.PureComponent {
 		if(this.hRef !== null){
 			let sticky = this.hRef.offsetTop;
 			if(window.pageYOffset >= sticky){
-				if(!this.state.showNavBar){
-					this.setState({showNavBar: true});
+				// if(!this.state.showNavBar){
+				// 	this.setState({showNavBar: true});
+				// }
+				if(!this.props.showNavBar){
+					this.props.setShowNavBar(true);
 				}
 			} else {
-				if(this.state.showNavBar){
-					this.setState({showNavBar: false});
+				// if(this.state.showNavBar){
+				// 	this.setState({showNavBar: false});
+				// }
+				if(this.props.showNavBar){
+					this.props.setShowNavBar(false);
 				}
 			}
 		}
@@ -202,6 +202,7 @@ class KStudy extends React.PureComponent {
 
 		if(imgList.length > 0) {
 			this.setState({kImgList: imgList, imageBanner: 'Image Section'});
+			this.props.handleShowNavBtn('image');
 			if(!isMobile) {
 				this.timerID = setTimeout(() => this.props.handleDeco(),5000);
 			}
@@ -226,6 +227,7 @@ class KStudy extends React.PureComponent {
 					// this.setState({showImageSection: true});
 					// this.handleImgUrlRequest(imgRef, imageNameList);
 					this.setState({kAudioList: audioNameList});
+					this.props.handleShowNavBtn('audio');
 					// this.handleAudioUrlRequest(audRef, audioNameList);
 				}
 			}
@@ -463,34 +465,6 @@ class KStudy extends React.PureComponent {
 				</div>
 				<div align="center">
 					{this.getTaskVideoFrom()}
-				</div>
-				<div align="center" className={isMobile ? 'mNavButtonBar pt-page-moveFromTopFade' : 'dNavButtonBar pt-page-moveFromTopFade'} 
-					style={{display: this.state.showNavBar ? 'block' : 'none'}} key="kNavBar">
-					<div className="Row">
-						<div className="ColumnR" style={{width: '25%'}}>
-							<button className={isMobile ? 'mNavBtn' : 'dNavBtn'} onClick={() => this.handleScrollToElement('video')}
-								style={{display: this.state.kVideoList.length > 0 ? 'block' : 'none'}}>
-								{videoIcBtn}
-							</button>	
-						</div>
-						<div className="ColumnR" style={{width: '25%'}}>
-							<button className={isMobile ? 'mNavBtn' : 'dNavBtn'} onClick={() => this.handleScrollToElement('image')} 
-								style={{display: this.state.kImgList.length > 0 ? 'block' : 'none'}}>
-								{imageIcBtn}
-							</button>
-						</div>
-						<div className="ColumnR" style={{width: '25%'}}>
-							<button className={isMobile ? 'mNavBtn' : 'dNavBtn'} onClick={() => this.handleScrollToElement('audio')}
-								style={{display: this.state.kAudioList.length > 0 ? 'block' : 'none'}}>
-								{audioIcBtn}
-							</button>
-						</div>
-						<div className="ColumnR" style={{width: '25%'}}>
-							<button className={isMobile ? 'mNavBtn' : 'dNavBtn'} onClick={() => this.handleScrollToElement('task')}>
-								{assignmentIcBtn}
-							</button>
-						</div>
-					</div>
 				</div>
 			</div /*study ends*/>
 		);

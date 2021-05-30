@@ -17,7 +17,8 @@ class KSDevice extends React.PureComponent {
 						KMStudies:[{id:0,header:"Please wait... Fetching Events >>",desc:""}],
 						isMImgModal: false, MImgModalSrc: '', isMVidModal: false, MVidModalSrc: '', 
 						isMShowLoading: true, isMAudModal: false, isMShowAudLoading: true, MAudModalSrc: '',
-						ismFooterAnimation: false}
+						ismFooterAnimation: false, handleMNavBtn: undefined, showMNavBar: false, 
+						showMNavVidBtn: false, showMNavImgBtn: false, showMNavAudBtn: false}
 		this.getmBodyContent = this.getmBodyContent.bind(this);
 		this.handleMKSLogin = this.handleMKSLogin.bind(this);
 		this.handleMKSLogOut = this.handleMKSLogOut.bind(this);
@@ -37,6 +38,7 @@ class KSDevice extends React.PureComponent {
 		this.getMAudioPlayer = this.getMAudioPlayer.bind(this);
 		this.getMVideoPlayer = this.getMVideoPlayer.bind(this);
 		this.handleFooterAnimation = this.handleFooterAnimation.bind(this);
+		this.handleShowMNavBtn = this.handleShowMNavBtn.bind(this);
 	}
 
 	async fetchMKgmsStudy(db,kStudyDoc){
@@ -232,6 +234,16 @@ class KSDevice extends React.PureComponent {
 		event.preventDefault();
 	}
 
+	handleShowMNavBtn(btn){
+		if(btn === 'video'){
+			this.setState({showMNavVidBtn: true});
+		}else if(btn === 'image'){
+			this.setState({showMNavImgBtn: true});
+		} else if(btn === 'audio'){
+			this.setState({showMNavAudBtn: true});
+		}
+	}
+
 	getmBodyContent(loginState){
 
 		if(!loginState){
@@ -251,7 +263,10 @@ class KSDevice extends React.PureComponent {
 								handleStartImgModal={(src) => this.handleStartMImgModal(src)}
 								handleStartVideoModal={(src) => this.handleStartMVidModal(src)}
 								handleStartAudioModal={() => this.handleStartMAudModal()}
-								handleSetAudioSrc={(src) => this.setState({MAudModalSrc: src})}/>
+								handleSetAudioSrc={(src) => this.setState({MAudModalSrc: src})}
+								handleSetNavBarOnClick={(src) => this.setState({handleMNavBtn: src})}
+								handleShowNavBtn={(src) => this.handleShowMNavBtn(src)} showNavBar={this.state.showMNavBar}
+								setShowNavBar={(src) => this.setState({showMNavBar: src})}/>
 					</div>
 				</div>
 			);
@@ -263,6 +278,7 @@ class KSDevice extends React.PureComponent {
 								style={{visibility: this.state.isMLogin ? 'visible' : 'hidden'}} 
 								key={this.state.isMLogin.toString()} onClick={this.handleLogOutModalStart}
 								className="mLog-out noSelect pt-page-rotateUnfoldTop"/>;
+		const mIcBtnCss = 'material-icons mNavIconButton noSelect';						
 		return(
 			<div className="mApp" /*app starts*/>
 				<div className="Row" /*header starts*/>
@@ -327,6 +343,34 @@ class KSDevice extends React.PureComponent {
 						</div>
 					</div>
 				</div /*audio modal ends*/>
+				<div align="center" className='mNavButtonBar pt-page-moveFromTopFade' 
+					style={{display: this.state.showMNavBar ? 'block' : 'none'}} key="kMNavBar" /*nav bar starts*/>
+					<div className="Row">
+						<div className="ColumnR" style={{width: '25%'}}>
+							<button className='mNavBtn' onClick={() => this.state.handleMNavBtn('video')}
+								style={{display: this.state.showMNavVidBtn ? 'block' : 'none'}}>
+								<i className={mIcBtnCss}>ondemand_video</i>
+							</button>	
+						</div>
+						<div className="ColumnR" style={{width: '25%'}}>
+							<button className='mNavBtn' onClick={() => this.state.handleMNavBtn('image')} 
+								style={{display: this.state.showMNavImgBtn ? 'block' : 'none'}}>
+								<i className={mIcBtnCss}>image</i>
+							</button>
+						</div>
+						<div className="ColumnR" style={{width: '25%'}}>
+							<button className='mNavBtn' onClick={() => this.state.handleMNavBtn('audio')}
+								style={{display: this.state.showMNavAudBtn ? 'block' : 'none'}}>
+								<i className={mIcBtnCss}>audiotrack</i>
+							</button>
+						</div>
+						<div className="ColumnR" style={{width: '25%'}}>
+							<button className='mNavBtn' onClick={() => this.state.handleMNavBtn('task')}>
+								<i className={mIcBtnCss}>assignment</i>
+							</button>
+						</div>
+					</div>
+				</div /*nav bar ends*/>
 				<div onClick={this.handleFooterAnimation} /*footer starts*/>
 					<div align="center">
 						<span style={{visibility: this.state.ismFooterAnimation ? 'visible' : 'hidden'}}
