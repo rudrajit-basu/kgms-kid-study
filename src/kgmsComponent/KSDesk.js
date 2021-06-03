@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Suspense} from 'react';
 import './DStyle.css';
 import HH from './images/HH.png';
 import H4 from './images/H4.png';
@@ -9,17 +9,20 @@ import F1 from './images/F1.png';
 import LO from './images/LO.png';
 import O1 from './images/O1.png';
 import O3 from './images/O3.png';
-import KSLogin from './KSLogin';
-import KStudy from './KStudy';
+// import KSLogin from './KSLogin';
+// import KStudy from './KStudy';
 import "firebase/firestore";
 import "firebase/analytics";
 
-const KB1 = <img src={M3} alt="M3" style={{width:'23%'}} className="noSelect pt-page-moveFromBottomFade" referrerPolicy="same-origin"/>;
-const KB2 = <img src={M2} alt="M2" style={{width:'29%'}} className="noSelect pt-page-moveFromBottomFade" referrerPolicy="same-origin"/>;
-const KB3 = <img src={M1} alt="M1" style={{width:'22%'}}className="noSelect pt-page-moveFromBottomFade" referrerPolicy="same-origin"/>;
-const KO1 = <img src={O1} alt="O1" style={{width:'70%'}} className="noSelect ImgTilt pt-page-moveFromBottomFade" referrerPolicy="same-origin"/>;
-const KO3 = <img src={O3} alt="O3" style={{width:'55%'}} className="noSelect ImgTilt2 pt-page-moveFromBottomFade" referrerPolicy="same-origin"/>;
-const KB4 = <img src={M2} alt="M2" style={{width:'29%'}} className="noSelect ImgTilt3 pt-page-moveFromBottomFade" referrerPolicy="same-origin"/>;
+const KSLogin = React.lazy(() => import('./KSLogin'));
+const KStudy = React.lazy(() => import('./KStudy'));
+
+const KB1 = <img src={M3} alt="M3" style={{width:'23%'}} className="noSelect pt-page-moveFromBottomFade" referrerPolicy="same-origin" loading="lazy"/>;
+const KB2 = <img src={M2} alt="M2" style={{width:'29%'}} className="noSelect pt-page-moveFromBottomFade" referrerPolicy="same-origin" loading="lazy"/>;
+const KB3 = <img src={M1} alt="M1" style={{width:'22%'}}className="noSelect pt-page-moveFromBottomFade" referrerPolicy="same-origin" loading="lazy"/>;
+const KO1 = <img src={O1} alt="O1" style={{width:'70%'}} className="noSelect ImgTilt pt-page-moveFromBottomFade" referrerPolicy="same-origin" loading="lazy"/>;
+const KO3 = <img src={O3} alt="O3" style={{width:'55%'}} className="noSelect ImgTilt2 pt-page-moveFromBottomFade" referrerPolicy="same-origin" loading="lazy"/>;
+const KB4 = <img src={M2} alt="M2" style={{width:'29%'}} className="noSelect ImgTilt3 pt-page-moveFromBottomFade" referrerPolicy="same-origin" loading="lazy"/>;
 
 const imgArr = [KB1,KB2,KB3,KO3,KB4];
 
@@ -247,16 +250,20 @@ class KSDesk extends React.PureComponent {
 	}
 
 	getBodyContent(loginState){
+		const suspenseLoading = <div className='dMain' align='center'>Loading...</div>;
 		if(!loginState){
 			return(
+				<Suspense fallback={suspenseLoading}>
 				<div key={'KSLogin'} style={{width:'100%'}} align="center" className="pt-page-rotateUnfoldRight">
 					<div className="SeaBlue BorderRound dLoginContent BoxShadow">
 						<KSLogin kLogIn={() => this.handleKSLogIn()} chkUser={(uid, pwd) => this.checkCredentials(uid, pwd)}/>
 					</div>
 				</div>
+				</Suspense>
 			);
 		} else {
 			return(
+				<Suspense fallback={suspenseLoading}>
 				<div className="pt-page-rotateUnfoldRight" key={'KStudy'} style={{width:'100%'}}>
 					<div className="Orange BorderRound dKStudyContent BoxShadow">
 						<KStudy handleDeco={()=>this.handleCurrentDecoList()} kgmsClassName={this.state.KClassName}
@@ -270,6 +277,7 @@ class KSDesk extends React.PureComponent {
 								setShowNavBar={(src) => this.setState({showDNavBar: src})}/>
 					</div>
 				</div>
+				</Suspense>
 			);
 		}
 	}
@@ -404,10 +412,10 @@ class KSDesk extends React.PureComponent {
 							{log_out_btn}
 						</div>
 						<div className="Column HeaderMiddle" align="center" style={{marginTop:'2.5em'}}>
-							<img src={HH} alt="kgms" style={{width: '90%'}} className="noSelect" referrerPolicy="same-origin"/>
+							<img src={HH} alt="kgms" style={{width: '90%'}} className="noSelect" referrerPolicy="same-origin" loading="lazy"/>
 						</div>
 						<div className="Column HeaderRight" align="center">
-							<img src={H4} alt="sun" style={{width: '65%'}} className="noSelect" referrerPolicy="same-origin"/>
+							<img src={H4} alt="sun" style={{width: '65%'}} className="noSelect" referrerPolicy="same-origin" loading="lazy"/>
 						</div>
 					</div>
 				</div /*header ends*/>
@@ -447,7 +455,7 @@ class KSDesk extends React.PureComponent {
 						onClick={this.handleCloseDImgModal}>&times;</span>
 					<div > 
 						<img src={this.state.DImgModalSrc} alt="modal img" 
-							className="dImgModalImage" referrerPolicy="same-origin"/>
+							className="dImgModalImage" referrerPolicy="same-origin" loading="lazy"/>
 					</div>
 				</div /*image modal ends*/>
 				<div style={{display: this.state.isDVidModal ? 'block' : 'none'}} 
@@ -503,7 +511,7 @@ class KSDesk extends React.PureComponent {
 						<div align="center">
 							<span className="footerTip">&#169; {'Khela Ghar Montessory School, 2021'}</span>
 						</div>
-						<img src={F1} alt="footer" style={{width:'75vw'}} className="noSelect" referrerPolicy="same-origin"/>
+						<img src={F1} alt="footer" style={{width:'75vw'}} className="noSelect" referrerPolicy="same-origin" loading="lazy"/>
 					</div>
 				</div /*footer ends*/>
 			</div /*app ends*/>

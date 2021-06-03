@@ -1,6 +1,6 @@
 import React from 'react';
 import './K1.css';
-import {isMobile} from 'react-device-detect';
+import {isMobile, isFirefox, isIE} from 'react-device-detect';
 import "firebase/storage";
 
 // document.cookie = "test1=Hello";
@@ -16,6 +16,9 @@ const apiJsUrl = "https://apis.google.com/js/api.js";
 const apiKeyY = 'AIzaSyCjyx-Y-2yupi_mGz9YeaZvdGwutVM7LTw';
 const yJsUrl = 'https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest';
 // const yJsScope = 'https://www.googleapis.com/auth/youtube.readonly';
+
+const animeTime = isFirefox ? 42 : 92;
+
 
 class KStudy extends React.PureComponent {
 
@@ -37,6 +40,8 @@ class KStudy extends React.PureComponent {
 		this.handleScrollToElement = this.handleScrollToElement.bind(this);
 		this.getMarginPos = this.getMarginPos.bind(this);
 		this.handleScrollNavBar = this.handleScrollNavBar.bind(this);
+		this.animateScrollToElem = this.animateScrollToElem.bind(this);
+		this.handleScrollToElementForIE = this.handleScrollToElementForIE.bind(this);
 	}
 
 
@@ -70,7 +75,11 @@ class KStudy extends React.PureComponent {
 				});
 		}
 		window.addEventListener('scroll', this.handleScrollNavBar, false);
-		this.props.handleSetNavBarOnClick(this.handleScrollToElement);
+		if(isIE){
+			this.props.handleSetNavBarOnClick(this.handleScrollToElementForIE);
+		}else {
+			this.props.handleSetNavBarOnClick(this.handleScrollToElement);
+		}
 	}
 
 	 async loadGapiClient(){
@@ -139,7 +148,7 @@ class KStudy extends React.PureComponent {
 
 	handleScrollNavBar(event){
 		if(this.hRef !== null){
-			let sticky = this.hRef.offsetTop;
+			const sticky = isFirefox || isIE ? this.hRef.offsetTop + 150 : this.hRef.offsetTop;
 			if(window.pageYOffset >= sticky){
 				// if(!this.state.showNavBar){
 				// 	this.setState({showNavBar: true});
@@ -280,7 +289,7 @@ class KStudy extends React.PureComponent {
 					<div>
 						<img src={vidL.thumbnail} alt={vidL.title} className={isMobile ? 'mTaskImg' : 'dTaskVideoImg'}
 							onClick={(event)=>{this.props.handleStartVideoModal(embedUrl); event.preventDefault();}}
-							referrerPolicy="same-origin"/>
+							referrerPolicy="same-origin" loading="lazy"/>
 					</div>
 					<p className="mLetterWrap"><b className={isMobile ? 'mTextMain' : 'dMain'}><u>{vidL.title}</u></b></p>	
 				</div>
@@ -312,7 +321,7 @@ class KStudy extends React.PureComponent {
 					<div>
 						<img src={imgL.link} alt={imgL.id} className="dTaskImg" 
 							onClick={(event) => {this.props.handleStartImgModal(imgL.link); event.preventDefault();}}
-							referrerPolicy="same-origin"/>
+							referrerPolicy="same-origin" loading="lazy"/>
 					</div>	
 					<div>	
 						<h3 className="dMain dTextBlk dLetterWrap"><u>{imgL.tag}</u></h3>
@@ -385,7 +394,7 @@ class KStudy extends React.PureComponent {
 					<div>
 						<img src={imgL.link} alt={imgL.id} className="mTaskImg" 
 							 onClick={(event) => {this.props.handleStartImgModal(imgL.link); event.preventDefault();}}
-							 referrerPolicy="same-origin"/>
+							 referrerPolicy="same-origin" loading="lazy"/>
 					</div>
 					<div>	 
 						<p><b className="mTextMain mLetterWrap"><u>{imgL.tag}</u></b></p>	
@@ -397,26 +406,112 @@ class KStudy extends React.PureComponent {
 		return mTaskImgListItems;
 	}
 
-
-	handleScrollToElement(btn){
-		let wH = this.getMarginPos();
+	handleScrollToElementForIE(btn){
+		const wH = this.getMarginPos();
 
 		if(btn === 'task'){
-			let vPos = this.tskRef.offsetTop;
+			const vPos = this.tskRef.offsetTop + (wH*2);
 			window.scrollTo(0, vPos-20);
-			// console.log(`wh task --> ${wH}`);
 		} else if(btn === 'audio'){
-			let vPos = this.audioRef.offsetTop;
-			// console.log(`wh audio --> ${wH}`);
-			window.scrollTo(0, vPos-wH);
+			const vPos = this.audioRef.offsetTop + wH;
+			window.scrollTo(0, vPos);
 		} else if(btn === 'image'){
-			let vPos = this.imgRef.offsetTop;
-			// console.log(`wh image --> ${wH}`);
-			window.scrollTo(0, vPos-wH);
+			const vPos = this.imgRef.offsetTop + wH;
+			window.scrollTo(0, vPos);
 		} else if(btn === 'video'){
-			let vPos = this.vidRef.offsetTop;
-			// console.log(`wh video --> ${wH}`);
-			window.scrollTo(0, vPos-wH);
+			const vPos = this.vidRef.offsetTop + wH;
+			window.scrollTo(0, vPos);
+		}
+	}
+
+
+	async handleScrollToElement(btn){
+		const wH = this.getMarginPos();
+		let isAnime = false;
+		if(this.scrollTimer !== undefined ){
+			// console.log(`this.scrollTimer --> ${this.scrollTimer}`);
+			try{
+				clearInterval(this.scrollTimer);
+				this.scrollTimer = undefined;
+			}catch(e){
+				isAnime = false;
+			}
+		} else {
+			isAnime = true;
+		}
+
+		const tryAnimeScroll = (vPos) => {
+			try{
+				this.animateScrollToElem(vPos);
+			}catch(e){
+				window.scrollTo(0, vPos);
+			}
+		}
+
+		if(btn === 'task'){
+			const vPos = isFirefox ? Math.floor(this.tskRef.offsetTop) + (wH*2) : Math.floor(this.tskRef.offsetTop)-20;
+			isAnime ? tryAnimeScroll(vPos) : window.scrollTo(0, vPos);
+		} else if(btn === 'audio'){
+			const vPos = isFirefox ? Math.floor(this.audioRef.offsetTop) + wH : Math.floor(this.audioRef.offsetTop)-wH;
+			isAnime ? tryAnimeScroll(vPos) : window.scrollTo(0, vPos);
+		} else if(btn === 'image'){
+			const vPos = isFirefox ? Math.floor(this.imgRef.offsetTop) + wH : Math.floor(this.imgRef.offsetTop)-wH;
+			isAnime ? tryAnimeScroll(vPos) : window.scrollTo(0, vPos);
+		} else if(btn === 'video'){
+			const vPos = isFirefox ? Math.floor(this.vidRef.offsetTop) + wH : Math.floor(this.vidRef.offsetTop)-wH;
+			isAnime ? tryAnimeScroll(vPos) : window.scrollTo(0, vPos);
+		}
+	}
+
+	animateScrollToElem(position){
+		const curPos = Math.floor(window.scrollY);
+		// console.log(`position --> ${position} & curPos --> ${curPos}`);
+		if(curPos > position){
+			const tDist = curPos - position;
+			let steps = tDist <= 2700 ? (Math.floor(curPos / position) - 1) * 2 : Math.floor(curPos / position) - 1;
+			// console.log(`steps --> ${steps}`);
+			if(steps > 0) {
+				const sDist = tDist / steps;
+				let cPos = curPos;
+				this.scrollTimer = setInterval(() => {
+					if(steps >= 1){
+						cPos = cPos - sDist;
+						window.scrollTo(0, cPos);
+						steps--;
+						// console.log(`curPos --> ${curPos}`);
+					} else {
+						window.scrollTo(0, position);
+						clearInterval(this.scrollTimer);
+						this.scrollTimer = undefined;
+					}
+				}, animeTime);
+			} else {
+				window.scrollTo(0, position);
+				// console.log('steps === 0');
+			}
+		} else if(curPos < position){
+			const tDist = position - curPos;
+			let steps = tDist <= 2700 ? (Math.floor(position / curPos) - 1) * 2 : Math.floor(position / curPos) - 1;
+			// console.log(`steps --> ${steps}`);
+			if(steps > 0) {
+				const sDist = tDist / steps;
+				let cPos = curPos;
+				this.scrollTimer = setInterval(() => {
+					if(steps >= 1){
+						cPos = cPos + sDist;
+						window.scrollTo(0, cPos);
+						steps--;
+						// console.log(`curPos --> ${curPos}`);
+					} else {
+						window.scrollTo(0, position);
+						clearInterval(this.scrollTimer);
+						this.scrollTimer = undefined;
+					}
+				}, 100);
+			} else {
+				window.scrollTo(0, position);
+				// console.log('steps === 0');
+			}
 		}
 	}
 

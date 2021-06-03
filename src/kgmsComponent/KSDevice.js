@@ -1,13 +1,16 @@
-import React from 'react';
+import React, {Suspense} from 'react';
 import './MStyle.css';
 import HHM from './images/HHM.png';
 import H4 from './images/H4.png';
 import LO from './images/LO.png';
 import F1 from './images/F1.png';
-import KSLogin from './KSLogin';
-import KStudy from './KStudy';
+// import KSLogin from './KSLogin';
+// import KStudy from './KStudy';
 import "firebase/firestore";
 import "firebase/analytics";
+
+const KSLogin = React.lazy(() => import('./KSLogin'));
+const KStudy = React.lazy(() => import('./KStudy'));
 
 class KSDevice extends React.PureComponent {
 
@@ -245,17 +248,20 @@ class KSDevice extends React.PureComponent {
 	}
 
 	getmBodyContent(loginState){
-
+		const suspenseLoading = <div className='mTextMainDesc' align='center'>Loading...</div>;
 		if(!loginState){
 			return(
+				<Suspense fallback={suspenseLoading}>
 				<div key={'mKSLogin'} className="mSeaBlue mBord pt-page-rotateUnfoldRight">
 					<div className="mBodyContent2">
 						<KSLogin kLogIn={() => this.handleMKSLogin()} chkUser={(uid, pwd) => this.checkMCredentials(uid, pwd)}/>
 					</div>
 				</div>
+				</Suspense>
 			);
 		} else {
 			return(
+				<Suspense fallback={suspenseLoading}>
 				<div key={'mKStudy'} className="mOrange mBord pt-page-rotateUnfoldRight">
 					<div className="mBodyContent2">
 						<KStudy kgmsClassName={this.state.KMClassName} kgmsStudies={this.state.KMStudies}
@@ -269,6 +275,7 @@ class KSDevice extends React.PureComponent {
 								setShowNavBar={(src) => this.setState({showMNavBar: src})}/>
 					</div>
 				</div>
+				</Suspense>
 			);
 		}
 	}
@@ -279,6 +286,7 @@ class KSDevice extends React.PureComponent {
 								key={this.state.isMLogin.toString()} onClick={this.handleLogOutModalStart}
 								className="mLog-out noSelect pt-page-rotateUnfoldTop"/>;
 		const mIcBtnCss = 'material-icons mNavIconButton noSelect';						
+		
 		return(
 			<div className="mApp" /*app starts*/>
 				<div className="Row" /*header starts*/>
@@ -286,11 +294,11 @@ class KSDevice extends React.PureComponent {
 						{mLog_out_btn}
 					</div>
 					<div className="Column mTopRight" align="right">
-						<img src={H4} alt="sun" className="mSun noSelect" referrerPolicy="same-origin"/>
+						<img src={H4} alt="sun" className="mSun noSelect" referrerPolicy="same-origin" loading="lazy"/>
 					</div>
 				</div>
 				<div align="left" className="mHDiv">
-						<img src={HHM} alt="kgms" className="mHH noSelect" referrerPolicy="same-origin"/>
+						<img src={HHM} alt="kgms" className="mHH noSelect" referrerPolicy="same-origin" loading="lazy"/>
 				</div /*header ends*/>
 				<div style={{width:'100%'}} /*body starts*/>
 					<div className="mBodyContent1">
@@ -320,7 +328,7 @@ class KSDevice extends React.PureComponent {
 						onClick={this.handleCloseMImgModal}>&times;</span>
 					<div > 
 						<img src={this.state.MImgModalSrc} alt="modal img" 
-							className="mImgModalImage" referrerPolicy="same-origin"/>
+							className="mImgModalImage" referrerPolicy="same-origin" loading="lazy"/>
 					</div>
 				</div /*image modal ends*/>
 				<div style={{display: this.state.isMVidModal ? 'block' : 'none'}} 
@@ -376,7 +384,8 @@ class KSDevice extends React.PureComponent {
 						<span style={{visibility: this.state.ismFooterAnimation ? 'visible' : 'hidden'}}
 							className="mFooterTip mFooterText">&#169; {'Khela Ghar Montessory School, 2021'}</span>
 					</div>
-					<img src={F1} alt="footer" className="mFooter noSelect mTextGap3" referrerPolicy="same-origin"/>
+					<img src={F1} alt="footer" className="mFooter noSelect mTextGap3" 
+						referrerPolicy="same-origin" loading="lazy"/>
 				</div /*footer ends*/>
 			</div /*app ends*/>
 		);
