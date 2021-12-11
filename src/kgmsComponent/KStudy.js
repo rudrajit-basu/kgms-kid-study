@@ -17,7 +17,8 @@ const apiKeyY = 'AIzaSyCjyx-Y-2yupi_mGz9YeaZvdGwutVM7LTw';
 const yJsUrl = 'https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest';
 // const yJsScope = 'https://www.googleapis.com/auth/youtube.readonly';
 
-const animeTime = isFirefox ? 42 : 92;
+// const animeTime = isFirefox ? 42 : 92;
+const animeTime = 42;
 
 
 class KStudy extends React.PureComponent {
@@ -171,6 +172,7 @@ class KStudy extends React.PureComponent {
 	componentWillUnmount(){
 		clearTimeout(this.timerID);
 		window.removeEventListener('scroll', this.handleScrollNavBar, false);
+		this.props.setShowNavBar(false);
 	}
 
 	async handleImgAlbumRequest(){
@@ -468,7 +470,8 @@ class KStudy extends React.PureComponent {
 		// console.log(`position --> ${position} & curPos --> ${curPos}`);
 		if(curPos > position){
 			const tDist = curPos - position;
-			let steps = tDist <= 2700 ? (Math.floor(curPos / position) - 1) * 2 : Math.floor(curPos / position) - 1;
+			// let steps = tDist <= 2700 ? (Math.floor(curPos / position) - 1) * 2 : Math.floor(curPos / position) - 1;
+			let steps = tDist <= 4000 ? 5 : 3;
 			// console.log(`steps --> ${steps}`);
 			if(steps > 0) {
 				const sDist = tDist / steps;
@@ -491,7 +494,8 @@ class KStudy extends React.PureComponent {
 			}
 		} else if(curPos < position){
 			const tDist = position - curPos;
-			let steps = tDist <= 2700 ? (Math.floor(position / curPos) - 1) * 2 : Math.floor(position / curPos) - 1;
+			// let steps = tDist <= 2700 ? (Math.floor(position / curPos) - 1) * 2 : Math.floor(position / curPos) - 1;
+			let steps = tDist <= 4000 ? 5 : 3;
 			// console.log(`steps --> ${steps}`);
 			if(steps > 0) {
 				const sDist = tDist / steps;
@@ -517,11 +521,12 @@ class KStudy extends React.PureComponent {
 
 	getMarginPos(){
 		let wH = window.outerHeight;
-		if(wH > 500){
-			return wH / 8;
-		} else {
-			return wH / 5;
-		}
+		// if(wH > 500){
+		// 	return wH / 96;
+		// } else {
+		// 	return wH / 5;
+		// }
+		return wH / 128;
 	}
 
 	render(){

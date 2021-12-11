@@ -66,8 +66,27 @@ class KSDesk extends React.PureComponent {
 	async fetchKgmsStudy(db,kStudyDoc){
 
 		// let db = this.props.firebase.firestore();
+		// db.collection("kgms-classes").doc(kStudyDoc).collection("kgms-study").orderBy("studyNumber")
+		// 	.onSnapshot((querySnapshot) => {
+		// 		let kstudies = [];
+		// 		querySnapshot.forEach((doc) => {
+		// 			// console.log(`${doc.id} => ${doc.data().desc}`);
+		// 			kstudies.push({id: doc.data().studyNumber, header: doc.data().header, 
+		// 				subHeader: doc.data().subHeader, desc: doc.data().desc});
+		// 		});
+
+		// 		if(kstudies.length > 0){
+		// 			this.setState({KStudies: kstudies});
+		// 		}else{
+		// 			this.setState({KStudies: [{id: 0, header: "No study available !", desc: ""}]});
+		// 		}
+
+		// 	},(error)=>{
+		// 		this.setState({KStudies: [{id: 0, header: "Something went wrong. Please try later !", desc: ""}]});
+		// 		// console.log(`Error: ${error}`);
+		// 	});
 		db.collection("kgms-classes").doc(kStudyDoc).collection("kgms-study").orderBy("studyNumber")
-			.onSnapshot((querySnapshot) => {
+			.get().then((querySnapshot) => {
 				let kstudies = [];
 				querySnapshot.forEach((doc) => {
 					// console.log(`${doc.id} => ${doc.data().desc}`);
@@ -84,6 +103,8 @@ class KSDesk extends React.PureComponent {
 			},(error)=>{
 				this.setState({KStudies: [{id: 0, header: "Something went wrong. Please try later !", desc: ""}]});
 				// console.log(`Error: ${error}`);
+			}).catch((error) => {
+				this.setState({KStudies: [{id: 0, header: "Something went wrong. Please try later !", desc: ""}]});
 			});
 	}
 
@@ -104,6 +125,10 @@ class KSDesk extends React.PureComponent {
 				            if(doc.data().classId.toLowerCase() === userId.trim().toLowerCase()){
 				            	this.setState({KClassName: doc.data().className, KMediaId: doc.data().classId});
 				            	this.fetchKgmsStudy(db,doc.id);
+				            	if (typeof(Storage) !== undefined) {
+				            		const sessionValue = {docId: doc.id, KClassName: doc.data().className, KMediaId: doc.data().classId};
+				            		window.sessionStorage.setItem('kgmsStudy', JSON.stringify(sessionValue));
+				            	}
 				            	resolve("Success!");
 				            }else{
 				            	reject("Not Success!");
@@ -147,6 +172,7 @@ class KSDesk extends React.PureComponent {
 	handleKSLogOut(event){
 		this.setState({isModalLogOut: false, isLogin: false, kBodyHeight: 0, kBodyNum: [], KClassName: "",
 				KStudies:[{id:0,header:"Please wait... Fetching Events >>",desc:""}], KMediaId: ""});
+		window.sessionStorage.clear();
 		event.preventDefault();
 	}
 
@@ -391,6 +417,20 @@ class KSDesk extends React.PureComponent {
 		};
 		window.addEventListener('keydown', this.onEscapeKeyDown, false);
 		this.props.firebase.analytics();
+		const ifUserLoggedIn = () => {
+			if (typeof(Storage) !== undefined) {
+				const value = window.sessionStorage.getItem('kgmsStudy');
+				// console.log(`value --> ${value !== null && value !== undefined ? value : 'undefined'}`);
+				if (value !== null && value !== undefined) {
+					const sessionValue = JSON.parse(value);
+					this.setState({KClassName: sessionValue.KClassName, KMediaId: sessionValue.KMediaId});
+					this.fetchKgmsStudy(this.props.firebase.firestore(),sessionValue.docId);
+					window.scrollTo(0, 0);
+					this.setState({isLogin: true});
+				}
+			}
+		}
+		ifUserLoggedIn();
 	}
 
 	componentWillUnmount(){
