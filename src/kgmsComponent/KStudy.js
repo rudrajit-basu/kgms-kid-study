@@ -96,7 +96,7 @@ class KStudy extends React.PureComponent {
 		        "snippet"
 		      ],
 		      "channelId": "UCuS-pL1W9DnAgw0ju4rDOKA",
-		      "maxResults": 8
+		      "maxResults": 15
 		    });
         },(err)=>{
         	console.error("Error loading GAPI client for Youtube API Playlist list !", err);
